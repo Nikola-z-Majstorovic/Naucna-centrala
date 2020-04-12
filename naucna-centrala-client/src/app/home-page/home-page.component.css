@@ -1,0 +1,31 @@
+.nav-link{
+  color:#FDF2E1;
+}
+
+a.nav-link:hover{
+  background-color: #FF995C
+}
+
+.container {
+  height: 100%;
+}
+
+button.btn{
+  color: #FDFDFD;
+  background-color: #707274;
+  border-radius: 0px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+button.btn:hover{
+  background-color: #FF995C;
+  color: #FDFDFD
+}
+
+.reg-casopis{
+  color:#FDF2E1;
+  margin-right: 20px;
+  border-left: 1px solid #FDF2E1;
+  padding: 12px;
+}

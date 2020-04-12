@@ -1,0 +1,9 @@
+<form>
+  <div>
+    <label for="id_magazine">Magazine:</label>
+    <select id="id_magazine" [(ngModel)]="magazineId" name="magazineId">
+      <option  *ngFor="let magazine of magazines" [ngValue]="magazine.id">{{magazine.name}}</option>
+    </select>
+  </div>
+  <br/>
+</form>
