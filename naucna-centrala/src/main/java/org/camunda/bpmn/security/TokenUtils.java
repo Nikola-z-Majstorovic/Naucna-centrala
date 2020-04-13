@@ -1,6 +1,7 @@
 package org.camunda.bpmn.security;
 
 import java.util.Date;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,8 +27,8 @@ public class TokenUtils {
 	@Value("3600")
 	private int EXPIRES_IN;
 
-	@Value("600")
-	private int MOBILE_EXPIRES_IN;
+//	@Value("600")
+//	private int MOBILE_EXPIRES_IN;
 
 	@Value("Authorization")
 	private String AUTH_HEADER;
@@ -196,6 +197,7 @@ public class TokenUtils {
 		public String getToken(HttpServletRequest request) {
 			String authHeader = getAuthHeaderFromHeader(request);
 
+			
 			if (authHeader != null && authHeader.startsWith("Bearer ")) {
 				return authHeader.substring(7);
 			}

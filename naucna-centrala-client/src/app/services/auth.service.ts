@@ -6,8 +6,9 @@ import {JwtUtilsService} from './jwt-utils/jwt-utils.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 
-@Injectable(
-)
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }

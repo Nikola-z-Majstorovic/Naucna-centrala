@@ -2,16 +2,27 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginPageComponent} from '../login-page/login-page.component';
 import {HomePageComponent} from '../home-page/home-page.component';
-import {AuthorComponent} from '../core/author/author.component';
+import { AuthorComponent } from '../home-page/author/author.component';
 import {RegisterPageComponent} from '../register-page/register-page.component';
-
+import {TextSubbmitingComponent} from '../home-page/author/text-subbmiting/text-subbmiting.component';
+import {SciencePaperFormComponent} from '../home-page/author/text-subbmiting/science-paper-form/science-paper-form.component';
+import {AuthorTasksComponent} from '../home-page/author/author-tasks/author-tasks.component';
+import {ChooseMagazineComponent} from '../home-page/author/text-subbmiting/choose-magazine/choose-magazine.component';
 
 const routes: Routes = [
-  { path: 'home-page', component: HomePageComponent },
+  { path: '', redirectTo: 'home-page', pathMatch: 'full'},
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
-  { path: 'author-page', component: AuthorComponent },
-  { path: '', redirectTo: 'home-page', pathMatch: 'full'}
+  { path: 'home-page', component: HomePageComponent , children: [
+  { path: 'author', component: AuthorComponent, children: [
+    { path: '', component: AuthorTasksComponent},
+    { path: 'text-subbmiting', component: TextSubbmitingComponent, children: [
+      {path: '', component: ChooseMagazineComponent},
+    {path: 'science-paper-form/:processId', component: SciencePaperFormComponent}]
+    }
+  ]}
+
+  ]}
 ];
 
 @NgModule({
