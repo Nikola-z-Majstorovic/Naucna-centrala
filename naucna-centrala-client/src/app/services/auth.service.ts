@@ -11,12 +11,9 @@ import {Router} from '@angular/router';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router) { }
-
   loggedUser: any;
-  private relativeUrl;
-  private currentUserKey = 'currentUser';
 
+  constructor(private http: HttpClient, private router: Router) { }
 
   getLoggedUser() {
     return localStorage.getItem('currentUser');
@@ -34,11 +31,6 @@ export class AuthService {
         })
       );
   }
-  // getToken(): string {
-  //   const currentUser = JSON.parse(localStorage.getItem(this.currentUserKey));
-  //   const token = currentUser && currentUser.token;
-  //   return token ? token : '';
-  // }
 
   logout() {
     return this.http.post('/api/auth/logout', null).subscribe(
@@ -49,18 +41,4 @@ export class AuthService {
     );
   }
 
-  // isLoggedIn(): boolean {
-  //   if (this.getToken() !== '') {
-  //     return true;
-  //   }
-  //   return false;
-  // }
-  //
-  // getCurrentUser() {
-  //   if (localStorage.currentUser) {
-  //     return JSON.parse(localStorage.currentUser);
-  //   } else {
-  //     return undefined;
-  //   }
-  // }
 }

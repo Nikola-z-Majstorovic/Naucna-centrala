@@ -15,6 +15,7 @@ export class AuthorTasksComponent implements OnInit {
   constructor(private repoService: RepositoryService, private router: Router) {
   }
 
+
   ngOnInit() {}
 //     this.repoService.getAddCoauthorTasks().subscribe(
 //       (response: any) => {

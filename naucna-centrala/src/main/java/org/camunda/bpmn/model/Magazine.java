@@ -62,8 +62,8 @@ public class Magazine {
     @OneToMany(mappedBy = "magazine", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SciencePaper> sciencePapers;
 
-//    @OneToMany(mappedBy = "magazine", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Membership> memberships;
+    @OneToMany(mappedBy = "magazine", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Membership> memberships;
 
     public Magazine() {
     }
@@ -198,13 +198,13 @@ public class Magazine {
         this.sciencePapers = sciencePapers;
     }
 
-//    public List<Membership> getMemberships() {
-//        return memberships;
-//    }
-//
-//    public void setMemberships(List<Membership> memberships) {
-//        this.memberships = memberships;
-//    }
+    public List<Membership> getMemberships() {
+        return memberships;
+    }
+
+    public void setMemberships(List<Membership> memberships) {
+        this.memberships = memberships;
+    }
 
     public void addSciencePaper(SciencePaper sciencePaper){
         sciencePapers.add(sciencePaper);

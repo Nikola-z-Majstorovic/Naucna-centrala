@@ -8,6 +8,7 @@ import {TextSubbmitingComponent} from '../home-page/author/text-subbmiting/text-
 import {SciencePaperFormComponent} from '../home-page/author/text-subbmiting/science-paper-form/science-paper-form.component';
 import {AuthorTasksComponent} from '../home-page/author/author-tasks/author-tasks.component';
 import {ChooseMagazineComponent} from '../home-page/author/text-subbmiting/choose-magazine/choose-magazine.component';
+import {MembershipPaymentComponent} from '../home-page/author/text-subbmiting/membership-payment/membership-payment.component'
 
 const routes: Routes = [
   { path: '', redirectTo: 'home-page', pathMatch: 'full'},
@@ -18,7 +19,8 @@ const routes: Routes = [
     { path: '', component: AuthorTasksComponent},
     { path: 'text-subbmiting', component: TextSubbmitingComponent, children: [
       {path: '', component: ChooseMagazineComponent},
-    {path: 'science-paper-form/:processId', component: SciencePaperFormComponent}]
+      {path: 'membership-payment/:processId', component: MembershipPaymentComponent},
+      {path: 'science-paper-form/:processId', component: SciencePaperFormComponent}]
     }
   ]}
 

@@ -29,9 +29,9 @@ public class ScienceField implements Serializable {
     public ScienceField() {
     }
 
-    public ScienceField(String name){
-        this.name = name;
-    }
+//    public ScienceField(String name){
+//        this.name = name;
+//    }
 
     public Long getId() {
         return id;

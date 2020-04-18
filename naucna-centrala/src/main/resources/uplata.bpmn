@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1a6n5to" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <bpmn:process id="uplata" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_15f0vm8</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_17j8amq" sourceRef="Task_1eirepp" targetRef="Task_19ks4e4" />
+    <bpmn:endEvent id="EndEvent_1pzcmoq">
+      <bpmn:incoming>SequenceFlow_173b85z</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_173b85z" sourceRef="Task_19ks4e4" targetRef="EndEvent_1pzcmoq" />
+    <bpmn:sequenceFlow id="SequenceFlow_15f0vm8" sourceRef="StartEvent_1" targetRef="Task_1eirepp" />
+    <bpmn:userTask id="Task_1eirepp" name="Uplata clanarine">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="iznos_clanarine" label="Iznos clanarine je 10 e" type="long" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_15f0vm8</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_17j8amq</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_19ks4e4" name="Provera novcanih sredstava" camunda:class="org.camunda.bpmn.handlers.CheckSusbscription">
+      <bpmn:incoming>SequenceFlow_17j8amq</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_173b85z</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="uplata">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_17j8amq_di" bpmnElement="SequenceFlow_17j8amq">
+        <di:waypoint x="350" y="160" />
+        <di:waypoint x="430" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1pzcmoq_di" bpmnElement="EndEvent_1pzcmoq">
+        <dc:Bounds x="602" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_173b85z_di" bpmnElement="SequenceFlow_173b85z">
+        <di:waypoint x="530" y="160" />
+        <di:waypoint x="602" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_15f0vm8_di" bpmnElement="SequenceFlow_15f0vm8">
+        <di:waypoint x="188" y="160" />
+        <di:waypoint x="250" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1fyqge9_di" bpmnElement="Task_1eirepp">
+        <dc:Bounds x="250" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1lksdu0_di" bpmnElement="Task_19ks4e4">
+        <dc:Bounds x="430" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

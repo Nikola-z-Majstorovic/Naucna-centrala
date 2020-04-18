@@ -19,7 +19,8 @@ export class SciencePaperFormComponent implements OnInit {
   naucneOblasti: any = [];
 
   constructor(private route: ActivatedRoute, private repoService: RepositoryService,
-              private sciencePaperService: SciencePaperService, private router: Router, private validationService: ValidationService) {
+              private sciencePaperService: SciencePaperService, private router: Router, private validationService: ValidationService)
+  {
     this.route.params.subscribe(
       (params: Params) => {
         this.processId = params['processId'];
@@ -28,6 +29,7 @@ export class SciencePaperFormComponent implements OnInit {
 
     this.repoService.getSciencePaperForm(this.processId).subscribe(
       (response: any) => {
+        console.log(response)
         this.formFieldsDto = response;
         this.formFields = response.formFields;
         this.formFields.forEach( (field) => {
@@ -58,32 +60,32 @@ export class SciencePaperFormComponent implements OnInit {
   }
 
   onSubmit(value, form) {
-
-    if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
-      return;
-    }
-
-    let dto = new Array();
-    for (var property in value) {
-      if (property == 'pdf') {
-        dto.push({fieldId: property, fieldValue: this.fileToUpload.name});
-      }
-      dto.push({fieldId: property, fieldValue: value[property]});
-    }
-
-    this.sciencePaperService.save(this.formFieldsDto.taskId, dto).subscribe(
-      (response: any) => {
-        this.sciencePaperService.savePdf(response, this.fileToUpload).subscribe(
-          (success) => {
-            alert('Success');
-            this.router.navigate(['/homepage/author']);
-          }
-        );
-      },
-      (error) => {
-        alert(error.message);
-      }
-    );
+    //
+    // if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
+    //   return;
+    // }
+    //
+    // let dto = new Array();
+    // for (var property in value) {
+    //   if (property == 'pdf') {
+    //     dto.push({fieldId: property, fieldValue: this.fileToUpload.name});
+    //   }
+    //   dto.push({fieldId: property, fieldValue: value[property]});
+    // }
+    //
+    // this.sciencePaperService.save(this.formFieldsDto.taskId, dto).subscribe(
+    //   (response: any) => {
+    //     this.sciencePaperService.savePdf(response, this.fileToUpload).subscribe(
+    //       (success) => {
+    //         alert('Success');
+    //         this.router.navigate(['/homepage/author']);
+    //       }
+    //     );
+    //   },
+    //   (error) => {
+    //     alert(error.message);
+    //   }
+    // );
 
   }
 

@@ -18,7 +18,6 @@ export class HomePageComponent implements OnInit {
   isAuthor = false;
   isLoggedIn = false;
 
-
   ngOnInit() {
     const user = this.authService.getLoggedUser();
     if (user != null) {

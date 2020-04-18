@@ -19,6 +19,10 @@ export class ChooseMagazineComponent implements OnInit {
   formFields: any;
 
   constructor(private sciencePaperService: SciencePaperService, private validationService: ValidationService, private router: Router) {
+
+  }
+
+  ngOnInit() {
     this.sciencePaperService.startProcess().subscribe(
       (response: any) => {
         this.formFieldsDto = response;
@@ -33,38 +37,33 @@ export class ChooseMagazineComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-  }
+  onSubmit(value, form) {
 
-  // onSubmit(value, form) {
-  //
-  //   if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
-  //     return;
-  //   }
-  //
-  //   let dto = new Array();
-  //
-  //   for (var property in value) {
-  //     dto.push({fieldId: property, fieldValue: value[property]});
-  //   }
-  //   this.sciencePaperService.selectMagazine(this.formFieldsDto.taskId, dto).subscribe(
-  //
-  //     (response: any) => {
-  //       if (response.openAccess == false && response.membership == false) {
-  //         this.router.navigate(['/homepage/author/text-subbmiting/science-paper-form/'.concat(this.formFieldsDto.processInstanceId)]);
-  //       }
-  //       if (response.openAccess == true && response.membership == false) {
-  //         this.router.navigate(['/homepage/author/text-subbmiting/membership-payment/'.concat(this.formFieldsDto.processInstanceId)]);
-  //       }
-  //       if (response.openAccess == true && response.membership == true) {
-  //         this.router.navigate(['/homepage/author/text-subbmiting/science-paper-form/'.concat(this.formFieldsDto.processInstanceId)]);
-  //       }
-  //
-  //     },
-  //     (error) => {
-  //       alert(error.message);
-  //     });
-  // }
+    if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
+      return;
+    }
+
+    let dto = new Array();
+
+    for (var property in value) {
+      dto.push({fieldId: property, fieldValue: value[property]});
+    }
+    this.sciencePaperService.selectMagazine(this.formFieldsDto.taskId, dto).subscribe(
+      (response: any) => {
+        if (!response.openAccess) { // && response.membership == false
+          this.router.navigate(['/home-page/author/text-subbmiting/science-paper-form/'.concat(this.formFieldsDto.processInstanceId)]);
+        } else if (response.openAccess && !response.membership) {
+          this.router.navigate(['/home-page/author/text-subbmiting/membership-payment/'.concat(this.formFieldsDto.processInstanceId)]);
+        } else if (response.openAccess && response.membership) {
+          this.router.navigate(['/home-page/author/text-subbmiting/science-paper-form/'.concat(this.formFieldsDto.processInstanceId)]);
+        }
+
+      },
+      (error) => {
+        alert(error.message);
+      }
+     );
+  }
 
 
 }

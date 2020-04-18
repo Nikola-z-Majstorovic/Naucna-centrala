@@ -1,15 +1,12 @@
 <div class="wrapper d-flex justify-content-center" style="width: 100%; height: 100%;">
-  <form #f="ngForm"  (ngSubmit)="onSubmit(f.value, f)" ngNativateValidate>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativateValidate>
 
     <div *ngFor="let field of formFields">
 
       <label for={{field.id}}> {{field.label}} </label>
 
-      <select name={{field.id}} *ngIf="field.type.name=='enum'" ngModel class="form-control">
-        <option *ngFor="let val of casopisi" value={{val}}>
-          {{field.type.values[val]}}
-        </option>
-      </select>
+      <input type="text" name={{field.id}} *ngIf="field.type.name == 'string'" class="form-control" ngModel>
+      <input type="text" name={{field.id}} *ngIf="field.type.name == 'long'" class="form-control" ngModel>
     </div>
 
     <div class="d-flex justify-content-center">
