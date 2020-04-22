@@ -29,7 +29,6 @@ export class SciencePaperFormComponent implements OnInit {
 
     this.repoService.getSciencePaperForm(this.processId).subscribe(
       (response: any) => {
-        console.log(response)
         this.formFieldsDto = response;
         this.formFields = response.formFields;
         this.formFields.forEach( (field) => {
@@ -52,6 +51,7 @@ export class SciencePaperFormComponent implements OnInit {
     var reader = new FileReader();
     reader.onload = (event: any) => {
       this.fileUrl = event.target.result;
+      console.log(this.fileUrl);
     };
     reader.readAsDataURL(this.fileToUpload);
     console.log('URL ' + this.fileUrl);
@@ -60,32 +60,32 @@ export class SciencePaperFormComponent implements OnInit {
   }
 
   onSubmit(value, form) {
-    //
-    // if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
-    //   return;
-    // }
-    //
-    // let dto = new Array();
-    // for (var property in value) {
-    //   if (property == 'pdf') {
-    //     dto.push({fieldId: property, fieldValue: this.fileToUpload.name});
-    //   }
-    //   dto.push({fieldId: property, fieldValue: value[property]});
-    // }
-    //
-    // this.sciencePaperService.save(this.formFieldsDto.taskId, dto).subscribe(
-    //   (response: any) => {
-    //     this.sciencePaperService.savePdf(response, this.fileToUpload).subscribe(
-    //       (success) => {
-    //         alert('Success');
-    //         this.router.navigate(['/homepage/author']);
-    //       }
-    //     );
-    //   },
-    //   (error) => {
-    //     alert(error.message);
-    //   }
-    // );
+
+    if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
+      return;
+    }
+
+    let dto = new Array();
+    for (var property in value) {
+      if (property == 'pdf') {
+        dto.push({fieldId: property, fieldValue: this.fileToUpload.name});
+      }
+      dto.push({fieldId: property, fieldValue: value[property]});
+    }
+
+    this.sciencePaperService.save(this.formFieldsDto.taskId, dto).subscribe(
+      (response: any) => {
+        this.sciencePaperService.savePdf(response, this.fileToUpload).subscribe(
+          (success) => {
+            alert('Success');
+            this.router.navigate(['/home-page/author']);
+          }
+        );
+      },
+      (error) => {
+        alert(error.message);
+      }
+    );
 
   }
 

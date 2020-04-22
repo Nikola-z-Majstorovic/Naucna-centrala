@@ -11,9 +11,13 @@ import java.util.List;
 public class ScienceFieldService {
 
     @Autowired
-    private ScienceFieldRepository scienceFieldRepositor;
+    private ScienceFieldRepository scienceFieldRepository;
 
     public List<ScienceField> findAll() {
-        return scienceFieldRepositor.findAll();
+        return scienceFieldRepository.findAll();
+    }
+
+    public ScienceField findOneByName(String fieldValue) {
+        return scienceFieldRepository.findOneByName(fieldValue);
     }
 }

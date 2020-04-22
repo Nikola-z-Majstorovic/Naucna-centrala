@@ -6,6 +6,10 @@ insert into user (username, password, first_name, last_name, city, country, emai
 values ('nikola', '$2a$04$TwATfW3iqzDzzrAKvT06fepL/hZ4CuhYwyFhsaEIeV0UuxO26QFqS', 'nikola', 'majstorovic', 'Novi Sad', 'Srbija', 'nikola@gmail.com', false, true, 'AUTHOR');
 
 insert into user (username, password, first_name, last_name, city, country, email, is_reviewer, is_active, type)
+values ('maja', '$2a$04$4sB6MSFX7RQRvrAzzhuhue/naaSliITXBU9a0JN6LPmtsYwujwJ.W', 'maja', 'lazic', 'Novi Sad', 'Srbija', 'maja@gmail.com', false, true, 'AUTHOR');
+
+
+insert into user (username, password, first_name, last_name, city, country, email, is_reviewer, is_active, type)
 values ('lazic', '$2a$10$LiTcSs1SsKYHcAjAQLejqe/VPI4YsxkHLEC8OaujOR6ShPM81sV4q', 'Milan', 'Lazic', 'Novi Sad', 'Srbija', 'lazic@gmail.com', false, true, 'REVIEWER');
 insert into user (username, password, first_name, last_name, city, country, email, is_reviewer, is_active, type)
 values ('djordjevic', '$2a$10$XbOz9hcDf83PMdfm1JeHRO9JwcMCtalZVC1oiCnbhT/0sVF4A8snC', 'Nikola', 'Djordjevic', 'Novi Sad', 'Srbija', 'djordjevic@gmail.com', false, true, 'REVIEWER');

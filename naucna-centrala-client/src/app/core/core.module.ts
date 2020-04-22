@@ -17,6 +17,8 @@ import {AuthorTasksComponent} from '../home-page/author/author-tasks/author-task
 import { ChooseMagazineComponent } from '../home-page/author/text-subbmiting/choose-magazine/choose-magazine.component';
 import {JwtInterceptor} from '../_helper/jwt.interceptor';
 import { MembershipPaymentComponent } from '../home-page/author/text-subbmiting/membership-payment/membership-payment.component';
+import {CoauthorFormComponent} from '../home-page/author/coauthor-form/coauthor-form.component';
+
 @NgModule({
   declarations: [
     HomePageComponent,
@@ -27,7 +29,8 @@ import { MembershipPaymentComponent } from '../home-page/author/text-subbmiting/
     SciencePaperFormComponent,
     AuthorTasksComponent,
     ChooseMagazineComponent,
-    MembershipPaymentComponent],
+    MembershipPaymentComponent,
+    CoauthorFormComponent],
   imports: [
     CommonModule,
     ToastrModule.forRoot({preventDuplicates: true}), // ToastrModule added,

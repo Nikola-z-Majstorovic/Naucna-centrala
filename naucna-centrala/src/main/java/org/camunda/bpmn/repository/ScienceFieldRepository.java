@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ScienceFieldRepository extends JpaRepository<ScienceField, Long> {
 
+    ScienceField findOneByName(String fieldValue);
 }

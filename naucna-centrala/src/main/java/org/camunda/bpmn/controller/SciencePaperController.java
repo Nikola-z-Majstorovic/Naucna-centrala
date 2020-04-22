@@ -1,5 +1,6 @@
 package org.camunda.bpmn.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,103 +18,82 @@ import org.camunda.bpmn.dto.AccessAndMembershipDTO;
 import org.camunda.bpmn.dto.FormFieldsDto;
 import org.camunda.bpmn.dto.FormSubmissionDto;
 import org.camunda.bpmn.dto.MagazineDTO;
+import org.camunda.bpmn.model.Coauthor;
+import org.camunda.bpmn.model.ScienceField;
+import org.camunda.bpmn.model.SciencePaper;
 import org.camunda.bpmn.security.TokenUtils;
-import org.camunda.bpmn.service.MagazineService;
-import org.camunda.bpmn.service.Utils;
+import org.camunda.bpmn.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(value = "/science-paper")
 public class SciencePaperController {
 
-	
+
+    @Autowired
+    private RuntimeService runtimeService;
+
     @Autowired
     TaskService taskService;
     
     @Autowired
     FormService formService;
-    
-    @Autowired
-    private RuntimeService runtimeService;
 
     @Autowired
-    private TokenUtils tokenUtils;
-    
+    private ScienceFieldService scienceFieldService;
+
     @Autowired
-    private MagazineService magazineService;
+    private SciencePaperService sciencePaperService;
 
-    
-    @RequestMapping(value = "/form", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<FormFieldsDto> getForm(HttpServletRequest request){
-    	
-        ProcessInstance pi = runtimeService.startProcessInstanceByKey("Obrada");
 
-        Task task = taskService.createTaskQuery().processInstanceId(pi.getId()).list().get(0);
+
+    @RequestMapping(value = "/form/{processInstanceId}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<FormFieldsDto> getSciencePaperForm(@PathVariable("processInstanceId") String processInstanceId){
+        ProcessInstance pi = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+        Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
         TaskFormData tfd = formService.getTaskFormData(task.getId());
         List<FormField> properties = tfd.getFormFields();
-        runtimeService.setVariable(pi.getId(), "authorId", Utils.getUsernameFromRequest(request, tokenUtils));
-
-        List<MagazineDTO> magazines = magazineService.findAll();
+        List<ScienceField> scienceFields = scienceFieldService.findAll();
         for(FormField field : properties){
-            if(field.getId().equals("casopis")){
+            if(field.getId().equals("naucna_oblast")){
                 EnumFormType enumType = (EnumFormType) field.getType();
-                System.out.println(((EnumFormType) field.getType()).getValues());
-                for(MagazineDTO magazineDTO: magazines){
-                    enumType.getValues().put(magazineDTO.getName(), magazineDTO.getName());
-
+                for(ScienceField scienceField: scienceFields){
+                    enumType.getValues().put(scienceField.getName(), scienceField.getName());
                 }
-                break;
             }
         }
         return new ResponseEntity<>(new FormFieldsDto(task.getId(), pi.getId(), properties), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/select-magazine/{taskId}", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-    public ResponseEntity<AccessAndMembershipDTO> selectMagazine(@RequestBody List<FormSubmissionDto> magazine, @PathVariable("taskId") String taskId, HttpServletRequest request){
-        HashMap<String, Object> map = Utils.mapListToDto(magazine);
+    @RequestMapping(value = "/{taskId}", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    public ResponseEntity<String> save(@RequestBody List<FormSubmissionDto> sciencePaperData, @PathVariable("taskId") String taskId, HttpServletRequest request){
+        HashMap<String, Object> map = Utils.mapListToDto(sciencePaperData);
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         String processInstanceId = task.getProcessInstanceId();
-        String name = Utils.getUsernameFromRequest(request, tokenUtils);
+        SciencePaper sciencePaper = new SciencePaper();
+        sciencePaper.setPdfName(Utils.getFormFieldValue(sciencePaperData, "pdf"));
+        sciencePaper = sciencePaperService.save(sciencePaper);
 
-        runtimeService.setVariable(processInstanceId, "magazineName", Utils.getFormFieldValue(magazine, "casopis"));
-        runtimeService.setVariable(processInstanceId, "username", name);
+        runtimeService.setVariable(processInstanceId, "sciencePaperData", sciencePaperData);
+        runtimeService.setVariable(processInstanceId, "sciencePaperId", sciencePaper.getId());
+        runtimeService.setVariable(processInstanceId, "coauthorList", new ArrayList<Coauthor>());
 
         formService.submitTaskForm(taskId, map);
-        boolean openAccess = (boolean) runtimeService.getVariable(processInstanceId, "open_access");
-        boolean membership = (boolean) runtimeService.getVariable(processInstanceId, "uplacena_clanarina");
-        return new ResponseEntity<>(new AccessAndMembershipDTO(openAccess,membership), HttpStatus.OK);
+        return new ResponseEntity<>(sciencePaper.getId().toString(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/payment/{processInstanceId}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<FormFieldsDto> getForm(@PathVariable("processInstanceId") String processInstanceId){
-        ProcessInstance subprocess = runtimeService.createProcessInstanceQuery().superProcessInstanceId(processInstanceId).singleResult();
-        Task task = taskService.createTaskQuery().processInstanceId(subprocess.getId()).list().get(0);
-        TaskFormData tfd = formService.getTaskFormData(task.getId());
-        List<FormField> properties = tfd.getFormFields();
-        return new ResponseEntity<>(new FormFieldsDto(task.getId(), processInstanceId, properties), HttpStatus.OK);
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> savePdf(@RequestParam("file") MultipartFile file , @PathVariable("id") String sciencePaperId){
+        SciencePaper sciencePaper = sciencePaperService.findOneById(Long.parseLong(sciencePaperId));
+        sciencePaperService.savePdf(file, sciencePaper);
+        return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/submit/{taskId}/{processInstanceId}", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-    public ResponseEntity<Boolean> submit(@RequestBody List<FormSubmissionDto> paymentData, @PathVariable("taskId") String taskId,@PathVariable("processInstanceId") String processInstanceId, HttpServletRequest request){
-        HashMap<String, Object> map = Utils.mapListToDto(paymentData);
-        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
-        String subProcessInstanceId = task.getProcessInstanceId();
-        runtimeService.setVariable(subProcessInstanceId, "payment", Utils.getFormFieldValue(paymentData, "iznos_clanarine"));
 
-//        String name = Utils.getUsernameFromRequest(request, tokenUtils);
-//        runtimeService.setVariable(processInstanceId, "username", name);
-//        runtimeService.setVariable(subProcessInstanceId,"clanarina_uplacena",false);
-//
-        formService.submitTaskForm(taskId, map);
-
-//        boolean clanarina_uplacena = (boolean) runtimeService.getVariable(processInstanceId, "clanarina_uplacena");
-//        if(clanarina_uplacena) {
-            return new ResponseEntity<>(true, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(false, HttpStatus.OK);
-//        }
-    }
 }

@@ -22,13 +22,13 @@ export class RepositoryService {
   //   return this.httpClient.get('/api/admin/get/tasks/reviewer');
   // }
   //
-  // claimTask(taskId){
-  //   return this.httpClient.post('/api/repository/tasks/claim/' + taskId, null);
-  // }
+  claimTask(taskId) {
+    return this.httpClient.post('/api/task/claim/' + taskId, null);
+  }
   //
-  // getForm(taskId){
-  //   return this.httpClient.get('/api/repository/form/' + taskId);
-  // }
+  getForm(taskId) {
+    return this.httpClient.get('/api/task/form/' + taskId);
+  }
   //
   // getCheckMagazineDataForm(taskId){
   //   return this.httpClient.get('/api/repository/form/check-magazine-data/' + taskId);
@@ -43,12 +43,12 @@ export class RepositoryService {
   // }
 
   getSciencePaperForm(processInstanceId) {
-    return this.httpClient.get('/api/task/form/science-paper/'.concat(processInstanceId));
+    return this.httpClient.get('/api/science-paper/form/'.concat(processInstanceId));
   }
 
-  // getAddCoauthorTasks() {
-  //   return this.httpClient.get('/api/repository/tasks/coauthor');
-  // }
+  getAddCoauthorTasks() {
+    return this.httpClient.get('/api/task/coauthor');
+  }
   //
   // getReviewPaperTasks() {
   //   return this.httpClient.get('/api/repository/tasks/review-paper');

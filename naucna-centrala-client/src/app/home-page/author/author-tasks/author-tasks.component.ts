@@ -9,22 +9,25 @@ import { Router } from '@angular/router';
 })
 export class AuthorTasksComponent implements OnInit {
 
-  // tasksCoauthor: any = [];
+  tasksCoauthor: any = [];
   // tasksPaperCorrection: any = [];
 
   constructor(private repoService: RepositoryService, private router: Router) {
   }
 
 
-  ngOnInit() {}
-//     this.repoService.getAddCoauthorTasks().subscribe(
-//       (response: any) => {
-//         this.tasksCoauthor = response;
-//       },
-//       (error) => {
-//         alert(error.message);
-//       }
-//     );
+  ngOnInit() {
+    this.repoService.getAddCoauthorTasks().subscribe(
+      (response: any) => {
+        console.log(response);
+        this.tasksCoauthor = response;
+      },
+      (error) => {
+        alert(error.message);
+      }
+    );
+  }
+
 //
 //     this.repoService.getPaperCorrectionTasks().subscribe(
 //       (response: any) => {
@@ -36,16 +39,16 @@ export class AuthorTasksComponent implements OnInit {
 //     );
 //   }
 //
-//   claimTaskCoauthor(taskId) {
-//     this.repoService.claimTask(taskId).subscribe(
-//       (success) => {
-//         this.router.navigate(['/homepage/author/coauthor/'.concat(taskId)]);
-//       }
-//     ),
-//       (error) => {
-//         alert(error.message);
-//       };
-//   }
+  claimTaskCoauthor(taskId) {
+    this.repoService.claimTask(taskId).subscribe(
+      (success) => {
+        this.router.navigate(['/home-page/author/coauthor/'.concat(taskId)]);
+      }
+    ),
+      (error) => {
+        alert(error.message);
+      };
+  }
 //
 //   claimTaskPaperCorrection(taskId) {
 //     this.repoService.claimTask(taskId).subscribe(

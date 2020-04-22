@@ -35,7 +35,7 @@
       <bpmn:outgoing>SequenceFlow_02nk3zx</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_1u1c6hk" sourceRef="Task_1c5yf4g" targetRef="Task_1i6sbns" />
-    <bpmn:userTask id="Task_0q1mn9w" name="Zadatak za glavnog urednika koji pregleda casopis" camunda:assignee="glavniUrednik">
+    <bpmn:userTask id="Task_0q1mn9w" name="Zadatak za glavnog urednika koji pregleda casopis">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="checkNaslovRada" label="Naslov rada" type="string" defaultValue="${naslovRada}" />
@@ -443,7 +443,7 @@ execution.setVariable("cnt ", cnt)</camunda:script>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_1fl0e6j" sourceRef="Task_15w0it2" targetRef="Task_1usjj95" />
     <bpmn:sequenceFlow id="SequenceFlow_1qtyrv8" sourceRef="Task_15mijsu" targetRef="Task_19sv3c5" />
-    <bpmn:sequenceFlow id="SequenceFlow_05l80c9" sourceRef="Task_0etq3cf" targetRef="Task_1c5yf4g" />
+    <bpmn:sequenceFlow id="SequenceFlow_05l80c9" sourceRef="Task_0etq3cf" targetRef="Task_036byug" />
     <bpmn:userTask id="Task_0etq3cf" name="Forma naucnog rada" camunda:assignee="${initiator}">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -457,7 +457,7 @@ execution.setVariable("cnt ", cnt)</camunda:script>
               <camunda:constraint name="required" />
             </camunda:validation>
           </camunda:formField>
-          <camunda:formField id="kljucni_pojmovi" label="Kljucni pojam:" type="string">
+          <camunda:formField id="kljucni_pojam" label="Kljucni pojam:" type="string">
             <camunda:validation>
               <camunda:constraint name="required" />
             </camunda:validation>
@@ -472,6 +472,7 @@ execution.setVariable("cnt ", cnt)</camunda:script>
               <camunda:constraint name="required" />
             </camunda:validation>
           </camunda:formField>
+          <camunda:formField id="broj_koautora" label="Unesite broj koatuora " type="long" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0oiszwl</bpmn:incoming>
@@ -482,12 +483,12 @@ execution.setVariable("cnt ", cnt)</camunda:script>
     <bpmn:endEvent id="EndEvent_1car69m">
       <bpmn:incoming>SequenceFlow_1d3mxqp</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Task_1c5yf4g" name="Odabir glavnog urednika" camunda:expression="${activate}">
-      <bpmn:incoming>SequenceFlow_05l80c9</bpmn:incoming>
+    <bpmn:serviceTask id="Task_1c5yf4g" name="Odabir glavnog urednika" camunda:class="org.camunda.bpmn.handlers.SavePaperAndGetMainEditor">
+      <bpmn:incoming>SequenceFlow_1glql1b</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1u1c6hk</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_0b4nq4g" sourceRef="Task_1i6sbns" targetRef="Task_0q1mn9w" />
-    <bpmn:sendTask id="Task_1i6sbns" name="Slanje notifikacionog mejla njemu i autoru" camunda:expression="${activate}">
+    <bpmn:sendTask id="Task_1i6sbns" name="Slanje notifikacionog mejla njemu i autoru" camunda:class="org.camunda.bpmn.handlers.SendMailAuthorAndEditor">
       <bpmn:incoming>SequenceFlow_1u1c6hk</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_0ufbamt</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0b4nq4g</bpmn:outgoing>
@@ -501,11 +502,49 @@ execution.setVariable("cnt ", cnt)</camunda:script>
       <bpmn:outgoing>SequenceFlow_0j1xc69</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:sequenceFlow id="SequenceFlow_0j1xc69" sourceRef="Task_07fwnzq" targetRef="ExclusiveGateway_1mlewhf" />
+    <bpmn:userTask id="Task_036byug" name="Izbor koautora" camunda:assignee="${initiator}">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="ime_koautora" label="Ime koautora " type="string">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="prezime_koautora" label="Prezime koautora " type="string">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="email_koautora" label="Email koautora" type="string">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="grad" label="Grad koautora" type="string">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="drzava" label="Drzava koautora" type="string">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+        <camunda:taskListener class="org.camunda.bpmn.handlers.AssignForCoauthorTask" event="create" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_05l80c9</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1glql1b</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true">
+        <bpmn:loopCardinality xsi:type="bpmn:tFormalExpression">${broj_koautora}</bpmn:loopCardinality>
+      </bpmn:multiInstanceLoopCharacteristics>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1glql1b" sourceRef="Task_036byug" targetRef="Task_1c5yf4g" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Obrada">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="156" y="475" width="36" height="36" />
+        <dc:Bounds x="156" y="347" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_1mxhfe6_di" bpmnElement="ExclusiveGateway_1mxhfe6" isMarkerVisible="true">
         <dc:Bounds x="664" y="340" width="50" height="50" />
@@ -615,9 +654,7 @@ execution.setVariable("cnt ", cnt)</camunda:script>
         <di:waypoint x="664" y="365" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1phkhrk_di" bpmnElement="SequenceFlow_1phkhrk">
-        <di:waypoint x="192" y="493" />
-        <di:waypoint x="254" y="493" />
-        <di:waypoint x="254" y="365" />
+        <di:waypoint x="192" y="365" />
         <di:waypoint x="311" y="365" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_02nk3zx_di" bpmnElement="SequenceFlow_02nk3zx">
@@ -666,7 +703,7 @@ execution.setVariable("cnt ", cnt)</camunda:script>
         <di:waypoint x="1297" y="383" />
         <di:waypoint x="926" y="383" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1257" y="278" width="63" height="27" />
+          <dc:Bounds x="1628" y="278" width="63" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_1mzt0yt_di" bpmnElement="Task_18ob252">
@@ -912,7 +949,7 @@ execution.setVariable("cnt ", cnt)</camunda:script>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_05l80c9_di" bpmnElement="SequenceFlow_05l80c9">
         <di:waypoint x="876" y="406" />
-        <di:waypoint x="876" y="570" />
+        <di:waypoint x="876" y="450" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_10ypjo2_di" bpmnElement="Task_0etq3cf">
         <dc:Bounds x="826" y="326" width="100" height="80" />
@@ -937,6 +974,13 @@ execution.setVariable("cnt ", cnt)</camunda:script>
         <di:waypoint x="1360" y="261" />
         <di:waypoint x="1692" y="261" />
         <di:waypoint x="1692" y="356" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0c20d6c_di" bpmnElement="Task_036byug">
+        <dc:Bounds x="826" y="453" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1glql1b_di" bpmnElement="SequenceFlow_1glql1b">
+        <di:waypoint x="876" y="533" />
+        <di:waypoint x="876" y="570" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

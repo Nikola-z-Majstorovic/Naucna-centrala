@@ -1,6 +1,8 @@
 package org.camunda.bpmn.dto;
 
-public class FormSubmissionDto {
+import java.io.Serializable;
+
+public class FormSubmissionDto  implements Serializable {
 	String fieldId;
 	String fieldValue;
 	

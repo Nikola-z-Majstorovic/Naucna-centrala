@@ -9,6 +9,7 @@ import {SciencePaperFormComponent} from '../home-page/author/text-subbmiting/sci
 import {AuthorTasksComponent} from '../home-page/author/author-tasks/author-tasks.component';
 import {ChooseMagazineComponent} from '../home-page/author/text-subbmiting/choose-magazine/choose-magazine.component';
 import {MembershipPaymentComponent} from '../home-page/author/text-subbmiting/membership-payment/membership-payment.component'
+import {CoauthorFormComponent} from '../home-page/author/coauthor-form/coauthor-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home-page', pathMatch: 'full'},
@@ -21,7 +22,8 @@ const routes: Routes = [
       {path: '', component: ChooseMagazineComponent},
       {path: 'membership-payment/:processId', component: MembershipPaymentComponent},
       {path: 'science-paper-form/:processId', component: SciencePaperFormComponent}]
-    }
+    },
+    { path: 'coauthor/:id', component: CoauthorFormComponent },
   ]}
 
   ]}
