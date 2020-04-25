@@ -84,4 +84,6 @@ public class MagazineController {
         return new ResponseEntity<>(new AccessAndMembershipDTO(openAccess,membership), HttpStatus.OK);
     }
 
+
+
 }

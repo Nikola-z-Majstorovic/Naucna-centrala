@@ -4,6 +4,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpmn.dto.FormSubmissionDto;
 import org.camunda.bpmn.model.Coauthor;
+import org.camunda.bpmn.model.Editor;
 import org.camunda.bpmn.model.Magazine;
 import org.camunda.bpmn.model.SciencePaper;
 import org.camunda.bpmn.service.MagazineService;
@@ -36,6 +37,7 @@ public class SavePaperAndGetMainEditor implements JavaDelegate {
         String magazineName = (String) execution.getVariable("magazineName");
         Magazine magazine = magazineService.findByName(magazineName);
         execution.setVariable("chiefEditor", magazine.getChiefEditor().getUsername());
+
     }
 
 }

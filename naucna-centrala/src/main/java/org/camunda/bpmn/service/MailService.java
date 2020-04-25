@@ -20,7 +20,8 @@ public class MailService {
     public void sendNotification(Author author, Editor chiefEditor) {
 
         SimpleMailMessage mailAuthor = new SimpleMailMessage();
-        mailAuthor.setTo("majsta93@hotmail.com");
+        System.out.println(chiefEditor.getTitle());
+        mailAuthor.setTo("majsta993@gmail.com");
         mailAuthor.setFrom(environment.getProperty("spring.mail.username"));
         mailAuthor.setSubject("Nov rad");
         mailAuthor.setText("Zdravo " + author.getFirstName() + ",\n\nuspešno ste prijavili rad.");
@@ -33,6 +34,15 @@ public class MailService {
 
 
         javaMailSender.send(mailAuthor);
+        javaMailSender.send(mailEditor);
+    }
+
+    public void notifyScienceFieldEditor(Editor editor) {
+        SimpleMailMessage mailEditor = new SimpleMailMessage();
+        mailEditor.setTo("flylivedrive@gmail.com");
+        mailEditor.setFrom(environment.getProperty("spring.mail.username"));
+        mailEditor.setSubject("Nov rad");
+        mailEditor.setText("Zdravo " + editor.getFirstName() + ",\n\nobaveštavamo Vas da je u sistemu prijavljen nov rad.");
         javaMailSender.send(mailEditor);
     }
 }

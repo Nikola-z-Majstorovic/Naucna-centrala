@@ -23,4 +23,12 @@ export class SciencePaperService {
     formData.append('file', fileToUpload);
     return this.httpClient.put('/api/science-paper/'.concat(sciencePaperId), formData, {responseType: 'text'});
   }
+
+  paperReview(taskId, dto) {
+    return this.httpClient.put('/api/task/paper-review/'.concat(taskId), dto, {responseType: 'text'});
+  }
+
+  paperFormat(taskId, dto) {
+    return this.httpClient.put('/api/science-paper/paper-format/'.concat(taskId), dto, {responseType: 'text'});
+  }
 }

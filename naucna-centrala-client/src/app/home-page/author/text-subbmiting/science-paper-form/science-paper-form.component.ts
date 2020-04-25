@@ -19,8 +19,10 @@ export class SciencePaperFormComponent implements OnInit {
   naucneOblasti: any = [];
 
   constructor(private route: ActivatedRoute, private repoService: RepositoryService,
-              private sciencePaperService: SciencePaperService, private router: Router, private validationService: ValidationService)
-  {
+              private sciencePaperService: SciencePaperService, private router: Router, private validationService: ValidationService) {}
+
+
+  ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
         this.processId = params['processId'];
@@ -43,20 +45,13 @@ export class SciencePaperFormComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-  }
-
   handleFileInput(file: FileList) {
     this.fileToUpload = file.item(0);
     var reader = new FileReader();
     reader.onload = (event: any) => {
       this.fileUrl = event.target.result;
-      console.log(this.fileUrl);
     };
     reader.readAsDataURL(this.fileToUpload);
-    console.log('URL ' + this.fileUrl);
-    console.log('file ' + this.fileToUpload);
-    console.log('filename ' + this.fileToUpload.name);
   }
 
   onSubmit(value, form) {

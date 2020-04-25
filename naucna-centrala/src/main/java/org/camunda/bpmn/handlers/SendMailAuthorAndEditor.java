@@ -20,7 +20,8 @@ public class SendMailAuthorAndEditor implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        Editor chiefEditor = (Editor) userService.findOneByUsername((String) execution.getVariable("chiefEditor"));
+        String editor = (String) execution.getVariable("chiefEditor");
+        Editor chiefEditor = (Editor) userService.findOneByUsername(editor);
         Author author = (Author) userService.findOneByUsername((String) execution.getVariable("authorId"));
         mailService.sendNotification(author, chiefEditor);
     }

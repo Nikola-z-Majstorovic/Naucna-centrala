@@ -5,7 +5,6 @@ import {AuthorComponent } from '../home-page/author/author.component';
 import {AuthService} from '../services/auth.service';
 import { GenericService } from '../services/generic/generic.service';
 import {JwtUtilsService} from '../services/jwt-utils/jwt-utils.service';
-import {RegisterPageComponent} from '../register-page/register-page.component';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -18,19 +17,28 @@ import { ChooseMagazineComponent } from '../home-page/author/text-subbmiting/cho
 import {JwtInterceptor} from '../_helper/jwt.interceptor';
 import { MembershipPaymentComponent } from '../home-page/author/text-subbmiting/membership-payment/membership-payment.component';
 import {CoauthorFormComponent} from '../home-page/author/coauthor-form/coauthor-form.component';
+import { EditorComponent } from '../home-page/editor/editor.component';
+import { EditorPapersComponent } from '../home-page/editor/editor-papers/editor-papers.component';
+import { ReviewPaperComponent } from '../home-page/editor/review-paper/review-paper.component';
+import { ChooseReviwersComponent } from '../home-page/editor/choose-reviwers/choose-reviwers.component';
+import { PaperFormatComponent } from '../home-page/editor/paper-format/paper-format.component';
 
 @NgModule({
   declarations: [
     HomePageComponent,
     LoginPageComponent,
-    RegisterPageComponent,
     AuthorComponent,
     TextSubbmitingComponent,
     SciencePaperFormComponent,
     AuthorTasksComponent,
     ChooseMagazineComponent,
     MembershipPaymentComponent,
-    CoauthorFormComponent],
+    CoauthorFormComponent,
+    EditorComponent,
+    EditorPapersComponent,
+    ReviewPaperComponent,
+    ChooseReviwersComponent,
+    PaperFormatComponent],
   imports: [
     CommonModule,
     ToastrModule.forRoot({preventDuplicates: true}), // ToastrModule added,

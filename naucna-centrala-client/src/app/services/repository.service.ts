@@ -25,7 +25,7 @@ export class RepositoryService {
   claimTask(taskId) {
     return this.httpClient.post('/api/task/claim/' + taskId, null);
   }
-  //
+
   getForm(taskId) {
     return this.httpClient.get('/api/task/form/' + taskId);
   }
@@ -49,23 +49,23 @@ export class RepositoryService {
   getAddCoauthorTasks() {
     return this.httpClient.get('/api/task/coauthor');
   }
-  //
-  // getReviewPaperTasks() {
-  //   return this.httpClient.get('/api/repository/tasks/review-paper');
-  // }
-  //
-  // getPaperFormatForm(processId) {
-  //   return this.httpClient.get('/api/repository/form/paper-format/'.concat(processId));
-  // }
-  //
+
+  getReviewPaperTasks() {
+    return this.httpClient.get('/api/task/review-paper');
+  }
+
+  getPaperFormatForm(processId) {
+    return this.httpClient.get('/api/science-paper/form/paper-format/'.concat(processId));
+  }
+
   // getPaperCorrectionTasks() {
   //   return this.httpClient.get('/api/repository/tasks/paper-correction');
   // }
-  //
-  // getChooseReviewerTasks() {
-  //   return this.httpClient.get('/api/repository/tasks/choose-reviewer');
-  // }
-  //
+
+  getChooseReviewerTasks() {
+    return this.httpClient.get('/api/task/choose-reviewer');
+  }
+
   // getChooseReviwersForm(taskId) {
   //   return this.httpClient.get('/api/repository/form/choose-reviewers/'.concat(taskId));
   // }
@@ -82,4 +82,7 @@ export class RepositoryService {
   //   return this.httpClient.get('/api/repository/tasks/chief-editor-choice');
   // }
 
+  getChooseReviwersForm(taskId) {
+    return this.httpClient.get('/api/task/form/choose-reviewers/'.concat(taskId));
+  }
 }

@@ -24,6 +24,7 @@ import org.camunda.bpmn.model.SciencePaper;
 import org.camunda.bpmn.security.TokenUtils;
 import org.camunda.bpmn.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +50,6 @@ public class SciencePaperController {
 
     @Autowired
     private SciencePaperService sciencePaperService;
-
 
 
     @RequestMapping(value = "/form/{processInstanceId}", method = RequestMethod.GET, produces = "application/json")
@@ -95,5 +95,19 @@ public class SciencePaperController {
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/form/paper-format/{processInstanceId}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<FormFieldsDto> getPaperFormatForm(@PathVariable("processInstanceId") String processInstanceId){
+        ProcessInstance pi = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+        Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
+        TaskFormData tfd = formService.getTaskFormData(task.getId());
+        List<FormField> properties = tfd.getFormFields();
+        return new ResponseEntity<>(new FormFieldsDto(task.getId(), pi.getId(), properties), HttpStatus.OK);
+    }
 
+    @RequestMapping(value = "/paper-format/{taskId}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<String> paperFormat(@RequestBody List<FormSubmissionDto> paperFormatData, @PathVariable("taskId") String taskId){
+        HashMap<String, Object> map = Utils.mapListToDto(paperFormatData);
+        formService.submitTaskForm(taskId, map);
+        return new ResponseEntity("Success", HttpStatus.OK);
+    }
 }

@@ -24,23 +24,23 @@
     <!-- ADMIN -->
 
     <!-- EDITOR -->
+<!--    <li class="nav-item active" *ngIf="isEditor">-->
+<!--      <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink='/home-page/editor'>Casopisi</a>-->
+<!--    </li>-->
     <li class="nav-item active" *ngIf="isEditor">
-      <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink='/homepage/editor'>Casopisi</a>
-    </li>
-    <li class="nav-item active" *ngIf="isEditor">
-      <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink='/homepage/editor/papers'>Radovi</a>
+      <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink='/home-page/editor/papers'>Radovi</a>
     </li>
     <!-- EDITOR -->
 
-    <li class="nav-item active" *ngIf="isEditor">
-      <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink='/homepage/orders'>Porudžbine</a>
-    </li>
+<!--    <li class="nav-item active" *ngIf="isEditor">-->
+<!--      <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink='/home-page/orders'>Porudžbine</a>-->
+<!--    </li>-->
 
 
   </ul>
   <div class="d-flex flex-row-reverse">
 
-    <button class="btn" [routerLink]="['/registration']" *ngIf="!isLoggedIn">Registracija</button>
+<!--    <button class="btn" [routerLink]="['/registration']" *ngIf="!isLoggedIn">Registracija</button>-->
     <button class="btn" [routerLink]="['/login']" *ngIf="!isLoggedIn">Prijava</button>
     <button class="btn" (click)="logOut()" *ngIf="isLoggedIn">Odjava</button>
 

@@ -19,18 +19,20 @@ public class MagazineService {
     public List<MagazineDTO> findAll(){
         List<MagazineDTO> magazines = new ArrayList<>();
         for(Magazine magazine: magazineRepo.findAll()){
-            if(magazine.getSellerId() != null){
-                magazines.add(new MagazineDTO(magazine.getId(), magazine.getName(), magazine.getIssn(),
-                        magazine.getScienceFields(), magazine.getChiefEditor(), magazine.isRegistered(), magazine.getSellerId(), magazine.getSciencePapers()));
-            }else{
+//            if(magazine.getSellerId() != null){
+//                magazines.add(new MagazineDTO(magazine.getId(), magazine.getName(), magazine.getIssn(),
+//                        magazine.getScienceFields(), magazine.getChiefEditor(), magazine.isRegistered(), magazine.getSellerId(), magazine.getSciencePapers()));
+//            }else{
                 magazines.add(new MagazineDTO(magazine.getId(), magazine.getName(), magazine.getIssn(),
                         magazine.getScienceFields(), magazine.getChiefEditor(), magazine.isRegistered(), new Long(0), magazine.getSciencePapers()));
 
-            }
+//            }
         }
         return magazines;
     }
     public Magazine findByName(String name){
         return magazineRepo.findByName(name);
     }
+
+
 }

@@ -14,10 +14,10 @@ import org.camunda.bpmn.dto.FormSubmissionDto;
 import org.camunda.bpmn.dto.TaskDto;
 import org.camunda.bpmn.model.Coauthor;
 import org.camunda.bpmn.model.ScienceField;
+import org.camunda.bpmn.model.SciencePaper;
+import org.camunda.bpmn.model.User;
 import org.camunda.bpmn.security.TokenUtils;
-import org.camunda.bpmn.service.CoauthorService;
-import org.camunda.bpmn.service.ScienceFieldService;
-import org.camunda.bpmn.service.Utils;
+import org.camunda.bpmn.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -44,10 +44,16 @@ public class TaskController {
     FormService formService;
 
     @Autowired
+    private TokenUtils tokenUtils;
+
+    @Autowired
     private ScienceFieldService scienceFieldService;
 
     @Autowired
-    private TokenUtils tokenUtils;
+    private SciencePaperService sciencePaperService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private CoauthorService coauthorService;
@@ -67,7 +73,6 @@ public class TaskController {
 
     @RequestMapping(value = "/claim/{taskId}", method = RequestMethod.POST,produces = "application/json")
     public ResponseEntity claim(@PathVariable String taskId, HttpServletRequest request) {
-        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         String user = Utils.getUsernameFromRequest(request, tokenUtils);
         taskService.claim(taskId, user);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -95,5 +100,66 @@ public class TaskController {
 
         formService.submitTaskForm(taskId, map);
         return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
+    @RequestMapping(value = "/review-paper", method = RequestMethod.GET,produces = "application/json")
+    public ResponseEntity reviewPaperTasks(HttpServletRequest request) {
+        String username = Utils.getUsernameFromRequest(request, tokenUtils);
+        List<Task> tasks = taskService.createTaskQuery().taskName("Zadatak za glavnog urednika koji pregleda casopis").taskAssignee(username).list();
+        List<TaskDto> tasksDto = new ArrayList<>();
+        for(Task task: tasks){
+            TaskDto t = new TaskDto(task.getId(), task.getName(), task.getAssignee());
+            tasksDto.add(t);
+        }
+        return new ResponseEntity<>(tasksDto, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/paper-review/{taskId}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<String> paperReview(@RequestBody List<FormSubmissionDto> reviewPaperData, @PathVariable("taskId") String taskId){
+        HashMap<String, Object> map = Utils.mapListToDto(reviewPaperData);
+        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        formService.submitTaskForm(taskId, map);
+        String value = Utils.getFormFieldValue(reviewPaperData, "relevantnost_rada");
+        if(value.equals("ne")){
+            return new ResponseEntity<>("Rad nije relevantan.", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Rad je relevantan.", HttpStatus.OK);
+    }
+    @RequestMapping(value = "/choose-reviewer",  method = RequestMethod.GET,produces = "application/json")
+    public ResponseEntity chooseReviewerTasks(HttpServletRequest request) {
+        String username = Utils.getUsernameFromRequest(request, tokenUtils);
+        List<Task> tasks = taskService.createTaskQuery().taskName("Zadatak za glavnog urednika ili urednika" +
+                " naucne oblasti da izabere recezente").taskAssignee(username).list();
+        List<TaskDto> tasksDto = new ArrayList<>();
+        for(Task task: tasks){
+            TaskDto t = new TaskDto(task.getId(), task.getName(), task.getAssignee());
+            tasksDto.add(t);
+        }
+        return new ResponseEntity<>(tasksDto, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/form/choose-reviewers/{taskId}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<FormFieldsDto> getChooseReviwersForm(@PathVariable("taskId") String taskId) {
+        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        ProcessInstance pi = runtimeService.createProcessInstanceQuery().processInstanceId(task.getProcessInstanceId()).singleResult();
+        TaskFormData tfd = formService.getTaskFormData(task.getId());
+        SciencePaper sciencePaper = sciencePaperService.findOneById((Long) runtimeService.getVariable(pi.getId(), "sciencePaperId"));
+        List<User> reviewers = userService.findAllReviewers();
+        List<User> reviewerList = new ArrayList<>();
+        for (User reviewer : reviewers) {
+            for (ScienceField scienceField : reviewer.getScienceFields()) {
+                if (scienceField.getName().equals(sciencePaper.getScienceField().getName())) {
+                    reviewerList.add(reviewer);
+                }
+            }
+        }
+        List<FormField> properties = tfd.getFormFields();
+        for (FormField field : properties) {
+            if (field.getId().equals("recenzenti")) {
+                EnumFormType enumType = (EnumFormType) field.getType();
+                for (User user : reviewerList) {
+                    enumType.getValues().put(user.getUsername(), user.getFirstName() + " " + user.getLastName() + ", " + user.getUsername());
+                }
+            }
+        }
+        return new ResponseEntity<>(new FormFieldsDto(task.getId(), pi.getId(), properties), HttpStatus.OK);
     }
 }

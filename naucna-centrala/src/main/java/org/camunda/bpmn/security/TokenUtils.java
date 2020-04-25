@@ -14,8 +14,9 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class TokenUtils {
 
 	@Value("mega-travel")

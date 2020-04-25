@@ -8,7 +8,7 @@ import java.util.List;
 @DiscriminatorValue("AUTHOR")
 public class Author extends User{
 
-//    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Membership> memberships;
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Membership> memberships;
 
 }

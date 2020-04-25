@@ -19,7 +19,6 @@ export class AuthorTasksComponent implements OnInit {
   ngOnInit() {
     this.repoService.getAddCoauthorTasks().subscribe(
       (response: any) => {
-        console.log(response);
         this.tasksCoauthor = response;
       },
       (error) => {
