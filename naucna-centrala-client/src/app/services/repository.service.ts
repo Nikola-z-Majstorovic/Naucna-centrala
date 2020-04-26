@@ -85,4 +85,8 @@ export class RepositoryService {
   getChooseReviwersForm(taskId) {
     return this.httpClient.get('/api/task/form/choose-reviewers/'.concat(taskId));
   }
+
+  getPaperReviewTasks() {
+    return this.httpClient.get('/api/task/paper-review/');
+  }
 }

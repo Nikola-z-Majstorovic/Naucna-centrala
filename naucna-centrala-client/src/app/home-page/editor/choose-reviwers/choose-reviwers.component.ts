@@ -40,6 +40,29 @@ export class ChooseReviwersComponent implements OnInit {
     );
   }
 
-  onSubmit(value, form) { }
+  onSubmit(value, form) {
+    if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
+      return;
+    }
+
+    var dto = new Array();
+    for (var property in value) {
+      if (property === 'recenzenti') {
+        var recenzenti = value[property];
+        for (let i = 0; i < recenzenti.length; i++) {
+          dto.push({fieldId: property, fieldValue: recenzenti[i]});
+        }
+      }
+    }
+
+    this.sciencePaperService.chooseReviewers(this.taskId, dto).subscribe(
+      (response: any) => {
+        alert(response);
+        this.router.navigate(['/home-page/editor']);
+      },
+      (error) => { alert(error.message);
+      }
+    );
+  }
 
 }

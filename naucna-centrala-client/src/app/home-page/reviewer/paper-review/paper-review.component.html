@@ -1,0 +1,7 @@
+<h1>Zadaci:</h1>
+<div class="wrapper" style="width: 100%; height: 100%;">
+  <table>
+    <tr *ngFor="let task of reviewPaperTasks" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimReviewPaperTask(task.taskId)">Preuzmi</button></td></tr>
+  </table>
+
+</div>

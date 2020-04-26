@@ -14,6 +14,9 @@ import {ReviewPaperComponent} from '../home-page/editor/review-paper/review-pape
 import {EditorComponent} from '../home-page/editor/editor.component';
 import {PaperFormatComponent} from '../home-page/editor/paper-format/paper-format.component';
 import {ChooseReviwersComponent} from '../home-page/editor/choose-reviwers/choose-reviwers.component';
+import {ReviewerComponent} from '../home-page/reviewer/reviewer.component';
+import {PaperReviewComponent} from '../home-page/reviewer/paper-review/paper-review.component';
+import {PaperSubbmitComponent} from '../home-page/reviewer/paper-subbmit/paper-subbmit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home-page', pathMatch: 'full'},
@@ -33,7 +36,11 @@ const routes: Routes = [
     { path: 'paper-format/:processId', component: PaperFormatComponent },
     { path: 'review-paper/:id', component: ReviewPaperComponent },
     { path: 'choose-reviwers/:id', component: ChooseReviwersComponent },
-   ]}
+   ]},
+  { path: 'reviewer', component: ReviewerComponent, children: [
+      { path: 'paper-review', component: PaperReviewComponent },
+      { path: 'paper-subbmit/:id', component: PaperSubbmitComponent }
+    ]}
   ]}
 ];
 

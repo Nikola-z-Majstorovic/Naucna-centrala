@@ -22,6 +22,10 @@ import { EditorPapersComponent } from '../home-page/editor/editor-papers/editor-
 import { ReviewPaperComponent } from '../home-page/editor/review-paper/review-paper.component';
 import { ChooseReviwersComponent } from '../home-page/editor/choose-reviwers/choose-reviwers.component';
 import { PaperFormatComponent } from '../home-page/editor/paper-format/paper-format.component';
+import { PaperReviewComponent } from '../home-page/reviewer/paper-review/paper-review.component';
+import { ReviewerComponent } from '../home-page/reviewer/reviewer.component';
+import { PaperSubbmitComponent } from '../home-page/reviewer/paper-subbmit/paper-subbmit.component';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +42,10 @@ import { PaperFormatComponent } from '../home-page/editor/paper-format/paper-for
     EditorPapersComponent,
     ReviewPaperComponent,
     ChooseReviwersComponent,
-    PaperFormatComponent],
+    PaperFormatComponent,
+    ReviewerComponent,
+    PaperReviewComponent,
+    PaperSubbmitComponent],
   imports: [
     CommonModule,
     ToastrModule.forRoot({preventDuplicates: true}), // ToastrModule added,

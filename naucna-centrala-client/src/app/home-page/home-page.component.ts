@@ -26,7 +26,7 @@ export class HomePageComponent implements OnInit {
 
     this.userService.getUser().subscribe(
       (user: any) => {
-        if(user == null) {
+        if (user == null) {
           this.isLoggedIn = false;
         } else if (user.role === 'ADMIN') {
           this.isAdmin = true;
@@ -34,7 +34,7 @@ export class HomePageComponent implements OnInit {
           this.isReviewer = true;
         } else if (user.role === 'EDITOR') {
           this.isEditor = true;
-        } else if (user.role == 'AUTHOR') {
+        } else if (user.role === 'AUTHOR') {
           this.isAuthor = true;
         }
       }

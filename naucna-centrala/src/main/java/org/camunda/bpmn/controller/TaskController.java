@@ -162,4 +162,26 @@ public class TaskController {
         }
         return new ResponseEntity<>(new FormFieldsDto(task.getId(), pi.getId(), properties), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/choose-reviewers/{taskId}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<String> chooseReviewers(@RequestBody List<FormSubmissionDto> reviewersData, @PathVariable("taskId") String taskId){
+        HashMap<String, Object> map = Utils.mapListToDto(reviewersData);
+        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String processInstanceId = task.getProcessInstanceId();
+        runtimeService.setVariable(processInstanceId,  "reviewersData", reviewersData);
+        formService.submitTaskForm(taskId, map);
+        return new ResponseEntity("Success", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/paper-review", method = RequestMethod.GET,produces = "application/json")
+    public ResponseEntity paperReviewTasks(HttpServletRequest request) {
+        String username = Utils.getUsernameFromRequest(request, tokenUtils);
+        List<Task> tasks = taskService.createTaskQuery().taskName("Rezultati recenzije").taskAssignee(username).list();
+        List<TaskDto> tasksDto = new ArrayList<>();
+        for(Task task: tasks){
+            TaskDto t = new TaskDto(task.getId(), task.getName(), task.getAssignee());
+            tasksDto.add(t);
+        }
+        return new ResponseEntity<>(tasksDto, HttpStatus.OK);
+    }
 }
