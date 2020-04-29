@@ -28,9 +28,9 @@ public class CoauthorService {
             }else if(dto.getFieldId().equals("email_koautora")){
                 coauthor.setEmail(dto.getFieldValue());
             }else if(dto.getFieldId().equals("grad")){
-                coauthor.setAddress(dto.getFieldValue());
+                coauthor.setCity(dto.getFieldValue());
             }else if(dto.getFieldId().equals("drzava")){
-                coauthor.setAddress(dto.getFieldValue());
+                coauthor.setCountry(dto.getFieldValue());
             }
         }
         return coauthorRepo.save(coauthor);

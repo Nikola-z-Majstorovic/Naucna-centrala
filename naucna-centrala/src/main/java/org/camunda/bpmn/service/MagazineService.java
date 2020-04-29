@@ -35,4 +35,7 @@ public class MagazineService {
     }
 
 
+    public Magazine save(Magazine magazine) {
+        return magazineRepo.save(magazine);
+    }
 }

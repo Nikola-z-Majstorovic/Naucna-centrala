@@ -1,0 +1,15 @@
+<div class="wrapper d-flex justify-content-center" style="width: 100%; height: 100%;">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativateValidate>
+
+    <div *ngFor="let field of formFields">
+      <label for={{field.id}}> {{field.label}} </label>
+      <input type="text" name={{field.id}} *ngIf="field.type.name == 'string'  && field.id != 'pdf_ispravka'" class="form-control" [ngModel]=field.defaultValue>
+    <input type="file" name={{field.id}} *ngIf="field.id == 'pdf_ispravka'" class="form-control" ngModel (change)="handleFileInput($event.target.files)">
+    </div>
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-primary">Potvrdi</button>
+    </div>
+  </form>
+</div>
+
+

@@ -6,10 +6,10 @@
   <table>
     <tr *ngFor="let task of chooseReviewerTasks" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimChooseReviewerTask(task.taskId)">Preuzmi</button></td></tr>
   </table>
-<!--  <table>-->
-<!--    <tr *ngFor="let task of chiefEditorRevieweingTasks" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimChiefEditorReviewTask(task.taskId)">Preuzmi</button></td></tr>-->
-<!--  </table>-->
-<!--  <table>-->
-<!--    <tr *ngFor="let task of chiefEditorChoiceTasks" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimChiefEditorChoiceTask(task.taskId)">Preuzmi</button></td></tr>-->
-<!--  </table>-->
+  <table>
+    <tr *ngFor="let task of chooseTimeErrorTasks" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimChooseTimeErrorTasks(task.taskId)">Preuzmi</button></td></tr>
+  </table>
+  <table>
+    <tr *ngFor="let task of chiefOrEditorChoiceTasks" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimChiefOrEditorChoiceTask(task.taskId)">Preuzmi</button></td></tr>
+  </table>
 </div>

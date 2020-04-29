@@ -39,10 +39,37 @@ public class MailService {
 
     public void notifyScienceFieldEditor(Editor editor) {
         SimpleMailMessage mailEditor = new SimpleMailMessage();
-        mailEditor.setTo("flylivedrive@gmail.com");
+        mailEditor.setTo("majsta993@gmail.com");
         mailEditor.setFrom(environment.getProperty("spring.mail.username"));
         mailEditor.setSubject("Nov rad");
         mailEditor.setText("Zdravo " + editor.getFirstName() + ",\n\nobaveštavamo Vas da je u sistemu prijavljen nov rad.");
         javaMailSender.send(mailEditor);
+    }
+
+    public void notifyAboutAcceptance(Author author) {
+        SimpleMailMessage mailAuthor = new SimpleMailMessage();
+        mailAuthor.setTo("majsta993@gmail.com");
+        mailAuthor.setFrom(environment.getProperty("spring.mail.username"));
+        mailAuthor.setSubject("Odluka o prihvaćanju rada");
+        mailAuthor.setText("Zdravo " + author.getFirstName() + ",\n\nobaveštavamo Vas da je rad koji ste priložili prihvaćen od strane glavnog urednika.");
+        javaMailSender.send(mailAuthor);
+    }
+
+    public void notifyAboutRefusal(Author author) {
+        SimpleMailMessage mailAuthor = new SimpleMailMessage();
+        mailAuthor.setTo("majsta993@gmail.com");
+        mailAuthor.setFrom(environment.getProperty("spring.mail.username"));
+        mailAuthor.setSubject("Odluka o prihvaćanju rada");
+        mailAuthor.setText("Zdravo " + author.getFirstName() + ",\n\nnažalost Vas obaveštavamo da je rad koji ste priložili odbijen od strane glavnog urednika.");
+        javaMailSender.send(mailAuthor);
+    }
+
+    public void correctionNotification(Author author) {
+        SimpleMailMessage mailAuthor = new SimpleMailMessage();
+        mailAuthor.setTo("majsta993@gmail.com");
+        mailAuthor.setFrom(environment.getProperty("spring.mail.username"));
+        mailAuthor.setSubject("Ispravka rada");
+        mailAuthor.setText("Zdravo " + author.getFirstName() + ",\n\nobaveštavamo Vas da rad koji ste priložili zahteva ispravke i potrebno je priložiti nov PDF. Imate 24h da ispravite rad.");
+        javaMailSender.send(mailAuthor);
     }
 }

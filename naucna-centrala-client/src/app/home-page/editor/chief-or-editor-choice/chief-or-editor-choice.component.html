@@ -5,10 +5,9 @@
       <div *ngFor="let field of formFields">
 
         <label for={{field.id}}> {{field.label}} </label>
-        <input type="text" name={{field.id}} *ngIf="field.type.name == 'string'" class="form-control" [ngModel]=field.defaultValue>
-        <input type="text" name={{field.id}} *ngIf="field.type.name == 'string' && field.defaultValue != '' && field.id == 'komentar_od_autora' " class="form-control" [ngModel]=field.defaultValue>
+        <input type="text" name={{field.id}} *ngIf="field.type.name == 'string'" class="form-control" [ngModel] = "field.defaultValue">
         <select name={{field.id}} *ngIf="field.type.name == 'enum'" class="form-control" ngModel>
-          <option *ngFor="let val of preporukaPrihvacanja" value={{val}}>
+          <option *ngFor="let val of odluka" value={{val}}>
             {{field.type.values[val]}}
           </option>
         </select>
@@ -22,3 +21,5 @@
   </div>
 
 </div>
+
+

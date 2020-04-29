@@ -110,4 +110,13 @@ public class SciencePaperController {
         formService.submitTaskForm(taskId, map);
         return new ResponseEntity("Success", HttpStatus.OK);
     }
+    @RequestMapping(value = "/paper-correction/{taskId}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<String> paperCorrection(@RequestBody List<FormSubmissionDto> paperCorrectionData, @PathVariable("taskId") String taskId){
+        HashMap<String, Object> map = Utils.mapListToDto(paperCorrectionData);
+        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String processInstanceId = task.getProcessInstanceId();
+        formService.submitTaskForm(taskId, map);
+        return new ResponseEntity(runtimeService.getVariable(processInstanceId, "sciencePaperId"), HttpStatus.OK);
+    }
+
 }

@@ -3,6 +3,7 @@ package org.camunda.bpmn.handlers;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpmn.dto.FormSubmissionDto;
+import org.camunda.bpmn.dto.ReviewFormDto;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,9 +16,13 @@ public class SaveReviewers implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         List<FormSubmissionDto> reviewersData = (List<FormSubmissionDto>) execution.getVariable("reviewersData");
         List<String> reviewerList = new ArrayList<>();
-        for(FormSubmissionDto dto: reviewersData){
+        List<String> reviewersList = new ArrayList<>();
+        for(FormSubmissionDto dto: reviewersData) {
             reviewerList.add(dto.getFieldValue());
         }
         execution.setVariable("reviewerList", reviewerList);
+        execution.setVariable("reviewersList", reviewersList);
+        execution.setVariable("komentari_recezentima", "");
+        execution.setVariable("reviewersForm", new ArrayList<ReviewFormDto>());
     }
 }

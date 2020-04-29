@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <div class="d-flex justify-content-center">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativateValidate>
+
+      <div *ngFor="let field of formFields">
+
+        <label for={{field.id}}> {{field.label}} </label>
+
+        <input type="date" name={{field.name}} *ngIf="field.type.name == 'date'" class="form-control" [(ngModel)]=field.defaultValue>
+
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">Potvrdi</button>
+      </div>
+    </form>
+
+  </div>
+
+</div>

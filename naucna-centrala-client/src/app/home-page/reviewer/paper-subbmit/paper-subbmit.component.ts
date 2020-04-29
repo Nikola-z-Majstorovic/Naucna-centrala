@@ -43,5 +43,21 @@ export class PaperSubbmitComponent implements OnInit {
 
   onSubmit(value, form) {
 
+    if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
+      return;
+    }
+
+    let dto = new Array();
+    for (var property in value) {
+      dto.push({fieldId: property, fieldValue: value[property]});
+    }
+
+    this.repoService.saveReview(this.taskId, dto).subscribe(
+      (success) => {
+        this.router.navigate(['/home-page/reviewer/paper-review']);
+      },
+      (error) => {
+      }
+    );
   }
 }

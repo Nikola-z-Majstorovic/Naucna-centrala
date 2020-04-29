@@ -17,6 +17,9 @@ import {ChooseReviwersComponent} from '../home-page/editor/choose-reviwers/choos
 import {ReviewerComponent} from '../home-page/reviewer/reviewer.component';
 import {PaperReviewComponent} from '../home-page/reviewer/paper-review/paper-review.component';
 import {PaperSubbmitComponent} from '../home-page/reviewer/paper-subbmit/paper-subbmit.component';
+import {ChiefOrEditorChoiceComponent} from '../home-page/editor/chief-or-editor-choice/chief-or-editor-choice.component';
+import {PaperCorrectionComponent} from '../home-page/author/paper-correction/paper-correction.component';
+import {ChoosingErrorTimeComponent} from '../home-page/editor/choosing-error-time/choosing-error-time.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home-page', pathMatch: 'full'},
@@ -24,6 +27,7 @@ const routes: Routes = [
   { path: 'home-page', component: HomePageComponent , children: [
   { path: 'author', component: AuthorComponent, children: [
     { path: '', component: AuthorTasksComponent},
+    { path: 'paper-correction/:id', component: PaperCorrectionComponent},
     { path: 'text-subbmiting', component: TextSubbmitingComponent, children: [
       {path: '', component: ChooseMagazineComponent},
       {path: 'membership-payment/:processId', component: MembershipPaymentComponent},
@@ -36,10 +40,13 @@ const routes: Routes = [
     { path: 'paper-format/:processId', component: PaperFormatComponent },
     { path: 'review-paper/:id', component: ReviewPaperComponent },
     { path: 'choose-reviwers/:id', component: ChooseReviwersComponent },
+    { path: 'chief-or-editor-choice/:id', component: ChiefOrEditorChoiceComponent },
+      { path: 'choosing-error-time/:id', component: ChoosingErrorTimeComponent }
    ]},
   { path: 'reviewer', component: ReviewerComponent, children: [
       { path: 'paper-review', component: PaperReviewComponent },
-      { path: 'paper-subbmit/:id', component: PaperSubbmitComponent }
+      { path: 'paper-subbmit/:id', component: PaperSubbmitComponent },
+
     ]}
   ]}
 ];

@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 export class AuthorTasksComponent implements OnInit {
 
   tasksCoauthor: any = [];
-  // tasksPaperCorrection: any = [];
+  tasksPaperCorrection: any = [];
+  tasksPaperBigCorrection: any = [];
 
   constructor(private repoService: RepositoryService, private router: Router) {
   }
@@ -25,38 +26,57 @@ export class AuthorTasksComponent implements OnInit {
         alert(error.message);
       }
     );
+
+    this.repoService.getPaperCorrectionTasks().subscribe(
+      (response: any) => {
+        this.tasksPaperCorrection = response;
+      },
+      (error) => {
+        alert(error.message);
+      }
+    );
+
+    this.repoService.getPaperBigCorrectionTasks().subscribe(
+      (response: any) => {
+        this.tasksPaperBigCorrection = response;
+      },
+      (error) => {
+        alert(error.message);
+      }
+    );
   }
 
-//
-//     this.repoService.getPaperCorrectionTasks().subscribe(
-//       (response: any) => {
-//         this.tasksPaperCorrection = response;
-//       },
-//       (error) => {
-//         alert(error.message);
-//       }
-//     );
-//   }
-//
   claimTaskCoauthor(taskId) {
     this.repoService.claimTask(taskId).subscribe(
       (success) => {
         this.router.navigate(['/home-page/author/coauthor/'.concat(taskId)]);
-      }
-    ),
+      },
       (error) => {
         alert(error.message);
-      };
+      }
+    );
   }
-//
-//   claimTaskPaperCorrection(taskId) {
-//     this.repoService.claimTask(taskId).subscribe(
-//       (success) => {
-//         this.router.navigate(['/homepage/author/paper-correction/'.concat(taskId)]);
-//       }
-// ),        (error) => {
-//         alert(error.message);
-//       };
-//   }
 
+  claimTaskPaperCorrection(taskId) {
+    console.log('usao');
+    this.repoService.claimTask(taskId).subscribe(
+      (success) => {
+        this.router.navigate(['/home-page/author/paper-correction/'.concat(taskId)]);
+      },
+      (error) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  claimTaskPaperBigCorrection(taskId) {
+    this.repoService.claimTask(taskId).subscribe(
+      (success) => {
+        this.router.navigate(['/home-page/author/paper-correction/'.concat(taskId)]);
+      },
+      (error) => {
+        alert(error.message);
+      }
+    );
+  }
 }

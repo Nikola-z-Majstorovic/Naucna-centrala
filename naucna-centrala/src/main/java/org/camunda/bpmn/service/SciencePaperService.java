@@ -67,4 +67,8 @@ public class SciencePaperService {
     public SciencePaper save(SciencePaper sciencePaper) {
         return sciencePaperRepository.save(sciencePaper);
     }
+
+    public void remove(SciencePaper sciencePaper) {
+        sciencePaperRepository.delete(sciencePaper);
+    }
 }

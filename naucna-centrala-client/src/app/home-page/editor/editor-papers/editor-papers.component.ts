@@ -11,6 +11,8 @@ export class EditorPapersComponent implements OnInit {
 
   paperReviewTasks = [];
   chooseReviewerTasks = [];
+  chiefOrEditorChoiceTasks = [];
+  chooseTimeErrorTasks = [];
 
   constructor(private repoService: RepositoryService, private router: Router) { }
 
@@ -29,6 +31,21 @@ export class EditorPapersComponent implements OnInit {
         (error) => { alert(error.message);
         }
       );
+      this.repoService.getChiefOrEditorChoiceTasks().subscribe(
+        (response: any) => {
+          this.chiefOrEditorChoiceTasks = response;
+        },
+        (error) => { alert(error.message);
+        }
+      );
+      this.repoService.getChooseTimeErrorTasks().subscribe(
+        (response: any) => {
+          console.log(response);
+          this.chooseTimeErrorTasks = response;
+        },
+        (error) => { alert(error.message);
+        }
+      );
   }
 
   claimPaperReviweTask(taskId) {
@@ -42,6 +59,21 @@ export class EditorPapersComponent implements OnInit {
     this.repoService.claimTask(taskId).subscribe(
       (success) => {
         this.router.navigate(['/home-page/editor/choose-reviwers/'.concat(taskId)]);
+      }
+    );
+  }
+  claimChiefOrEditorChoiceTask(taskId) {
+    this.repoService.claimTask(taskId).subscribe(
+      (success) => {
+        this.router.navigate(['/home-page/editor/chief-or-editor-choice/'.concat(taskId)]);
+      }
+    );
+  }
+
+  claimChooseTimeErrorTasks(taskId) {
+    this.repoService.claimTask(taskId).subscribe(
+      (success) => {
+        this.router.navigate(['/home-page/editor/choosing-error-time/'.concat(taskId)]);
       }
     );
   }

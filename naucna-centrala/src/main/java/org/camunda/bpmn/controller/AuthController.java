@@ -4,8 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.camunda.bpm.engine.IdentityService;
-import org.camunda.bpmn.dto.UserInfoDTO;
-import org.camunda.bpmn.dto.UserLoginDTO;
 import org.camunda.bpmn.model.User;
 import org.camunda.bpmn.model.UserTokenState;
 import org.camunda.bpmn.security.CustomUserDetailsService;
