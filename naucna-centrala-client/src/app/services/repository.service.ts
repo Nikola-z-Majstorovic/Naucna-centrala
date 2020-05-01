@@ -100,12 +100,16 @@ export class RepositoryService {
   getPaperBigCorrectionTasks() {
     return this.httpClient.get('/api/task/paper-big-correction');
   }
-
+  getPaperSmallCorrectionTasks() {
+    return this.httpClient.get('/api/task/paper-small-correction');
+  }
   addingTime(taskId, dto) {
-    return this.httpClient.post('/api/task/addingTime'.concat(taskId), dto, {responseType: 'text'});
+    return this.httpClient.post('/api/task/addingTime/'.concat(taskId), dto, {responseType: 'text'});
   }
 
   getChooseTimeErrorTasks() {
     return this.httpClient.get('/api/task/choose-time-error');
   }
+
+
 }

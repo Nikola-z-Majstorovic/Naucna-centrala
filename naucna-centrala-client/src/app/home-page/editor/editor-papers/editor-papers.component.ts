@@ -40,7 +40,6 @@ export class EditorPapersComponent implements OnInit {
       );
       this.repoService.getChooseTimeErrorTasks().subscribe(
         (response: any) => {
-          console.log(response);
           this.chooseTimeErrorTasks = response;
         },
         (error) => { alert(error.message);

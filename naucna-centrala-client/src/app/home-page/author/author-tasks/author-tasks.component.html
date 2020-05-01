@@ -11,6 +11,9 @@
     <tr *ngFor="let task of tasksPaperCorrection" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimTaskPaperCorrection(task.taskId)">Preuzmi</button></td></tr>
   </table>
   <table>
+    <tr *ngFor="let task of tasksPaperSmallCorrection" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimTaskPaperSmallCorrection(task.taskId)">Preuzmi</button></td></tr>
+  </table>
+  <table>
     <tr *ngFor="let task of tasksPaperBigCorrection" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimTaskPaperBigCorrection(task.taskId)">Preuzmi</button></td></tr>
   </table>
 </div>

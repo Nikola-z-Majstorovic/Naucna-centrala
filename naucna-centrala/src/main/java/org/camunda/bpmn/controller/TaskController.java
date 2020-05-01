@@ -13,10 +13,7 @@ import org.camunda.bpmn.dto.FormFieldsDto;
 import org.camunda.bpmn.dto.FormSubmissionDto;
 import org.camunda.bpmn.dto.ReviewFormDto;
 import org.camunda.bpmn.dto.TaskDto;
-import org.camunda.bpmn.model.Coauthor;
-import org.camunda.bpmn.model.ScienceField;
-import org.camunda.bpmn.model.SciencePaper;
-import org.camunda.bpmn.model.User;
+import org.camunda.bpmn.model.*;
 import org.camunda.bpmn.security.TokenUtils;
 import org.camunda.bpmn.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +55,9 @@ public class TaskController {
 
     @Autowired
     private CoauthorService coauthorService;
+
+    @Autowired
+    private MagazineService magazineService;
 
 
     @RequestMapping(value = "/coauthor", method = RequestMethod.GET,produces = "application/json")
@@ -113,6 +113,17 @@ public class TaskController {
         }
         return new ResponseEntity<>(tasksDto, HttpStatus.OK);
     }
+    @RequestMapping(value = "/paper-small-correction", method = RequestMethod.GET,produces = "application/json")
+    public ResponseEntity paperSmallCorrectionTasks(HttpServletRequest request) {
+        String username = Utils.getUsernameFromRequest(request, tokenUtils);
+        List<Task> tasks = taskService.createTaskQuery().taskName("Autor koriguje sitne izmene").taskAssignee(username).list();
+        List<TaskDto> tasksDto = new ArrayList<>();
+        for(Task task: tasks){
+            TaskDto t = new TaskDto(task.getId(), task.getName(), task.getAssignee());
+            tasksDto.add(t);
+        }
+        return new ResponseEntity<>(tasksDto, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/review-paper", method = RequestMethod.GET,produces = "application/json")
     public ResponseEntity reviewPaperTasks(HttpServletRequest request) {
@@ -154,7 +165,10 @@ public class TaskController {
         ProcessInstance pi = runtimeService.createProcessInstanceQuery().processInstanceId(task.getProcessInstanceId()).singleResult();
         TaskFormData tfd = formService.getTaskFormData(task.getId());
         SciencePaper sciencePaper = sciencePaperService.findOneById((Long) runtimeService.getVariable(pi.getId(), "sciencePaperId"));
-        List<User> reviewers = userService.findAllReviewers();
+//        List<User> reviewers = userService.findAllReviewers();
+        String magazineName  = (String)runtimeService.getVariable(task.getProcessInstanceId(),"magazineName");
+        Magazine magazine = magazineService.findByName(magazineName);
+        List<Reviewer> reviewers = magazine.getReviewers();
         List<User> reviewerList = new ArrayList<>();
         for (User reviewer : reviewers) {
             for (ScienceField scienceField : reviewer.getScienceFields()) {
@@ -180,7 +194,13 @@ public class TaskController {
         HashMap<String, Object> map = Utils.mapListToDto(reviewersData);
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         String processInstanceId = task.getProcessInstanceId();
-        runtimeService.setVariable(processInstanceId,  "reviewersData", reviewersData);
+        List<FormSubmissionDto> formReviewersData = new ArrayList<>();
+        for (FormSubmissionDto field : reviewersData) {
+            if (field.getFieldId().equals("recenzenti")) {
+                formReviewersData.add(field);
+            }
+        }
+        runtimeService.setVariable(processInstanceId,  "reviewersData", formReviewersData);
         formService.submitTaskForm(taskId, map);
         return new ResponseEntity("Success", HttpStatus.OK);
     }
@@ -241,7 +261,7 @@ public class TaskController {
         return new ResponseEntity<>(tasksDto, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/addingTime/{taskId}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/addingTime/{taskId}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> paperFormat(@RequestBody List<FormSubmissionDto> paperFormatData, @PathVariable("taskId") String taskId){
         HashMap<String, Object> map = Utils.mapListToDto(paperFormatData);
         formService.submitTaskForm(taskId, map);

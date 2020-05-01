@@ -19,6 +19,7 @@ import org.camunda.bpmn.dto.FormFieldsDto;
 import org.camunda.bpmn.dto.FormSubmissionDto;
 import org.camunda.bpmn.dto.MagazineDTO;
 import org.camunda.bpmn.model.Coauthor;
+import org.camunda.bpmn.model.Magazine;
 import org.camunda.bpmn.model.ScienceField;
 import org.camunda.bpmn.model.SciencePaper;
 import org.camunda.bpmn.security.TokenUtils;
@@ -51,6 +52,8 @@ public class SciencePaperController {
     @Autowired
     private SciencePaperService sciencePaperService;
 
+    @Autowired
+    private MagazineService magazineService;
 
     @RequestMapping(value = "/form/{processInstanceId}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<FormFieldsDto> getSciencePaperForm(@PathVariable("processInstanceId") String processInstanceId){
@@ -58,7 +61,8 @@ public class SciencePaperController {
         Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
         TaskFormData tfd = formService.getTaskFormData(task.getId());
         List<FormField> properties = tfd.getFormFields();
-        List<ScienceField> scienceFields = scienceFieldService.findAll();
+        Magazine magazine = magazineService.findByName((String)runtimeService.getVariable(processInstanceId,"magazineName"));
+        List<ScienceField> scienceFields = magazine.getScienceFields();
         for(FormField field : properties){
             if(field.getId().equals("naucna_oblast")){
                 EnumFormType enumType = (EnumFormType) field.getType();

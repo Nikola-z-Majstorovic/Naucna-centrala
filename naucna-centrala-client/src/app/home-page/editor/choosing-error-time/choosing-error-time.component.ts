@@ -14,6 +14,7 @@ export class ChoosingErrorTimeComponent implements OnInit {
   taskId: any;
   formFieldsDto = null;
   formFields = [];
+  TestDateString = new Date();
 
   constructor(private repoService: RepositoryService, private route: ActivatedRoute,
               private router: Router, private validationService: ValidationService) {
@@ -40,21 +41,13 @@ export class ChoosingErrorTimeComponent implements OnInit {
   }
 
   onSubmit(value, form) {
-    console.log(value);
+
     if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
       return;
     }
-    var dto = new Array();
+    let dto = new Array();
     for (var property in value) {
-      console.log(property);
-      console.log(value[property]);
-      console.log(form.taskId);
-
-      var splited = value[property].split('-');
-      var date = splited[2] + '/' + splited[1] + '/' + splited[0];
-      console.log(date);
-
-      dto.push({fieldId: property, fieldValue: date});
+      dto.push({fieldId: property, fieldValue: value[property]});
     }
     this.repoService.addingTime(this.taskId, dto).subscribe(
       (response) => {

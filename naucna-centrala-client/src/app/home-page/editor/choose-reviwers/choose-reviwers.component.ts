@@ -41,6 +41,7 @@ export class ChooseReviwersComponent implements OnInit {
   }
 
   onSubmit(value, form) {
+
     if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
       return;
     }
@@ -52,9 +53,10 @@ export class ChooseReviwersComponent implements OnInit {
         for (let i = 0; i < recenzenti.length; i++) {
           dto.push({fieldId: property, fieldValue: recenzenti[i]});
         }
+      } else {
+        dto.push({fieldId: property, fieldValue: value[property]});
       }
     }
-
     this.sciencePaperService.chooseReviewers(this.taskId, dto).subscribe(
       (response: any) => {
         alert(response);

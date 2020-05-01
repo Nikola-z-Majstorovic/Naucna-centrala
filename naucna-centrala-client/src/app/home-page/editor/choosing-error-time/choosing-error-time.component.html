@@ -5,9 +5,7 @@
       <div *ngFor="let field of formFields">
 
         <label for={{field.id}}> {{field.label}} </label>
-
-        <input type="date" name={{field.name}} *ngIf="field.type.name == 'date'" class="form-control" [(ngModel)]=field.defaultValue>
-
+        <input type="number" name={{field.id}} *ngIf="field.type.name == 'long'" class="form-control" ngModel>
       </div>
 
       <div class="d-flex justify-content-center">
