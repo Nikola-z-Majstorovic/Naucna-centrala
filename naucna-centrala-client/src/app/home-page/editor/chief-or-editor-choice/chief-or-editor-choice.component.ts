@@ -15,6 +15,7 @@ export class ChiefOrEditorChoiceComponent implements OnInit {
   formFieldsDto = null;
   formFields = [];
   odluka = [];
+  reviewersForm = [];
 
   constructor(private sciencePaperService: SciencePaperService, private repoService: RepositoryService,
               private route: ActivatedRoute, private router: Router, private validationService: ValidationService) { }
@@ -29,6 +30,7 @@ export class ChiefOrEditorChoiceComponent implements OnInit {
       (response: any) => {
         this.formFieldsDto = response;
         this.formFields = response.formFields;
+        this.reviewersForm = response.reviewersForm;
         this.formFields.forEach((field) => {
           if (field.type.name == 'enum') {
             this.odluka = Object.keys(field.type.values);
@@ -41,7 +43,7 @@ export class ChiefOrEditorChoiceComponent implements OnInit {
     );
   }
   onSubmit(value, form) {
-    if(!this.validationService.validate(this.formFieldsDto.formFields, form)){
+    if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
       return;
     }
 

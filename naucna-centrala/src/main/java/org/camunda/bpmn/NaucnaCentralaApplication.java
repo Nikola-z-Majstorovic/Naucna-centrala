@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class NaucnaCentralaApplication {
-	
+
 	public static void main(String... args) {
 		SpringApplication.run(NaucnaCentralaApplication.class, args);
 	}
@@ -26,15 +26,15 @@ public class NaucnaCentralaApplication {
 //		bean.setOrder(0);
 //		return bean;
 //	}
-	
+
 	@Bean
 	public FilterRegistrationBean corsFilterRegistration() {
-		FilterRegistrationBean registrationBean = new FilterRegistrationBean(new CORSFilter());				
+		FilterRegistrationBean registrationBean = new FilterRegistrationBean(new CORSFilter());
 		registrationBean.setName("CORS Filter");
 		registrationBean.addUrlPatterns("/*");
 		registrationBean.setOrder(1);
 		return registrationBean;
 	}
 
-	
+
 }

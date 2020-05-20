@@ -45,7 +45,6 @@ export class ChooseReviwersComponent implements OnInit {
     if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
       return;
     }
-
     var dto = new Array();
     for (var property in value) {
       if (property === 'recenzenti') {

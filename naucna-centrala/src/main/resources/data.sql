@@ -24,7 +24,7 @@ insert into user (username, password, first_name, last_name, city, country, emai
 values ('danilo', '$2a$04$TwATfW3iqzDzzrAKvT06fepL/hZ4CuhYwyFhsaEIeV0UuxO26QFqS', 'Danilo', 'Mihajlovic', 'Novi Sad', 'Srbija', 'daca@gmail.com', false, true, 'REVIEWER');
 
 insert into user (username, password, first_name, last_name, city, country, email, is_reviewer, is_active, type, magazine_id)
-values ('fedor', '$2a$10$IAbZueonfhyWHGKtSCtDtuSkxN6qbiHj4tmCKvMUjSvWi8otZIIQq', 'Fedor', 'Markovljev', 'Novi Sad', 'Srbija', 'fedor@gmail.com', false, true, 'EDITOR',3 );
+values ('fedor', '$2a$04$TwATfW3iqzDzzrAKvT06fepL/hZ4CuhYwyFhsaEIeV0UuxO26QFqS', 'Fedor', 'Markovljev', 'Novi Sad', 'Srbija', 'fedor@gmail.com', false, true, 'EDITOR',3 );  --$2a$10$IAbZueonfhyWHGKtSCtDtuSkxN6qbiHj4tmCKvMUjSvWi8otZIIQq
 insert into user (username, password, first_name, last_name, city, country, email, is_reviewer, is_active, type,magazine_id)
 values ('vukasin', '$2a$04$TwATfW3iqzDzzrAKvT06fepL/hZ4CuhYwyFhsaEIeV0UuxO26QFqS', 'Vukasin', 'Jovic', 'Novi Sad', 'Srbija', 'vukasin@gmail.com', false, true, 'EDITOR',1);  --$2a$10$3u5vuAP6GogQOyE5JQMTOOBIVB874JoCxtcE2s15H1JBVidraPUCW
 insert into user (username, password, first_name, last_name, city, country, email, is_reviewer, is_active, type)
@@ -80,6 +80,10 @@ insert into magazine_reviewers (magazines_id,reviewer_username)  values (2,'gavr
 insert into magazine_reviewers (magazines_id,reviewer_username)  values (3,'nenad');
 insert into magazine_reviewers (magazines_id,reviewer_username)  values (3,'stojan');
 insert into magazine_reviewers (magazines_id,reviewer_username)  values (3,'danilo');
+insert into magazine_reviewers (magazines_id,reviewer_username)  values (3,'gavra');
+insert into magazine_reviewers (magazines_id,reviewer_username)  values (1,'nenad');
+insert into magazine_reviewers (magazines_id,reviewer_username)  values (2,'stojan');
+insert into magazine_reviewers (magazines_id,reviewer_username)  values (2,'danilo');
 --/* admin privilegije */
 insert into privilege values (1, 'SET_REVIEWER_TASK');
 insert into privilege values (2, 'SET_REVIEWER');
@@ -142,7 +146,7 @@ insert into user_sciencefields values ('fedor', 5);
 
 
 --insert into memberships (magazine_id, author_username) values (2, 'marko');
-insert into membership (end_date,magazine_id, author_username) values ('2020-05-03 10:08:02',2, 'nikola');
+insert into membership (end_date,magazine_id, author_username) values ('2020-05-18 10:08:02',2, 'nikola');
 
 
 

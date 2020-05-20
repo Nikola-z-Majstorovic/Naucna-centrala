@@ -9,10 +9,7 @@ import org.camunda.bpm.engine.form.TaskFormData;
 import org.camunda.bpm.engine.impl.form.type.EnumFormType;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
-import org.camunda.bpmn.dto.FormFieldsDto;
-import org.camunda.bpmn.dto.FormSubmissionDto;
-import org.camunda.bpmn.dto.ReviewFormDto;
-import org.camunda.bpmn.dto.TaskDto;
+import org.camunda.bpmn.dto.*;
 import org.camunda.bpmn.model.*;
 import org.camunda.bpmn.security.TokenUtils;
 import org.camunda.bpmn.service.*;
@@ -87,6 +84,15 @@ public class TaskController {
         List<FormField> properties = tfd.getFormFields();
         return new ResponseEntity<>(new FormFieldsDto(task.getId(), processInstanceId, properties), HttpStatus.OK);
     }
+    @RequestMapping(value = "/reviewerForm/{taskId}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<FormFieldsReviewsDto> getReviewerFormFields(@PathVariable("taskId") String taskId){
+        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String processInstanceId = task.getProcessInstanceId();
+        TaskFormData tfd = formService.getTaskFormData(task.getId());
+        List<FormField> properties = tfd.getFormFields();
+        List<ReviewFormDto> reviewersForm = (ArrayList<ReviewFormDto>) runtimeService.getVariable(processInstanceId, "reviewersForm");
+        return new ResponseEntity<>(new FormFieldsReviewsDto(task.getId(), processInstanceId, properties,reviewersForm), HttpStatus.OK);
+    }
 
     @RequestMapping( value = "/{taskId}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> saveCoauthor(@RequestBody List<FormSubmissionDto> coauthorData, @PathVariable("taskId") String taskId){
@@ -106,17 +112,6 @@ public class TaskController {
     public ResponseEntity paperCorrectionTasks(HttpServletRequest request) {
         String username = Utils.getUsernameFromRequest(request, tokenUtils);
         List<Task> tasks = taskService.createTaskQuery().taskName("Iznena naucnog rada").taskAssignee(username).list();
-        List<TaskDto> tasksDto = new ArrayList<>();
-        for(Task task: tasks){
-            TaskDto t = new TaskDto(task.getId(), task.getName(), task.getAssignee());
-            tasksDto.add(t);
-        }
-        return new ResponseEntity<>(tasksDto, HttpStatus.OK);
-    }
-    @RequestMapping(value = "/paper-small-correction", method = RequestMethod.GET,produces = "application/json")
-    public ResponseEntity paperSmallCorrectionTasks(HttpServletRequest request) {
-        String username = Utils.getUsernameFromRequest(request, tokenUtils);
-        List<Task> tasks = taskService.createTaskQuery().taskName("Autor koriguje sitne izmene").taskAssignee(username).list();
         List<TaskDto> tasksDto = new ArrayList<>();
         for(Task task: tasks){
             TaskDto t = new TaskDto(task.getId(), task.getName(), task.getAssignee());
@@ -165,17 +160,24 @@ public class TaskController {
         ProcessInstance pi = runtimeService.createProcessInstanceQuery().processInstanceId(task.getProcessInstanceId()).singleResult();
         TaskFormData tfd = formService.getTaskFormData(task.getId());
         SciencePaper sciencePaper = sciencePaperService.findOneById((Long) runtimeService.getVariable(pi.getId(), "sciencePaperId"));
-//        List<User> reviewers = userService.findAllReviewers();
-        String magazineName  = (String)runtimeService.getVariable(task.getProcessInstanceId(),"magazineName");
-        Magazine magazine = magazineService.findByName(magazineName);
-        List<Reviewer> reviewers = magazine.getReviewers();
+//        String magazineName  = (String)runtimeService.getVariable(task.getProcessInstanceId(),"magazineName");
+//        Magazine magazine = magazineService.findByName(magazineName);
+//        List<Reviewer> reviewers = magazine.getReviewers();
+        List<Reviewer> reviewers = (List<Reviewer>) runtimeService.getVariable(task.getProcessInstanceId(),"broj_recezenata");;
         List<User> reviewerList = new ArrayList<>();
-        for (User reviewer : reviewers) {
-            for (ScienceField scienceField : reviewer.getScienceFields()) {
-                if (scienceField.getName().equals(sciencePaper.getScienceField().getName())) {
-                    reviewerList.add(reviewer);
+        //////////// ovo se ne izvrsava ukoliko glavni urednik dobije rolu urednika naucne oblasti
+        if(runtimeService.getVariable(task.getProcessInstanceId(),"izabrani_glavni_urednik")== null) {
+            for (User reviewer : reviewers) {
+                for (ScienceField scienceField : reviewer.getScienceFields()) {
+                    if (scienceField.getName().equals(sciencePaper.getScienceField().getName())) {
+                        reviewerList.add(reviewer);
+                    }
                 }
             }
+        } else {
+            for (User reviewer : reviewers) {
+                        reviewerList.add(reviewer);
+                    }
         }
         List<FormField> properties = tfd.getFormFields();
         for (FormField field : properties) {
@@ -228,26 +230,17 @@ public class TaskController {
         }
         return new ResponseEntity<>(tasksDto, HttpStatus.OK);
     }
-    @RequestMapping(value = "/chief-or-editor-choice/{taskId}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<FormFieldsDto> chiefOrEditorChoiceForm(@PathVariable("taskId") String taskId) {
+
+    @RequestMapping(value = "/chief-or-editor-choice-and-author-correction/{taskId}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<FormFieldsReviewsDto> chiefOrEditorChoiceForm(@PathVariable("taskId") String taskId) {
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         String processInstanceId = task.getProcessInstanceId();
         TaskFormData tfd = formService.getTaskFormData(task.getId());
         List<FormField> properties = tfd.getFormFields();
-        return new ResponseEntity<>(new FormFieldsDto(task.getId(), processInstanceId, properties), HttpStatus.OK);
+        List<ReviewFormDto> reviewersForm = (ArrayList<ReviewFormDto>) runtimeService.getVariable(processInstanceId, "reviewersForm");
+        return new ResponseEntity<>(new FormFieldsReviewsDto(task.getId(), processInstanceId, properties,reviewersForm), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/paper-big-correction", method = RequestMethod.GET,produces = "application/json")
-    public ResponseEntity paperBigCorrectionTasks(HttpServletRequest request) {
-        String username = Utils.getUsernameFromRequest(request, tokenUtils);
-        List<Task> tasks = taskService.createTaskQuery().taskName("Autor koriguje izmene").taskAssignee(username).list();
-        List<TaskDto> tasksDto = new ArrayList<>();
-        for(Task task: tasks){
-            TaskDto t = new TaskDto(task.getId(), task.getName(), task.getAssignee());
-            tasksDto.add(t);
-        }
-        return new ResponseEntity<>(tasksDto, HttpStatus.OK);
-    }
 
     @RequestMapping(value = "/choose-time-error", method = RequestMethod.GET,produces = "application/json")
     public ResponseEntity chooseTimeError(HttpServletRequest request) {

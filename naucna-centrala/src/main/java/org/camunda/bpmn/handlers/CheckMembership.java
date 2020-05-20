@@ -4,6 +4,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpmn.model.Author;
 import org.camunda.bpmn.model.Magazine;
+//import org.camunda.bpmn.model.Membership;
 import org.camunda.bpmn.model.Membership;
 import org.camunda.bpmn.security.TokenUtils;
 import org.camunda.bpmn.service.MagazineService;

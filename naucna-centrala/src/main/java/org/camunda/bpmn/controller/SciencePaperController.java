@@ -1,11 +1,5 @@
 package org.camunda.bpmn.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.camunda.bpm.engine.FormService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
@@ -14,23 +8,27 @@ import org.camunda.bpm.engine.form.TaskFormData;
 import org.camunda.bpm.engine.impl.form.type.EnumFormType;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
-import org.camunda.bpmn.dto.AccessAndMembershipDTO;
 import org.camunda.bpmn.dto.FormFieldsDto;
 import org.camunda.bpmn.dto.FormSubmissionDto;
-import org.camunda.bpmn.dto.MagazineDTO;
 import org.camunda.bpmn.model.Coauthor;
 import org.camunda.bpmn.model.Magazine;
 import org.camunda.bpmn.model.ScienceField;
 import org.camunda.bpmn.model.SciencePaper;
-import org.camunda.bpmn.security.TokenUtils;
-import org.camunda.bpmn.service.*;
+import org.camunda.bpmn.service.MagazineService;
+import org.camunda.bpmn.service.ScienceFieldService;
+import org.camunda.bpmn.service.SciencePaperService;
+import org.camunda.bpmn.service.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/science-paper")

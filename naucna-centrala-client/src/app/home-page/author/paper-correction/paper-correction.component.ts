@@ -3,6 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CoauthorService} from '../../../services/coauthor.service';
 import {RepositoryService} from '../../../services/repository.service';
 import {SciencePaperService} from '../../../services/science-paper.service';
+import {ValidationService} from '../../../services/validation.service';
 
 @Component({
   selector: 'app-paper-correction',
@@ -14,12 +15,14 @@ export class PaperCorrectionComponent implements OnInit {
   taskId: any;
   formFieldsDto = null;
   formFields = [];
-
+  reviewersForm = [];
   fileUrl: string;
   fileToUpload: File;
 
-  constructor(private coauthorService: CoauthorService, private repoService: RepositoryService,
-              private sciencePaperService: SciencePaperService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private coauthorService: CoauthorService,
+              private repoService: RepositoryService, private validationService: ValidationService,
+              private sciencePaperService: SciencePaperService,
+              private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
       this.route.params.subscribe(
@@ -27,10 +30,11 @@ export class PaperCorrectionComponent implements OnInit {
           this.taskId = params['id'];
         }
       );
-      this.repoService.getForm(this.taskId).subscribe(
+      this.repoService.getPaperCorrectionForm(this.taskId).subscribe(
         (response: any) => {
           this.formFieldsDto = response;
           this.formFields = response.formFields;
+          this.reviewersForm = response.reviewersForm;
         },
         (error) => {
           alert(error.message);
@@ -44,12 +48,16 @@ export class PaperCorrectionComponent implements OnInit {
       this.fileUrl = event.target.result;
     };
     reader.readAsDataURL(this.fileToUpload);
-    console.log('URL ' + this.fileUrl);
-    console.log('file ' + this.fileToUpload);
-    console.log('filename ' + this.fileToUpload.name);
+    // console.log('URL ' + this.fileUrl);
+    // console.log('file ' + this.fileToUpload);
+    // console.log('filename ' + this.fileToUpload.name);
   }
 
   onSubmit(value, form) {
+
+    if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
+      return;
+    }
     let dto = new Array();
     for (var property in value) {
       if (property == 'pdf') {

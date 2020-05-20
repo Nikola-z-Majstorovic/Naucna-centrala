@@ -45,6 +45,7 @@ export class EditorPapersComponent implements OnInit {
         (error) => { alert(error.message);
         }
       );
+
   }
 
   claimPaperReviweTask(taskId) {

@@ -12,4 +12,5 @@
   <table>
     <tr *ngFor="let task of chiefOrEditorChoiceTasks" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimChiefOrEditorChoiceTask(task.taskId)">Preuzmi</button></td></tr>
   </table>
+
 </div>

@@ -16,12 +16,10 @@ public class SaveReviewers implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         List<FormSubmissionDto> reviewersData = (List<FormSubmissionDto>) execution.getVariable("reviewersData");
         List<String> reviewerList = new ArrayList<>();
-        List<String> reviewersList = new ArrayList<>();
         for(FormSubmissionDto dto: reviewersData) {
             reviewerList.add(dto.getFieldValue());
         }
         execution.setVariable("reviewerList", reviewerList);
-        execution.setVariable("reviewersList", reviewersList);
         execution.setVariable("komentari_recezentima", "");
         execution.setVariable("reviewersForm", new ArrayList<ReviewFormDto>());
     }

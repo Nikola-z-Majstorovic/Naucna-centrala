@@ -52,12 +52,10 @@ public class MagazineController {
         TaskFormData tfd = formService.getTaskFormData(task.getId());
         List<FormField> properties = tfd.getFormFields();
         runtimeService.setVariable(pi.getId(), "authorId", Utils.getUsernameFromRequest(request, tokenUtils));
-
         List<MagazineDTO> magazines = magazineService.findAll();
         for(FormField field : properties){
             if(field.getId().equals("casopis")){
                 EnumFormType enumType = (EnumFormType) field.getType();
-                System.out.println(((EnumFormType) field.getType()).getValues());
                 for(MagazineDTO magazineDTO: magazines){
                     enumType.getValues().put(magazineDTO.getName(), magazineDTO.getName());
 

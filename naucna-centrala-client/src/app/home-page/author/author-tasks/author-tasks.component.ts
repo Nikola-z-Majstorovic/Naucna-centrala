@@ -11,8 +11,7 @@ export class AuthorTasksComponent implements OnInit {
 
   tasksCoauthor: any = [];
   tasksPaperCorrection: any = [];
-  tasksPaperBigCorrection: any = [];
-  tasksPaperSmallCorrection: any = [];
+
 
   constructor(private repoService: RepositoryService, private router: Router) {
   }
@@ -36,24 +35,6 @@ export class AuthorTasksComponent implements OnInit {
         alert(error.message);
       }
     );
-
-    this.repoService.getPaperBigCorrectionTasks().subscribe(
-      (response: any) => {
-        this.tasksPaperBigCorrection = response;
-      },
-      (error) => {
-        alert(error.message);
-      }
-    );
-
-    this.repoService.getPaperSmallCorrectionTasks().subscribe(
-      (response: any) => {
-        this.tasksPaperSmallCorrection = response;
-      },
-      (error) => {
-        alert(error.message);
-      }
-    );
   }
 
   claimTaskCoauthor(taskId) {
@@ -68,27 +49,6 @@ export class AuthorTasksComponent implements OnInit {
   }
 
   claimTaskPaperCorrection(taskId) {
-    this.repoService.claimTask(taskId).subscribe(
-      (success) => {
-        this.router.navigate(['/home-page/author/paper-correction/'.concat(taskId)]);
-      },
-      (error) => {
-        alert(error.message);
-      }
-    );
-  }
-
-  claimTaskPaperBigCorrection(taskId) {
-    this.repoService.claimTask(taskId).subscribe(
-      (success) => {
-        this.router.navigate(['/home-page/author/paper-correction/'.concat(taskId)]);
-      },
-      (error) => {
-        alert(error.message);
-      }
-    );
-  }
-  claimTaskPaperSmallCorrection(taskId) {
     this.repoService.claimTask(taskId).subscribe(
       (success) => {
         this.router.navigate(['/home-page/author/paper-correction/'.concat(taskId)]);

@@ -97,11 +97,6 @@
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0fdmoqp" sourceRef="BoundaryEvent_183ktz2" targetRef="Task_1usjj95" />
     <bpmn:sendTask id="Task_1cgo3uc" name="Rad se uvrstava u casopis i autoru se salje mejl da se rad prihvata " camunda:class="org.camunda.bpmn.handlers.NotifyAboutAcceptance">
-      <bpmn:extensionElements>
-        <camunda:executionListener event="start">
-          <camunda:script scriptFormat="javascript">var aktivacija = false;</camunda:script>
-        </camunda:executionListener>
-      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1awwxv6</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_076hqij</bpmn:outgoing>
     </bpmn:sendTask>
@@ -150,14 +145,7 @@
       <bpmn:outgoing>SequenceFlow_1foi763</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_1foi763" sourceRef="Task_1qmtp4g" targetRef="ExclusiveGateway_1mxhfe6" />
-    <bpmn:sequenceFlow id="SequenceFlow_1phkhrk" sourceRef="StartEvent_1" targetRef="Task_06hg0fq">
-      <bpmn:extensionElements>
-        <camunda:executionListener event="take">
-          <camunda:script scriptFormat="javascript">var aktivacija = false;
-execution.setVariable("doi",1);</camunda:script>
-        </camunda:executionListener>
-      </bpmn:extensionElements>
-    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1phkhrk" sourceRef="StartEvent_1" targetRef="Task_06hg0fq" />
     <bpmn:sequenceFlow id="SequenceFlow_02nk3zx" sourceRef="Task_06hg0fq" targetRef="Task_1qmtp4g" />
     <bpmn:sequenceFlow id="SequenceFlow_0l26rer" name="Closed access" sourceRef="ExclusiveGateway_1mxhfe6" targetRef="Task_0etq3cf">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!open_access}</bpmn:conditionExpression>
@@ -255,14 +243,15 @@ execution.setVariable("doi",1);</camunda:script>
       <bpmn:outgoing>SequenceFlow_0oizsvb</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:sequenceFlow id="SequenceFlow_0rqbd3y" sourceRef="Task_1rmk3ex" targetRef="Task_0q5ir0i" />
-    <bpmn:userTask id="Task_0q5ir0i" name="Autor koriguje sitne izmene">
+    <bpmn:userTask id="Task_0q5ir0i" name="Iznena naucnog rada">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="komentari_uredniku" label="Komentar za urednika:" type="string">
+          <camunda:formField id="komentar_za_urednika" label="Komentar za urednika:" type="string">
             <camunda:validation>
               <camunda:constraint name="required" />
             </camunda:validation>
           </camunda:formField>
+          <camunda:formField id="pdf_ispravka" label="PDF: " type="string" />
         </camunda:formData>
         <camunda:taskListener class="org.camunda.bpmn.handlers.AssignAuthor" event="create" />
       </bpmn:extensionElements>
@@ -284,7 +273,7 @@ execution.setVariable("doi",1);</camunda:script>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0oizsvb" sourceRef="Task_1pbi4rx" targetRef="Task_0c614b6" />
-    <bpmn:userTask id="Task_0c614b6" name="Autor koriguje izmene">
+    <bpmn:userTask id="Task_0c614b6" name="Iznena naucnog rada">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="komentari_recezentima" label="Komentar za recenzente:" type="string">
@@ -292,6 +281,7 @@ execution.setVariable("doi",1);</camunda:script>
               <camunda:constraint name="required" />
             </camunda:validation>
           </camunda:formField>
+          <camunda:formField id="pdf_ispravka" label="PDF: " type="string" />
         </camunda:formData>
         <camunda:taskListener class="org.camunda.bpmn.handlers.AssignAuthor" event="create" />
       </bpmn:extensionElements>
@@ -301,7 +291,7 @@ execution.setVariable("doi",1);</camunda:script>
     <bpmn:userTask id="Task_0zh2dpq" name="Glavi urednik ili urednik naucne oblasti odlucuje da li prihvata rad">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="odluka_o_prihvacanju" label="Da li se rad prihvata:" type="enum">
+          <camunda:formField id="odluka_o_prihvatanju" label="Da li se rad prihvata:" type="enum">
             <camunda:validation>
               <camunda:constraint name="required" />
             </camunda:validation>
@@ -309,8 +299,8 @@ execution.setVariable("doi",1);</camunda:script>
             <camunda:value id="korigovati" name="Korigovati" />
             <camunda:value id="odbiti" name="Odbiti" />
           </camunda:formField>
-          <camunda:formField id="komentar_od_autora" label="Poruka autora:" type="string" defaultValue="${komentari_uredniku}" />
-          <camunda:formField id="komentar_autoru" label="Komentari za autora:" type="string" />
+          <camunda:formField id="komentar_od_autora" label="Poruka autora:" type="string" defaultValue="${komentar_za_urednika}" />
+          <camunda:formField id="komentar" label="Komentari za autora:" type="string" />
         </camunda:formData>
         <camunda:taskListener class="org.camunda.bpmn.handlers.AssignScienceFieldEditor" event="create" />
       </bpmn:extensionElements>
@@ -318,15 +308,16 @@ execution.setVariable("doi",1);</camunda:script>
       <bpmn:incoming>SequenceFlow_0rgflkt</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_00aw9t3</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_0tw2bd2" name="Autor ponovo koriguje izmene">
+    <bpmn:userTask id="Task_0tw2bd2" name="Iznena naucnog rada">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="komentari_uredniku" label="Komentar za urednika:" type="string">
+          <camunda:formField id="komentar_za_urednika" label="Komentar za urednika:" type="string">
             <camunda:validation>
               <camunda:constraint name="required" />
             </camunda:validation>
           </camunda:formField>
-          <camunda:formField id="komentari_od_urednika" label="Poruka uredniku naucne oblasti:" type="string" defaultValue="${komentar_autoru}" />
+          <camunda:formField id="komentar_urednika" label="Poruka uredniku naucne oblasti:" type="string" defaultValue="${komentar}" />
+          <camunda:formField id="pdf_ispravka" label="PDF: " type="string" />
         </camunda:formData>
         <camunda:taskListener class="org.camunda.bpmn.handlers.AssignAuthor" event="create" />
       </bpmn:extensionElements>
@@ -341,7 +332,7 @@ execution.setVariable("doi",1);</camunda:script>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_1nnzcka" sourceRef="Task_1rsej35" targetRef="EndEvent_0hxevj9" />
     <bpmn:sequenceFlow id="SequenceFlow_01aqmrp" name="Rad se ne prihvata" sourceRef="ExclusiveGateway_0xcmqs1" targetRef="Task_1rsej35">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${odluka_o_prihvacanju == "odbiti"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${odluka_o_prihvatanju == "odbiti"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sendTask id="Task_1r6jvmq" name="Autoru se salje notifikacija da je rad prihvacen i rad se indeksira" camunda:class="org.camunda.bpmn.handlers.NotifyAboutAcceptance">
       <bpmn:incoming>SequenceFlow_1r8u81y</bpmn:incoming>
@@ -361,19 +352,14 @@ execution.setVariable("doi",1);</camunda:script>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="SequenceFlow_00aw9t3" sourceRef="Task_0zh2dpq" targetRef="ExclusiveGateway_0xcmqs1" />
     <bpmn:sequenceFlow id="SequenceFlow_0nidx9i" name="Rad se ponovo koriguje" sourceRef="ExclusiveGateway_0xcmqs1" targetRef="Task_1339lk3">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${odluka_o_prihvacanju == "korigovati"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${odluka_o_prihvatanju == "korigovati"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1r8u81y" name="Rad se  prihvata" sourceRef="ExclusiveGateway_0xcmqs1" targetRef="Task_1r6jvmq">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${odluka_o_prihvacanju == "prihvatiti"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${odluka_o_prihvatanju == "prihvatiti"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0rgflkt" sourceRef="Task_0tw2bd2" targetRef="Task_0zh2dpq" />
     <bpmn:sequenceFlow id="SequenceFlow_1ieyij0" sourceRef="Task_0c614b6" targetRef="Task_19sv3c5" />
     <bpmn:serviceTask id="Task_15w0it2" name="Lista svih recezenata u izabranom magazinu" camunda:class="org.camunda.bpmn.handlers.GetAllReviewers">
-      <bpmn:extensionElements>
-        <camunda:executionListener event="start">
-          <camunda:script scriptFormat="javascript">execution.setVariable("rola", "glavniUrednik");</camunda:script>
-        </camunda:executionListener>
-      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0p6vcr8</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_1v8ehyd</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1fl0e6j</bpmn:outgoing>
@@ -564,21 +550,9 @@ execution.setVariable("doi",1);</camunda:script>
     <bpmn:userTask id="Task_16gw7x4" name="Odredjivanje vremena za ispravku rada">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="dan_za_autora" label="Dan za ispravku:" type="long">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="sat_za_autora" label="Sat za ispravku:" type="long">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="minut_za_autora" label="Minut za ispravku:" type="long">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
+          <camunda:formField id="dan_za_autora" label="Dan za ispravku:" type="long" />
+          <camunda:formField id="sat_za_autora" label="Sat za ispravku:" type="long" />
+          <camunda:formField id="minut_za_autora" label="Minut za ispravku:" type="long" />
         </camunda:formData>
         <camunda:taskListener class="org.camunda.bpmn.handlers.AssignScienceFieldEditor" event="create" />
       </bpmn:extensionElements>
@@ -602,21 +576,9 @@ execution.setVariable("doi",1);</camunda:script>
     <bpmn:userTask id="Task_1339lk3" name="Odredjivanje vremena za ispravku rada">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="dan_za_autora" label="Dan za ispravku:" type="long">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="sat_za_autora" label="Sat za ispravku:" type="long">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="minut_za_autora" label="Minut za ispravku:" type="long">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
+          <camunda:formField id="dan_za_autora" label="Dan za ispravku:" type="long" />
+          <camunda:formField id="sat_za_autora" label="Sat za ispravku:" type="long" />
+          <camunda:formField id="minut_za_autora" label="Minut za ispravku:" type="long" />
         </camunda:formData>
         <camunda:taskListener class="org.camunda.bpmn.handlers.AssignScienceFieldEditor" event="create" />
       </bpmn:extensionElements>

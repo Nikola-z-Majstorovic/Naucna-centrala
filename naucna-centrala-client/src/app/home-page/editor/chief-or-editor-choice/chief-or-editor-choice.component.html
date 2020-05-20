@@ -5,14 +5,27 @@
       <div *ngFor="let field of formFields">
 
         <label for={{field.id}}> {{field.label}} </label>
-        <input type="text" name={{field.id}} *ngIf="field.type.name == 'string'" class="form-control" [ngModel] = "field.defaultValue">
+        <input type="text" name={{field.id}} *ngIf="field.type.name == 'string' && field.defaultValue == null " class="form-control" [ngModel] = "field.defaultValue">
+        <label for="{{field.id}}" *ngIf="field.type.name == 'string'">{{field.defaultValue}}</label>
         <select name={{field.id}} *ngIf="field.type.name == 'enum'" class="form-control" ngModel>
           <option *ngFor="let val of odluka" value={{val}}>
             {{field.type.values[val]}}
           </option>
         </select>
       </div>
+      <div style="border: 2px solid black; padding: 5px; margin-top: 10px" *ngFor="let reviewerForm of reviewersForm">
+        <label> Recenzent {{reviewerForm.username}} </label> <br/><br/>
+<!--        <br>-->
+        <label>Komentar:  {{reviewerForm.komentarUredniku}}</label> <br/>
+        <label>Preporuka: {{reviewerForm.preporukaPrihvacanja}}</label>
 
+<!--          <input type="text"  name={{reviewerForm.username}} class="form-control" [ngModel]="reviewerForm.preporukaPrihvacanja">-->
+        <br/>
+<!--        <input type="text" name={{reviewerForm.username}} class="form-control"  [ngModel]="reviewerForm.preporukaPrihvacanja">-->
+<!--        <br/>-->
+
+      </div>
+      <br/>
       <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-primary">Potvrdi</button>
       </div>

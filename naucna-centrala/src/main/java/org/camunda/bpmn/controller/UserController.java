@@ -84,11 +84,10 @@ public class UserController {
         String processInstanceId = task.getProcessInstanceId();
         String username = task.getAssignee();
         Reviewer reviewer = (Reviewer) userService.findOneByUsername(username);
-        ArrayList<ReviewFormDto> reviewersForm = (ArrayList<ReviewFormDto>) runtimeService.getVariable(processInstanceId,"reviewersForm");
-        ReviewFormDto reviewFormDto = reviewerService.create(reviewForm);
+        List<ReviewFormDto> reviewersForm = (ArrayList<ReviewFormDto>) runtimeService.getVariable(processInstanceId,"reviewersForm");
+        ReviewFormDto reviewFormDto = reviewerService.create(reviewForm,reviewer.getUsername());
         reviewersForm.add(reviewFormDto);
         runtimeService.setVariable(processInstanceId, "reviewersForm", reviewersForm);
-
         formService.submitTaskForm(taskId, map);
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }

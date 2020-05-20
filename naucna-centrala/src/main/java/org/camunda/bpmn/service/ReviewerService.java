@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class ReviewerService {
 
-    public ReviewFormDto create(List<FormSubmissionDto> reviewForm) {
+    public ReviewFormDto create(List<FormSubmissionDto> reviewForm,String username) {
         ReviewFormDto reviewFormDto = new ReviewFormDto();
         for(FormSubmissionDto dto: reviewForm){
             if(dto.getFieldId().equals("komentar_uredniku")){
@@ -21,6 +21,9 @@ public class ReviewerService {
                 reviewFormDto.setKomentarAutoru(dto.getFieldValue());
             }
         }
+        reviewFormDto.setUsername(username);
         return reviewFormDto;
     }
+
+
 }

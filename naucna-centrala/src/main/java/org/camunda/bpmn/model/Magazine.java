@@ -4,10 +4,11 @@ import javax.persistence.*;
 
 import org.camunda.bpmn.model.enums.BillingType;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Magazine {
+public class Magazine implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

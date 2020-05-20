@@ -23,7 +23,7 @@ public class GetAllReviewers implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         String magazineName = (String) execution.getVariable("magazineName");
         Magazine magazine = magazineService.findByName(magazineName);
-        execution.setVariable("izabrani_urednik", magazine.getChiefEditor().getUsername());
+        execution.setVariable("izabrani_glavni_urednik", magazine.getChiefEditor().getUsername());
         List<Reviewer> reviewerList = magazine.getReviewers();
         List<User> list = new ArrayList<>();
         for(Reviewer reviewer: reviewerList){

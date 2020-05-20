@@ -1,12 +1,13 @@
 package org.camunda.bpmn.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class SciencePaper {
+public class SciencePaper implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
