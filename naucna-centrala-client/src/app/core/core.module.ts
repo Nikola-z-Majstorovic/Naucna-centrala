@@ -28,7 +28,7 @@ import { PaperSubbmitComponent } from '../home-page/reviewer/paper-subbmit/paper
 import { ChiefOrEditorChoiceComponent } from '../home-page/editor/chief-or-editor-choice/chief-or-editor-choice.component';
 import { PaperCorrectionComponent } from '../home-page/author/paper-correction/paper-correction.component';
 import { ChoosingErrorTimeComponent } from '../home-page/editor/choosing-error-time/choosing-error-time.component';
-
+import { ChooseOtherReviwersComponent } from '../home-page/editor/choose-other-reviwers/choose-other-reviwers.component';
 @NgModule({
   declarations: [
     HomePageComponent,
@@ -50,7 +50,8 @@ import { ChoosingErrorTimeComponent } from '../home-page/editor/choosing-error-t
     PaperSubbmitComponent,
     ChiefOrEditorChoiceComponent,
     PaperCorrectionComponent,
-    ChoosingErrorTimeComponent],
+    ChoosingErrorTimeComponent,
+    ChooseOtherReviwersComponent],
   imports: [
     CommonModule,
     ToastrModule.forRoot({preventDuplicates: true}), // ToastrModule added,

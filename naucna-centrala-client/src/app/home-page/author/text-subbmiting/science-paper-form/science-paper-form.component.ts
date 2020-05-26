@@ -52,6 +52,9 @@ export class SciencePaperFormComponent implements OnInit {
       this.fileUrl = event.target.result;
     };
     reader.readAsDataURL(this.fileToUpload);
+    console.log('URL ' + this.fileUrl);
+    console.log('file ' + this.fileToUpload);
+    console.log('filename ' + this.fileToUpload.name);
   }
 
   onSubmit(value, form) {
@@ -61,17 +64,21 @@ export class SciencePaperFormComponent implements OnInit {
     }
 
     let dto = new Array();
+    console.log(value);
     for (var property in value) {
       if (property == 'pdf') {
+        console.log({fieldId: property, fieldValue: this.fileToUpload.name});
         dto.push({fieldId: property, fieldValue: this.fileToUpload.name});
+        console.log({fieldId: property, fieldValue: value[property]});
       }
       dto.push({fieldId: property, fieldValue: value[property]});
     }
-
     this.sciencePaperService.save(this.formFieldsDto.taskId, dto).subscribe(
       (response: any) => {
+        console.log(response);
         this.sciencePaperService.savePdf(response, this.fileToUpload).subscribe(
           (success) => {
+            console.log(response);
             alert('Success');
             this.router.navigate(['/home-page/author']);
           }

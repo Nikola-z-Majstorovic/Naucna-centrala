@@ -2,7 +2,6 @@ package org.camunda.bpmn.handlers;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpmn.model.Editor;
 import org.camunda.bpmn.model.Magazine;
 import org.camunda.bpmn.model.Reviewer;
 import org.camunda.bpmn.model.User;

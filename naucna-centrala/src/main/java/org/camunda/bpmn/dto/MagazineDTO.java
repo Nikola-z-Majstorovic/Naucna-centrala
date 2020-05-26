@@ -1,11 +1,11 @@
 package org.camunda.bpmn.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.camunda.bpmn.model.Editor;
 import org.camunda.bpmn.model.ScienceField;
 import org.camunda.bpmn.model.SciencePaper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MagazineDTO {
 	 private Long id;

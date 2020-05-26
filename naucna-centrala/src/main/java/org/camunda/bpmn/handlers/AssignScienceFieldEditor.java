@@ -1,8 +1,6 @@
 package org.camunda.bpmn.handlers;
 
-import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.DelegateTask;
-import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.delegate.TaskListener;
 import org.springframework.stereotype.Service;
 

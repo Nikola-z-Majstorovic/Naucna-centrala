@@ -1,9 +1,9 @@
 package org.camunda.bpmn.model;
 
-import org.hibernate.validator.constraints.ScriptAssert;
-
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 @DiscriminatorValue("EDITOR")

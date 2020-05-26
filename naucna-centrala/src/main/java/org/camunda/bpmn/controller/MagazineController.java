@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "magazine")
@@ -55,9 +56,10 @@ public class MagazineController {
         List<MagazineDTO> magazines = magazineService.findAll();
         for(FormField field : properties){
             if(field.getId().equals("casopis")){
-                EnumFormType enumType = (EnumFormType) field.getType();
+                Map<String, String> enumType = ((EnumFormType) field.getType()).getValues();
+                enumType.clear();
                 for(MagazineDTO magazineDTO: magazines){
-                    enumType.getValues().put(magazineDTO.getName(), magazineDTO.getName());
+                    enumType.put(magazineDTO.getName(), magazineDTO.getName());
 
                 }
                 break;

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0jq12du" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <bpmn:process id="rezultati_recenzije" name="Recenziranje" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_197mewi</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_1i5ycxi">
+      <bpmn:incoming>SequenceFlow_123qxv1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_123qxv1" sourceRef="Task_0v428xk" targetRef="EndEvent_1i5ycxi" />
+    <bpmn:sequenceFlow id="SequenceFlow_197mewi" sourceRef="StartEvent_1" targetRef="Task_0v428xk" />
+    <bpmn:userTask id="Task_0v428xk" name="Recenziranje" camunda:assignee="${reviewer}">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="komentar_autoru" label="Komentari za autora:" type="string" />
+          <camunda:formField id="preporuka_prihvacanja" label="Preporuka:" type="enum">
+            <camunda:value id="prihvatiti" name="Prihvatiti" />
+            <camunda:value id="prihvatiti_uz_manje_ispravke" name="Prihvatiti uz manje ispravke" />
+            <camunda:value id="uslovno_prihvatiti_uz_vece_ispravke" name="Uslovno prihvatiti uz vece ispravke" />
+            <camunda:value id="odbiti_rad" name="Odbiti rad" />
+          </camunda:formField>
+          <camunda:formField id="komentar_uredniku" label="Komentar za urednika:" type="string" />
+          <camunda:formField id="komentar_od_autora" label="Komentar od autora:" type="string" defaultValue="${komentari_recezentima}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_197mewi</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0xmqiez</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_123qxv1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_1e5fsne" name="Biranje drugog recenznenta">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="recenzent" label="Izaberi recenzenta: " type="enum">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="dan_za_recenzente" label="Dan za recenzente:" type="long" />
+          <camunda:formField id="sat_za_recenzente" label="Sat za recenzente:" type="long" />
+          <camunda:formField id="minut_za_recenzente" label="Minut za recenzente:" type="long" />
+        </camunda:formData>
+        <camunda:taskListener class="org.camunda.bpmn.handlers.AssignScienceFieldEditor" event="create" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0vlf0or</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0xmqiez</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0xmqiez" sourceRef="Task_1e5fsne" targetRef="Task_0v428xk" />
+    <bpmn:sequenceFlow id="SequenceFlow_0vlf0or" sourceRef="IntermediateThrowEvent_18e59jk" targetRef="Task_1e5fsne" />
+    <bpmn:boundaryEvent id="IntermediateThrowEvent_18e59jk" attachedToRef="Task_0v428xk">
+      <bpmn:outgoing>SequenceFlow_0vlf0or</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_1lrjaf2">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P${dan_za_recenzente}DT${sat_za_recenzente}H${minut_za_recenzente}M</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="rezultati_recenzije">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="122" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1i5ycxi_di" bpmnElement="EndEvent_1i5ycxi">
+        <dc:Bounds x="562" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_123qxv1_di" bpmnElement="SequenceFlow_123qxv1">
+        <di:waypoint x="410" y="117" />
+        <di:waypoint x="562" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_197mewi_di" bpmnElement="SequenceFlow_197mewi">
+        <di:waypoint x="158" y="117" />
+        <di:waypoint x="310" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1sazwv6_di" bpmnElement="Task_0v428xk">
+        <dc:Bounds x="310" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1hc32tw_di" bpmnElement="Task_1e5fsne">
+        <dc:Bounds x="310" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0xmqiez_di" bpmnElement="SequenceFlow_0xmqiez">
+        <di:waypoint x="310" y="270" />
+        <di:waypoint x="210" y="270" />
+        <di:waypoint x="210" y="140" />
+        <di:waypoint x="310" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0vlf0or_di" bpmnElement="SequenceFlow_0vlf0or">
+        <di:waypoint x="370" y="175" />
+        <di:waypoint x="370" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BoundaryEvent_1df340p_di" bpmnElement="IntermediateThrowEvent_18e59jk">
+        <dc:Bounds x="352" y="139" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

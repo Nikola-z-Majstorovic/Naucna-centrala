@@ -21,9 +21,15 @@ export class SciencePaperService {
   savePdf(sciencePaperId, fileToUpload) {
     const formData: FormData = new FormData();
     formData.append('file', fileToUpload);
+    console.log(formData);
     return this.httpClient.put('/api/science-paper/'.concat(sciencePaperId), formData, {responseType: 'text'});
   }
-
+  download(processId) {
+    const httpOptions = {
+      'responseType'  : 'arraybuffer' as 'json'
+    };
+    return this.httpClient.get('/api/science-paper/download/'.concat(processId), httpOptions);
+  }
   paperReview(taskId, dto) {
     return this.httpClient.put('/api/task/paper-review/'.concat(taskId), dto, {responseType: 'text'});
   }
@@ -35,7 +41,9 @@ export class SciencePaperService {
   chooseReviewers(taskId, dto) {
     return this.httpClient.put('/api/task/choose-reviewers/'.concat(taskId), dto, {responseType: 'text'});
   }
-
+  chooseOtherReviewers(taskId, dto) {
+    return this.httpClient.put('/api/task/choose-other-reviewers/'.concat(taskId), dto, {responseType: 'text'});
+  }
   chiefOrEditorChoice(taskId, dto) {
     return this.httpClient.put('/api/users/chief-or-editor-review/'.concat(taskId), dto, {responseType: 'text'});
   }

@@ -1,18 +1,13 @@
 package org.camunda.bpmn.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.camunda.bpm.engine.FormService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
-import org.camunda.bpm.engine.form.FormField;
-import org.camunda.bpm.engine.form.FormFieldValidationConstraint;
-import org.camunda.bpm.engine.form.FormType;
-import org.camunda.bpm.engine.form.TaskFormData;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
-import org.camunda.bpm.engine.variable.value.TypedValue;
-import org.camunda.bpmn.dto.*;
+import org.camunda.bpmn.dto.FormSubmissionDto;
+import org.camunda.bpmn.dto.ReviewFormDto;
+import org.camunda.bpmn.dto.UserInfoDTO;
 import org.camunda.bpmn.model.*;
 import org.camunda.bpmn.security.TokenUtils;
 import org.camunda.bpmn.service.ReviewerService;
@@ -24,10 +19,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "users")
@@ -82,9 +77,10 @@ public class UserController {
         HashMap<String, Object> map = Utils.mapListToDto(reviewForm);
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         String processInstanceId = task.getProcessInstanceId();
+        ProcessInstance pi = runtimeService.createProcessInstanceQuery().subProcessInstanceId(processInstanceId).singleResult();
         String username = task.getAssignee();
         Reviewer reviewer = (Reviewer) userService.findOneByUsername(username);
-        List<ReviewFormDto> reviewersForm = (ArrayList<ReviewFormDto>) runtimeService.getVariable(processInstanceId,"reviewersForm");
+        List<ReviewFormDto> reviewersForm = (ArrayList<ReviewFormDto>) runtimeService.getVariable(pi.getId(),"reviewersForm");
         ReviewFormDto reviewFormDto = reviewerService.create(reviewForm,reviewer.getUsername());
         reviewersForm.add(reviewFormDto);
         runtimeService.setVariable(processInstanceId, "reviewersForm", reviewersForm);

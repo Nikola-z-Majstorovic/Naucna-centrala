@@ -1,6 +1,5 @@
 package org.camunda.bpmn.repository;
 
-import org.camunda.bpmn.model.Magazine;
 import org.camunda.bpmn.model.SciencePaper;
 import org.springframework.data.jpa.repository.JpaRepository;
 

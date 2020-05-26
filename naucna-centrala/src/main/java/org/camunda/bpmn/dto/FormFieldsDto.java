@@ -1,8 +1,8 @@
 package org.camunda.bpmn.dto;
 
-import java.util.List;
-
 import org.camunda.bpm.engine.form.FormField;
+
+import java.util.List;
 
 public class FormFieldsDto {
 	String taskId;

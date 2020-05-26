@@ -14,7 +14,6 @@ export class PaperFormatComponent implements OnInit {
   processId: any;
   formFieldsDto = null;
   formFields = [];
-  downloadUrl: any;
   formatiranost = [];
 
   constructor(private repoService: RepositoryService, private sciencePaperService: SciencePaperService,
@@ -60,6 +59,19 @@ export class PaperFormatComponent implements OnInit {
 
   }
 
-  onDownload() {}
+  onDownload() {
+    this.sciencePaperService.download(this.processId).subscribe(
+    (response: any) => {
+      alert('Skinut pdf!');
+      var blob = new Blob([response], {type: 'application/pdf'});
+      var url = window.URL.createObjectURL(blob);
+      console.log(url);
+      window.open(url, '_blank');
+    },
+    (error) => {
+      alert(error.message);
+    }
+  );
+  }
 
 }

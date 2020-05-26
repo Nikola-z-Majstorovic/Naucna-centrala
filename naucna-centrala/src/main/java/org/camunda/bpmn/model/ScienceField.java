@@ -1,10 +1,7 @@
 package org.camunda.bpmn.model;
 
-import org.hibernate.annotations.Generated;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 @Entity

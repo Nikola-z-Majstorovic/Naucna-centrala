@@ -20,6 +20,7 @@ import {PaperSubbmitComponent} from '../home-page/reviewer/paper-subbmit/paper-s
 import {ChiefOrEditorChoiceComponent} from '../home-page/editor/chief-or-editor-choice/chief-or-editor-choice.component';
 import {PaperCorrectionComponent} from '../home-page/author/paper-correction/paper-correction.component';
 import {ChoosingErrorTimeComponent} from '../home-page/editor/choosing-error-time/choosing-error-time.component';
+import {ChooseOtherReviwersComponent} from '../home-page/editor/choose-other-reviwers/choose-other-reviwers.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home-page', pathMatch: 'full'},
@@ -40,8 +41,9 @@ const routes: Routes = [
     { path: 'paper-format/:processId', component: PaperFormatComponent },
     { path: 'review-paper/:id', component: ReviewPaperComponent },
     { path: 'choose-reviwers/:id', component: ChooseReviwersComponent },
+    { path: 'choose-other-reviwers/:id', component: ChooseOtherReviwersComponent },
     { path: 'chief-or-editor-choice/:id', component: ChiefOrEditorChoiceComponent },
-      { path: 'choosing-error-time/:id', component: ChoosingErrorTimeComponent }
+    { path: 'choosing-error-time/:id', component: ChoosingErrorTimeComponent }
    ]},
   { path: 'reviewer', component: ReviewerComponent, children: [
       { path: 'paper-review', component: PaperReviewComponent },

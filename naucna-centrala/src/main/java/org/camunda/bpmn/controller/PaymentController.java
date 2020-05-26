@@ -12,10 +12,8 @@ import org.camunda.bpmn.dto.FormSubmissionDto;
 import org.camunda.bpmn.security.TokenUtils;
 import org.camunda.bpmn.service.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

@@ -45,6 +45,9 @@ export class RepositoryService {
   getChooseReviewerTasks() {
     return this.httpClient.get('/api/task/choose-reviewer');
   }
+  getChooseOtherReviewerTasks() {
+    return this.httpClient.get('/api/task/choose-other-reviewer');
+  }
   getChiefEditorChoiceForm(taskId)  {
     return this.httpClient.get('/api/task/chief-or-editor-choice-and-author-correction/'.concat(taskId));
   }
@@ -56,6 +59,7 @@ export class RepositoryService {
   getChooseReviwersForm(taskId) {
     return this.httpClient.get('/api/task/form/choose-reviewers/'.concat(taskId));
   }
+
 
   getPaperReviewTasks() {
     return this.httpClient.get('/api/task/paper-review/');

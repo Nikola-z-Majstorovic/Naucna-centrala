@@ -7,6 +7,9 @@
     <tr *ngFor="let task of chooseReviewerTasks" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimChooseReviewerTask(task.taskId)">Preuzmi</button></td></tr>
   </table>
   <table>
+    <tr *ngFor="let task of chooseOtherReviewerTasks" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimChooseOtherReviewerTask(task.taskId)">Preuzmi</button></td></tr>
+  </table>
+  <table>
     <tr *ngFor="let task of chooseTimeErrorTasks" > <td>{{task.name}}</td><td>{{task.assignee}}</td><td><button (click)="claimChooseTimeErrorTasks(task.taskId)">Preuzmi</button></td></tr>
   </table>
   <table>

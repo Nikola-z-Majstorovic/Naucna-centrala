@@ -16,6 +16,7 @@ export class ChiefOrEditorChoiceComponent implements OnInit {
   formFields = [];
   odluka = [];
   reviewersForm = [];
+  processId: any;
 
   constructor(private sciencePaperService: SciencePaperService, private repoService: RepositoryService,
               private route: ActivatedRoute, private router: Router, private validationService: ValidationService) { }
@@ -31,6 +32,7 @@ export class ChiefOrEditorChoiceComponent implements OnInit {
         this.formFieldsDto = response;
         this.formFields = response.formFields;
         this.reviewersForm = response.reviewersForm;
+        this.processId = response.processInstanceId;
         this.formFields.forEach((field) => {
           if (field.type.name == 'enum') {
             this.odluka = Object.keys(field.type.values);
@@ -42,6 +44,21 @@ export class ChiefOrEditorChoiceComponent implements OnInit {
       }
     );
   }
+  onDownload() {
+    this.sciencePaperService.download(this.processId).subscribe(
+      (response: any) => {
+        alert('Skinut pdf!');
+        var blob = new Blob([response], {type: 'application/pdf'});
+        var url = window.URL.createObjectURL(blob);
+        console.log(url);
+        window.open(url, '_blank');
+      },
+      (error) => {
+        alert(error.message);
+      }
+    );
+  }
+
   onSubmit(value, form) {
     if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {
       return;

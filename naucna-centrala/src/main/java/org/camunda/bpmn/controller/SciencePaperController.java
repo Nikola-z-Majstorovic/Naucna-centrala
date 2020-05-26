@@ -19,6 +19,9 @@ import org.camunda.bpmn.service.ScienceFieldService;
 import org.camunda.bpmn.service.SciencePaperService;
 import org.camunda.bpmn.service.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/science-paper")
@@ -63,9 +67,11 @@ public class SciencePaperController {
         List<ScienceField> scienceFields = magazine.getScienceFields();
         for(FormField field : properties){
             if(field.getId().equals("naucna_oblast")){
-                EnumFormType enumType = (EnumFormType) field.getType();
+                Map<String, String> enumType = ((EnumFormType) field.getType()).getValues();
+                enumType.clear();
                 for(ScienceField scienceField: scienceFields){
-                    enumType.getValues().put(scienceField.getName(), scienceField.getName());
+                    enumType.put(scienceField.getName(), scienceField.getName());
+
                 }
             }
         }
@@ -120,5 +126,12 @@ public class SciencePaperController {
         formService.submitTaskForm(taskId, map);
         return new ResponseEntity(runtimeService.getVariable(processInstanceId, "sciencePaperId"), HttpStatus.OK);
     }
-
+    @RequestMapping(value = "/download/{processInstanceId}", method = RequestMethod.GET)
+    public ResponseEntity<Resource> downloadFile(@PathVariable("processInstanceId") String processInstanceId) {
+        SciencePaper sciencePaper = sciencePaperService.findOneById((Long) runtimeService.getVariable(processInstanceId, "sciencePaperId"));
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType("application/pdf"))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + sciencePaper.getPdfName() + "\"")
+                .body(new ByteArrayResource(sciencePaper.getPdf()));
+    }
 }

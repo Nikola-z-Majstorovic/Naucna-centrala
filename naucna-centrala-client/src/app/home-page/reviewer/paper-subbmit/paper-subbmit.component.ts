@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {RepositoryService} from '../../../services/repository.service';
 import {ValidationService} from '../../../services/validation.service';
+import {SciencePaperService} from '../../../services/science-paper.service';
 
 @Component({
   selector: 'app-paper-subbmit',
@@ -14,8 +15,9 @@ export class PaperSubbmitComponent implements OnInit {
   formFieldsDto = null;
   formFields = [];
   preporukaPrihvacanja = [];
+  processId: any;
 
-  constructor(private route: ActivatedRoute, private repoService: RepositoryService,
+  constructor(private route: ActivatedRoute, private repoService: RepositoryService, private sciencePaperService: SciencePaperService,
               private router: Router, private validationService: ValidationService) { }
 
   ngOnInit(): void {
@@ -28,6 +30,7 @@ export class PaperSubbmitComponent implements OnInit {
       (response: any) => {
         this.formFieldsDto = response;
         this.formFields = response.formFields;
+        this.processId = response.processInstanceId;
         this.formFields.forEach((field) => {
             if (field.type.name == 'enum') {
               this.preporukaPrihvacanja = Object.keys(field.type.values);
@@ -40,7 +43,20 @@ export class PaperSubbmitComponent implements OnInit {
     );
     });
   }
-
+  onDownload() {
+    this.sciencePaperService.download(this.processId).subscribe(
+      (response: any) => {
+        alert('Skinut pdf!');
+        var blob = new Blob([response], {type: 'application/pdf'});
+        var url = window.URL.createObjectURL(blob);
+        console.log(url);
+        window.open(url, '_blank');
+      },
+      (error) => {
+        alert(error.message);
+      }
+    );
+  }
   onSubmit(value, form) {
 
     if (!this.validationService.validate(this.formFieldsDto.formFields, form)) {

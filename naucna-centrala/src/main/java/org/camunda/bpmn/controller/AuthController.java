@@ -1,8 +1,5 @@
 package org.camunda.bpmn.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.camunda.bpm.engine.IdentityService;
 import org.camunda.bpmn.model.User;
 import org.camunda.bpmn.model.UserTokenState;
@@ -22,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(value = "auth")
@@ -48,7 +48,6 @@ public class AuthController {
                 .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 
         User user =  (User) authentication.getPrincipal();
-        // VRATI DRUGI STATUS KOD
         if(user == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }

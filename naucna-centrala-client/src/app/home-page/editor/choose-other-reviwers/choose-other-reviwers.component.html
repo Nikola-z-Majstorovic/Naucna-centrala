@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <div class="d-flex justify-content-center">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativateValidate>
+
+      <div *ngFor="let field of formFields">
+
+        <label for={{field.id}}> {{field.label}} </label>
+        <select name={{field.id}} *ngIf="field.type.name == 'enum'" class="form-control" ngModel>
+          <option *ngFor="let val of recenzenti" value={{val}}>
+            {{field.type.values[val]}}
+          </option>
+        </select>
+        <input type="number" name={{field.id}} *ngIf="field.type.name == 'long'" class="form-control" ngModel>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">Potvrdi</button>
+      </div>
+    </form>
+
+  </div>
+
+</div>

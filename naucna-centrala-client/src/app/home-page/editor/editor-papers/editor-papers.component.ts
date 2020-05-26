@@ -13,6 +13,7 @@ export class EditorPapersComponent implements OnInit {
   chooseReviewerTasks = [];
   chiefOrEditorChoiceTasks = [];
   chooseTimeErrorTasks = [];
+  chooseOtherReviewerTasks = [];
 
   constructor(private repoService: RepositoryService, private router: Router) { }
 
@@ -27,6 +28,13 @@ export class EditorPapersComponent implements OnInit {
       this.repoService.getChooseReviewerTasks().subscribe(
         (response: any) => {
           this.chooseReviewerTasks = response;
+        },
+        (error) => { alert(error.message);
+        }
+      );
+      this.repoService.getChooseOtherReviewerTasks().subscribe(
+        (response: any) => {
+          this.chooseOtherReviewerTasks = response;
         },
         (error) => { alert(error.message);
         }
@@ -59,6 +67,13 @@ export class EditorPapersComponent implements OnInit {
     this.repoService.claimTask(taskId).subscribe(
       (success) => {
         this.router.navigate(['/home-page/editor/choose-reviwers/'.concat(taskId)]);
+      }
+    );
+  }
+  claimChooseOtherReviewerTask(taskId) {
+    this.repoService.claimTask(taskId).subscribe(
+      (success) => {
+        this.router.navigate(['/home-page/editor/choose-other-reviwers/'.concat(taskId)]);
       }
     );
   }

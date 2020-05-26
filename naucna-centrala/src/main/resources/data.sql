@@ -146,7 +146,7 @@ insert into user_sciencefields values ('fedor', 5);
 
 
 --insert into memberships (magazine_id, author_username) values (2, 'marko');
-insert into membership (end_date,magazine_id, author_username) values ('2020-05-18 10:08:02',2, 'nikola');
+insert into membership (end_date,magazine_id, author_username) values ('2020-07-18 10:08:02',2, 'nikola');
 
 
 

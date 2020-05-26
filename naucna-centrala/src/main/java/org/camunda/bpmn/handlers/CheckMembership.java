@@ -2,17 +2,18 @@ package org.camunda.bpmn.handlers;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpmn.model.Author;
 import org.camunda.bpmn.model.Magazine;
-//import org.camunda.bpmn.model.Membership;
 import org.camunda.bpmn.model.Membership;
 import org.camunda.bpmn.security.TokenUtils;
 import org.camunda.bpmn.service.MagazineService;
 import org.camunda.bpmn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+//import org.camunda.bpmn.model.Membership;
 
 @Service
 public class CheckMembership implements JavaDelegate {
@@ -30,7 +31,6 @@ public class CheckMembership implements JavaDelegate {
         String magazineName = (String) delegateExecution.getVariable("magazineName");
         String username = (String) delegateExecution.getVariable("username");
         Magazine magazine = magazineService.findByName(magazineName);
-//        delegateExecution.setVariable("uplacena_clanarina", false);
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
         Date now = new Date();
         String strDate = sdfDate.format(now);
