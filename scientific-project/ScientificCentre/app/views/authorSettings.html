@@ -1,0 +1,90 @@
+﻿<div class="content">
+    <div class="content-body" data-ng-show="!loading">
+
+        <h2 data-ng-show="waitingProjects.length > 0">Projects waiting for approval:</h2>
+        <div data-ng-show="waitingProjects.length > 0" data-ng-repeat="project in waitingProjects" data-ng-if="project.Role == 'MainAuthor' && !project.ScientificProject.Acceped && !project.ScientificProject.Removed">
+            <br /><br />
+            <fieldset>
+                <legend>Project name: {{project.ScientificProject.Subject}}&nbsp; &nbsp; &nbsp; &nbsp;  Project: {{project.ScientificProject.Subject}}</legend>
+                <div>
+                    <label>Key words: </label>&nbsp&nbsp
+                    {{project.ScientificProject.KeyWords}}
+                </div>
+                <div>
+                    <label>Abstract: </label>&nbsp&nbsp
+                    {{project.ScientificProject.Abstract}}
+                </div>
+                <div data-ng-repeat="author in task.ScientificProject.ProjectAuthors">
+                    <label>Author: </label>&nbsp&nbsp
+                    {{project.ScientificCentreUser.Name}}  {{project.ScientificCentreUser.Surname}}
+                    <label>Role: </label>&nbsp&nbsp
+                    {{project.Role}}
+                </div>
+                <div>
+                    <label>Not registrated authors: </label>&nbsp&nbsp
+                    {{project.ScientificProject.NotRegisteredAutorsInfo}}
+                </div>
+                <div>
+                    <label>Link to project:  </label>&nbsp&nbsp
+                    <a href="app/resources/css/Projects/{{project.ScientificProject.FileName}}" target="_blank">Project</a>
+                </div>
+                <br /><br />
+                <button data-ng-if="projectExistsInTasks(project.ProjectId)" data-ng-click="changeView('/updateProject/' + project.ProjectId)">Edit Project</button>
+                <button data-ng-if="project.ScientificProject.ProjectReviews.length > 0" data-ng-click="displayReviewCommentModal(project.ScientificProject.ProjectReviews);">Show Reviews & Comments</button>
+            </fieldset><br /><br />
+        </div>
+        <br />
+        <h2 data-ng-show="activeProjects.length > 0">Active projects:</h2>
+        <div data-ng-show="activeProjects.length > 0" data-ng-repeat="project in activeProjects" data-ng-if="project.Role == 'MainAuthor'">
+            <br /><br />
+            <fieldset>
+                <legend>Project name: {{project.ScientificProject.Subject}}&nbsp; &nbsp; &nbsp; &nbsp;  Project: {{project.ScientificProject.Subject}}</legend>
+                <div>
+                    <label>Key words: </label>&nbsp&nbsp
+                    {{project.ScientificProject.KeyWords}}
+                </div>
+                <div>
+                    <label>Abstract: </label>&nbsp&nbsp
+                    {{project.ScientificProject.Abstract}}
+                </div>
+                <div data-ng-repeat="author in task.ScientificProject.ProjectAuthors">
+                    <label>Author: </label>&nbsp&nbsp
+                    {{project.ScientificCentreUser.Name}}  {{project.ScientificCentreUser.Surname}}
+                    <label>Role: </label>&nbsp&nbsp
+                    {{project.Role}}
+                </div>
+                <!--<div data-ng-repeat="author in project.ScientificProject.">
+                    <label>Author: </label>&nbsp&nbsp
+                    {{author.ScientificCentreUser.Name}}  {{author.ScientificCentreUser.Surname}}
+                </div>-->
+                <div>
+                    <label>Not registrated authors: </label>&nbsp&nbsp
+                    {{project.ScientificProject.NotRegisteredAutorsInfo}}
+                </div>
+                <div>
+                    <label>Project content: </label>&nbsp&nbsp
+                    {{project.ScientificProject.ProjectContent}}
+                </div><br /><br />
+                <!-- <div style="width: 100%;" data-ng-if="!task.Expired && !task.Processed">-->
+            </fieldset><br /><br />
+        </div>
+        <div class="modal" style="padding-top: 350px !important;" data-ng-show="showReviewCommentModal">
+            <div class="modal-content">
+                <div data-ng-repeat="prReview in selectedProjectReviews">
+                    <p>Reviewed on date: {{prReview.ReviewedOnDate}}</p>
+                    <h2>Project Review:</h2><br />
+                    <p>{{prReview.ReviewContent}}</p>
+
+                    <div data-ng-if="!prReview.OnlyForEditor || prReview.OnlyForEditor == null">
+                        <h2>Project Comment: </h2><br />
+                        <p>{{prReview.EditorContent}}</p>
+                    </div>
+                    <br />
+                    <br />
+                </div>
+                <button data-ng-click="exitModal()" title="Close">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

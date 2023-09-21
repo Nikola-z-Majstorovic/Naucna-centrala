@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e608e65527da4de5a647224c1008bff7" Name="Diagram1" ZoomLevel="52">
+        <EntityTypeShape EntityType="ScientificCentreModel.Country" Width="1.5" PointX="5.25" PointY="24.25" />
+        <EntityTypeShape EntityType="ScientificCentreModel.Magazine" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="ScientificCentreModel.Payment" Width="1.5" PointX="12" PointY="20.75" />
+        <EntityTypeShape EntityType="ScientificCentreModel.ProjectAuthor" Width="1.5" PointX="7.5" PointY="14" />
+        <EntityTypeShape EntityType="ScientificCentreModel.ScientificArea" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScientificCentreModel.ScientificCentreUser" Width="1.5" PointX="9.75" PointY="18.75" />
+        <EntityTypeShape EntityType="ScientificCentreModel.Subscription" Width="1.5" PointX="12" PointY="24.25" />
+        <EntityTypeShape EntityType="ScientificCentreModel.Task" Width="1.5" PointX="7.5" PointY="19.5" />
+        <EntityTypeShape EntityType="ScientificCentreModel.Town" Width="1.5" PointX="7.5" PointY="23.875" />
+        <EntityTypeShape EntityType="ScientificCentreModel.UserInventory" Width="1.5" PointX="3" PointY="11" />
+        <AssociationConnector Association="ScientificCentreModel.FK__UserInven__Magaz__01D345B0" />
+        <AssociationConnector Association="ScientificCentreModel.FK__Payments__UserId__66603565" />
+        <AssociationConnector Association="ScientificCentreModel.FK__ProjectAu__Autho__373B3228" />
+        <AssociationConnector Association="ScientificCentreModel.FK__Subscript__UserI__628FA481" />
+        <AssociationConnector Association="ScientificCentreModel.FK__UserInven__UserI__00DF2177" />
+        <AssociationConnector Association="ScientificCentreModel.FK_Towns_ScientificCentreUsers" />
+        <AssociationConnector Association="ScientificCentreModel.CountryTowns" />
+        <AssociationConnector Association="ScientificCentreModel.MagazineAreas" />
+        <AssociationConnector Association="ScientificCentreModel.UserTasks" />
+        <EntityTypeShape EntityType="ScientificCentreModel.ScientificProject" Width="1.5" PointX="5.25" PointY="12.75" />
+        <AssociationConnector Association="ScientificCentreModel.FK__ProjectAu__Proje__36470DEF" />
+        <AssociationConnector Association="ScientificCentreModel.FK__Scientifi__Scien__45F365D3" />
+        <AssociationConnector Association="ScientificCentreModel.FK__Tasks__ProjectId__5AEE82B9" />
+        <AssociationConnector Association="ScientificCentreModel.MagazineProjects" />
+        <EntityTypeShape EntityType="ScientificCentreModel.MagazineWorker" Width="1.5" PointX="15" PointY="15.75" />
+        <AssociationConnector Association="ScientificCentreModel.FK__MagazineW__Magaz__4959E263" />
+        <AssociationConnector Association="ScientificCentreModel.FK__MagazineW__Revie__4A4E069C" />
+        <AssociationConnector Association="ScientificCentreModel.FK_ScientificAreasMagazineWorkers" />
+        <EntityTypeShape EntityType="ScientificCentreModel.AuthorComment" Width="1.5" PointX="12" PointY="16.375" />
+        <EntityTypeShape EntityType="ScientificCentreModel.ProjectReview" Width="1.5" PointX="15" PointY="19.125" />
+        <AssociationConnector Association="ScientificCentreModel.FK__AuthorCom__Autho__056ECC6A" />
+        <AssociationConnector Association="ScientificCentreModel.FK__AuthorCom__Proje__047AA831" />
+        <AssociationConnector Association="ScientificCentreModel.FK__AuthorCom__Revie__0662F0A3" />
+        <AssociationConnector Association="ScientificCentreModel.FK__ProjectRe__AreaI__019E3B86" />
+        <AssociationConnector Association="ScientificCentreModel.FK__ProjectRe__Proje__7FB5F314" />
+        <AssociationConnector Association="ScientificCentreModel.FK__ProjectRe__Revie__00AA174D" />
+        <EntityTypeShape EntityType="ScientificCentreModel.ProjectsEditor" Width="1.5" PointX="15" PointY="13" />
+        <AssociationConnector Association="ScientificCentreModel.FK__ProjectsE__Edito__0EF836A4" />
+        <AssociationConnector Association="ScientificCentreModel.FK__ProjectsE__Proje__0E04126B" />
+        <AssociationConnector Association="ScientificCentreModel.FK__Subscript__Subsc__13BCEBC1" />
+        <EntityTypeShape EntityType="ScientificCentreModel.CamundaUserProcess" Width="1.5" PointX="12" PointY="28.125" />
+        <AssociationConnector Association="ScientificCentreModel.FK__CamundaUs__UserI__2116E6DF" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

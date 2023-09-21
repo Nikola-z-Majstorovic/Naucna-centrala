@@ -1,0 +1,15 @@
+﻿<div class="content">
+    <div class="content-body" data-ng-show="!loading">
+
+        <br /><br /><br />
+        <h1 style="text-align:center; width: 100%;">OUR MAGAZINES</h1>
+        <button data-ng-click="erForm.$invalid || changeView('/search');">Search</button>
+        <br /><br /><br />
+        <br /> <br />
+        <div data-ng-click="navigateToMagazine(magazine);" class="LocationRepeater" data-ng-repeat="magazine in Magazines | filter:search | orderObjectBy:sortBy:sortDirection">
+            <div class="LocationNameHolder">{{magazine.Name}} ({{magazine.ScientificProjects.length}})</div>
+            <div class="LocationImageHolder"><img ng-src="app/resources/css/images/LocationImages/{{location.LocationName}}.jpg" /></div>
+        </div>
+
+    </div>
+</div>

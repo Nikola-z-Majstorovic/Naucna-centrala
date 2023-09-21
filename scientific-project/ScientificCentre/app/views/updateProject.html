@@ -1,0 +1,23 @@
+﻿<div class="content">
+    <div class="content-body" data-ng-show="!loading">
+        <form name="form">
+            <div class="control-item" style="min-height: 2em !important;">
+                <label for="Subject">Subject</label><br />
+                <input id="Subject" type="text" data-ng-model="project.Subject" name="Subject" required="" selected />
+                <span data-ng-show="form.Subject.$error.required" class="required">*</span>
+            </div>
+            <div class="control-item" style="min-height: 2em !important;">
+                <label for="KeyWords">Key Words</label><br />
+                <input id="KeyWords" type="text" data-ng-model="project.KeyWords" name="KeyWords" required="" />
+                <span data-ng-show="form.KeyWords.$error.required" class="required">*</span>
+            </div>
+            <div class="control-item" style="min-height: 2em !important;">
+                <label for="Abstract">Abstract</label><br />
+                <input id="Abstract" type="text" data-ng-model="project.Abstract" name="Abstract" required="" />
+                <span data-ng-show="form.Abstract.$error.required" class="required">*</span>
+            </div><br/>
+            <input type="file" id="file" name="file" accept="pdf/*" /><br />           
+            <button  data-ng-click="UpdateProject()">Update Project</button>
+        </form>
+    </div>
+</div>

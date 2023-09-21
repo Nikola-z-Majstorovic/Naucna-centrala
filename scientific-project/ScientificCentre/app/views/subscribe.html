@@ -1,0 +1,19 @@
+﻿<div class="content">
+    <div class="content-body" data-ng-show="!loading">
+        <form name="form">
+            <div class="control-item" style="min-height: 2em !important;">
+                <label for="package1">One month: 30$</label><br />
+                <input id="package1" data-ng-click="choosePackage(1);" data-ng-model="packageSelected" type="radio" value="1" name="packageSelected" required="" selected />
+            </div>
+            <div class="control-item" style="min-height: 2em !important;">
+                <label for="package2">Three months: 80$ (save 10$)</label><br />
+                <input id="package2" data-ng-click="choosePackage(2);" data-ng-model="packageSelected" type="radio" value="2" name="packageSelected" required="" />
+            </div>
+            <div class="control-item" style="min-height: 2em !important;">
+                <label for="package3">Six months: 165$ (save 15$)</label><br />
+                <input id="package3" data-ng-click="choosePackage(3);" data-ng-model="packageSelected" type="radio" value="3" name="packageSelected" required="" />
+            </div>
+            <span data-ng-show="form.packageSelected.$error.required" class="required">*</span>
+        </form>
+    </div>
+</div>

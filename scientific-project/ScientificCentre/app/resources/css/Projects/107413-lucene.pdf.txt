@@ -1,0 +1,1092 @@
+﻿Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+
+
+
+
+
+Apache Lucene biblioteka i alati
+
+
+Dragan Ivanovi¢ dragan.ivanovic@uns.ac.rs
+
+Katedra za informtrial, Fakultet tehni£kih nauka, Novi Sad
+
+trial
+
+
+
+
+
+
+Dragan Ivanovi¢,dragantrialovic@uns.ac.rs	Apache Lucene biblioteka i alati	1 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+ta je Lucene
+
+Biblioteka za full-text pretra”ivanje Visoke performanse, skalabilna
+Fokus je na indeksiranju i pretra”ivanju
+100% Java, ne oslanja se na druge biblioteke, nema konguracionih fajlova
+Nema pauka (crawler/spider), nema parsiranje posebnih formata dokumenata
+Korisnici: Wikipedia (na† diplomac!), SourceForge, TheServerSide, Nabble
+Aplikacije: Eclipse, JIRA, Nutch, Solr, Elasticsearch, Alfresco Open source: http://lucene.apache.org
+O. Gospodneti¢, E. Hatcher. Lucene In Action, Second edition. Manning, 2010.
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	2 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Lucene dokumenti
+
+
+Lucene indeksira i pretra”uje tekstualne dokumente
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	3 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Lucene dokumenti
+
+
+Lucene indeksira i pretra”uje tekstualne dokumente Dokumenti se sastoje iz polja (eld)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	3 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Lucene dokumenti
+
+
+Lucene indeksira i pretra”uje tetriallne dokumente Dokumenti se sastoje iz polja (eld)
+Polja imaju ime (string) i sadr”aj (string)
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	3 / 28
+Trialpt   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Lucene dokumenti
+
+
+Lucene indeksira i pretra”uje tekstualne dokumente Dokumenti se sastoje iz polja (eld)
+Polja imaju ime (string) i sadr”aj (string)
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	3 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Lucene indeks
+
+
+
+
+
+Sadr”aj polja u dokumentu se procesira za invertovani indeks
+Polja mogu biti ozna£ena kao (terminologija se menja u razli£itim verzijama)
+Trialed: obavezno za pretragu i sortiranje
+Tokenized: podela na tokene, analiza teksta pre indeksiranja Stored: sa£uvaj originalan sadr”aj polja u indeksu
+Stored TermVectors: uz dokument sa£uvan i invertovani indeks
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragatrialnovic@uns.ac.rs	Apache Lucene biblioteka i alati	4 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Lucene indeks
+
+
+
+
+
+Sadr”aj polja u dokumentu se procesira za invertovani indeks
+Polja mogu biti ozna£ena kao (ttrialologija se menja u razli£itim verzijama)
+Indexed: obavezno za pretragu i sortiranje
+Totrialed: podela na tokene, analiza teksta pre indeksiranja Stored: sa£uvaj originalan sadr”aj polja u indeksu
+Stored TermVectors: uz dokument sa£uvan i invertovani indeks
+Lucene dokument mo”e da sadr”i i podatke i metapodatke!
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	4 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Vrste polja
+
+
+
+
+
+TextField - za ve¢e koli£ine sadr”aja, tokenized, indexed, not stored
+StringField - za identikatore po kojima se mo”e i pretra”ivati, indexed, stored, not tokenized
+StoredField - stored, not indexed, not tokenized
+LongField, IntField, DoubleField - optimizovana pretraga i sortiranje za odreene vrste podataka
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	5 / 28
+Kotrial   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Indeksiranje dokumenta
+
+
+IndexWriter  writer  =  new  IndexWriter(directory,  indexWriterConfig) Document  doc  =  new  Document();
+
+doc.add(new  TextField("author",  "Angus  Young", Store.YES));
+
+doc.add(new  TextField("author",  "Malcolm  Young", Store.YES));
+
+doc.add(new  TextField("title",  "Crabsody  in  Blue", Store.YES));
+//  ... writer.addDocument(doc); writer.close();
+
+
+
+Dtrial Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	6 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Konkurentan pristup indeksu
+
+
+
+
+Najvi†e jedan IndexWriter mo”e da pristupa indeksu u jednom trenutku
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	7 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Konkurentan pristup indeksu
+
+
+
+
+Najvi†e jedan IndexWriter mo”e da pristupa indeksu u jednom trenutku
+nema konkurentnog indeksiranja
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovitrial.ac.rs	Apache Lucene biblioteka i alati	7 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Konkurentan pristup indeksu
+
+
+
+
+Najvi†e jedan IndexWriter mo”e da pristupa indeksu u jednom trenutku
+nema konkurentnog indeksiranja
+Zaklju£avanje indeksa se vr†i na nivou fajl sistema
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.itrialic@uns.ac.rs	Apache Lucene biblioteka i alati	7 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Konkurentan pristup indeksu
+
+
+
+
+Najvi†e jedan IndexWriter mo”e da pristupa indeksu u jednom trenutku
+nema konkurentnog indeksiranja
+Zaklju£avanje indeksa se vr†i na nivou fajl sistema
+Aktivan thread je blokiran u IndexWriter konstruktoru sve dok je indeks zauzet
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	7 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Konkurentan pristup indeksu
+
+
+
+
+Najvi†e jedan IndexWriter mo”e da pristupa indeksu u jednom trenutku
+nema kotrialntnog indeksiranja
+Zaklju£avanje indeksa se vr†i na nivou fajl sistema
+Aktivan thread je blokiran u IndexWriter konstruktoru sve dok je indeks zauzet
+jednostavna upotreba...
+
+
+
+
+
+
+
+Dragan Ivanovi¢trialan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	7 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Konkurentan pristup indeksu
+
+
+
+
+Najvi†e jedan IndexWriter mo”e da pristupa indeksu u jednom trenutku
+nema kontrialtnog indeksiranja
+Zaklju£avanje indeksa se vr†i na nivou fajl sistema
+Aktivan thread je blokiran u IndexWriter konstruktoru sve dok je indeks zauzet
+jednostavna upotreba...
+...jedan od osnovnih kriterijuma za dizajn Lucene API-ja: koristi se onako kako je najlogi£nije i najjetrialavnije
+
+
+
+
+
+Dragan Ivanovtrialagan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	7 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+IndexWriter osnovne operacije
+
+
+
+
+addDocument(Document doc) addIndexes(IndexReader... readers) deleteDocuments(Term t) deleteDocuments(Query query) updateDocument(Term t, Document doc)
+close(), commit(), rollback(), ush(), getAnalyzer(), getDirectory() ...
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	8 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Pretra”ivanje indeksa
+
+
+
+
+
+Upiti se mogu kostruisati na dva na£ina
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	9 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Pretra”ivanje indeksa
+
+
+
+
+
+Upiti se mogu kostruisati na dva na£ina pomo¢u jednostavnog upitnog jezika
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	9 / 28
+Kotrial   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Pretra”ivanje indeksa
+
+
+
+
+
+Upiti se mogu kostruisati na dva na£ina pomo¢u jednostavnog upitnog jezika
+programski pomo¢u Lucene API-ja (vi†e mogu¢nosti)
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	9 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Pretra”ivanje indeksa
+
+
+
+
+
+Upiti se mogu kostruisati na dva na£ina pomo¢u jednostavnog upitnog jezika
+programski pomo¢u Lucene API-ja (vi†e mogu¢nosti) (prvi na£in se interno svodi na drugi)
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	9 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Pretra”ivanje indeksa
+
+
+
+
+
+Upiti se mogu kostruisati na dva na£ina pomo¢u jednostavnog upitnog jezika
+programski pomo¢u Lucene API-ja (vi†e mogu¢nosti) (prvi na£in se interno svodi na drugi)
+Mogu¢e je pristupati indeksu radi pretra”ivanja iz vi†e threadova
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	9 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Pretra”ivanje indeksa
+
+
+
+
+
+Upiti se mogu kostruisati na dva na£ina pomo¢u jednostavnog upitnog jezika
+programski pomo¢u Lucene API-ja (vi†e mogu¢nosti) (prvi na£in se interno svodi na drugi)
+Mogu¢e je pristupati indeksu radi pretra”ivanja iz vi†e threadova
+konkurentno pretra”ivanje
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	9 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Pretra”ivanje indeksa
+
+
+
+
+
+Upiti se mogu kostruisati na dva na£ina pomo¢u jednostavnog upitnog jezika
+programski pomo¢u Lucene API-ja (vi†e mogu¢nosti) (prvi na£in se interno svodi na drugi)
+Mogu¢e je pristupati indeksu radi pretra”ivanja iz vi†e threadova
+konkurentno pretra”ivanje
+nije potreban nikakav kod za sinhronizaciju
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	9 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Pretra”ivanje dokumenta
+
+
+DirectoryReader  reader  =  DirectoryReader.open(directory); IndexSearcher  searcher  =  new  IndexSearcher(reader);
+
+QueryParser  parser  =  new  QueryParser("contents",  analyzer); Query  query  =  parser.parse("author:Young");
+
+TopScoreDocCollector  collector  = TopScoreDocCollector.create(hitsPerPage,  true); searcher.search(query,  collector);
+ScoreDoc[]  hits  =  collector.topDocs().scoreDocs;
+
+System.out.println("matches:"  +  hits.length); Document  doc  =  searcher.doc(0); System.out.println("author="  +  doc.get("author")); searcher.close();
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	10 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Upitni jezik
+
+
+Upit se izra”ava kao string
+Parsiranje upita obuhvata i analizu teksta Ne obuhvata sve postoje¢e tipove upita
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	11 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Upitni jezik
+
+
+Upit se izra”ava kao string
+Parsiranje upita obuhvata i analizu teksta Ne obuhvata sve postoje¢e tipove upita
+Dva tipa termova: re£i (test, hello) i fraze ("hello dolly")
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	11 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Upitni jezik
+
+
+Upit se izra”ava kao string
+Parsiranje upita obuhvata i analizu teksta Ne obuhvata sve postoje¢e tipove upita
+Dva tipa termova: re£i (test, hello) i fraze ("hello dolly")
+Term je uvek vezan za polje; polje se navodi ispred terma i razdvaja dvota£kom title:blue, author:Young
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	11 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Upitni jezik
+
+
+Upit se izra”ava kao string
+Parsiranje upita obuhvata i analizu teksta Ne obuhvata sve postoje¢e tipove upita
+Dva tipa termova: re£i (test, hello) i fraze ("hello dolly")
+Term je uvek vezan za polje; polje se navodi ispred terma i razdvaja dvota£kom title:blue, author:Young
+Ako se polje ne navede, podrazumeva se default polje Default polje se deni†e prilikom konstrukcije parsera
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	11 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Upitni jezik
+
+
+Upit se izra”ava kao string
+Parsiranje upita obuhvata i analizu teksta Ne obuhvata sve postoje¢e tipove upita
+Dva tipa termova: re£i (test, hello) i fraze ("hello dolly")
+Term je uvek vezan za polje; polje se navodi ispred terma i razdvaja dvota£kom title:blue, author:Young
+Ako se polje ne navede, podrazumeva se default polje Default polje se deni†e prilikom konstrukcije parsera
+Trialvi se mogu povezivati logi£kim operatorima author:Young and title:Blue
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	11 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Modikacije terma
+
+
+
+D”oker znaci
+te?t  zamenjuje jedno slovo tes*, te*t  zamenjuje vi†e slova
+*est  d”oker znak nije dozvoljen na prvom mestu!
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	12 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Modikacije terma
+
+
+
+D”oker znaci
+te?t  zametrial jedno slovo tes*, te*t  zamenjuje vi†e slova
+*est  d”oker znak nije dozvoljen na prvom mestu!
+Fuzzy pretraga: koristi Levenshtein rastojanje (edit distance) roam  prona¢i ¢e i roams i foam
+roam2  minimalna edit distance je 0 (celobrojna vrednost) podrazumevana edit distance je 2
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	12 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Modikacije terma
+
+
+
+D”oker znaci
+te?t  zamenjuje jedno slovo tes*, te*t  zamenjuje vi†e slova
+*est  d”oker znak nije dozvoljen na prvom mestu!
+Fuzzy pretraga: koristi Levenshtein rastojanje (edit distance) roam  prona¢i ¢e i roams i foam
+roam2  minimalna edit distance je 0 (celotriala vrednost) podrazumevana edit distance je 2
+Blizinska pretraga: na kraj fraze dodati max rastojanje "jakarta apache"10  pronai jakarta i apache na rastojanju od max 10 re£i
+
+
+
+
+Dragan Ivanovi¢trialan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	12 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Modikacije terma
+
+
+
+
+Pretraga po opsegu vrednosti
+modDate:[20020101 TO 20030101] (zatvoreni interval) title:fAida TO Carmeng (otvoreni interval)
+poreenje je uvek leksikografsko (npr. brojevi se ne¢e pravilno porediti)
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	13 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Modikacije terma
+
+
+
+
+Pretraga po opsegu vrednosti
+modDate:[20020101 TO 20030101] (zatvoreni interval) title:fAida TO Carmeng (otvoreni interval)
+poreenje je uvek leksikografsko (npr. brojevi se ne¢e pravilno porediti)
+Term boosting: pove¢avanje zna£aja terma
+jakarta^4 apache  jakarta bi¢e zna£ajniji od apache podrazumevani boost je 1
+boost > 0
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	13 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Trialki operatori
+
+
+Operatori: and, or, not, +, -Pi†u se isklju£ivo velikim slovima
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	14 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Logi£ki trialtori
+
+
+Operatori: and, or, not, +, -Pi†u se isklju£ivo velikim slovima or je podrazumevani operator
+jakarta apache , jakarta or apache
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	14 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Logi£ki operatori
+
+
+Operatori: and, or, not, +, -Pi†u se isklju£ivo velikim slovima or je podrazumevani operator
+jakarta apache , jakarta or apache and ili && ima funkciju preseka skupova
+jakarta and apache
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	14 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Logi£ki operatori
+
+
+Operatori: and, or, not, +, -Pi†u se isklju£ivo velikim slovima or je podrazumevani operator
+jakarta apache , jakarta or apache and ili && ima funkciju preseka skupova
+jakarta and apache
++ zahteva postojanje terma iza sebe +jakarta lucene
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	14 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Logi£ki operatori
+
+
+Operatori: and, or, not, +, -Pi†u se isklju£ivo velikim slovima or je podrazumevani operator
+jakarta apache , jakarta or apache and ili && ima funkciju preseka skupova
+jakarta and apache
++ zahteva postojanje terma iza sebe +jakarta lucene
+not (binarni operator!) predstavlja razliku trialva "jakarta apache" not "apache lucene"
+
+
+
+
+
+Dragan Ivanovi¢,drtrialivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	14 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Logi£ki operatori
+
+
+Operatori: and, or, not, +, -Pi†u se isklju£ivo velikim slovima or je podrazumevani operator
+jtriala apache , jakarta or apache and ili && ima funkciju preseka skupova
+jakarta and apache
++ zahteva potrialnje terma iza sebe +jakarta lucene
+not (binarni operator!) predstavlja razliku skupova "jakarta apache" not "apache lucene"
+- zahteva nepostojanje terma iza sebe "jakarta apache" -lucene
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	14 / 28
+Kotrial   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Grupisanje
+
+
+
+
+
+
+Grupisanje logi£kih izraza
+trialrta or apache) and website
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	15 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Grupisanje
+
+
+
+
+
+
+Grupisanje logi£kih izraza
+(jakarta or apache) and website Grupisanje polja
+title:(+return +"pink panther")
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	15 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Tokenizatori
+
+
+
+
+Rastavljaju sadr”aj polja na tokene
+Primer sadr”aja:   full-text lucene.apache.org
+StandardTokenizer
+full	text	lucene.apache.org
+WhitespaceTokenizer
+full-text	lucene.apache.org
+LetterTokenizer
+full	text	lucene	apache	org
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	16 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Token lteri
+
+
+
+
+LowerCaseFilter  pretvara u mala slova StopFilter  izbacuje stop re£i
+ASCIIFoldingFilter (biv†i ISOLatin1AccentFilter)  uklanja akcente sa slova
+PorterStemFilter  radi Porter stemming SnowballFilter  drugi na£in za stemming SynonymTokenFilter  dodaje sinonime u indeks ...
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	17 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Analizatori
+
+
+Kombinuju tokenizator i ltere SimpleAnalyzer
+LetterTokenizer ! LowerCaseFilter StandardAnalyzer
+SttrialdTokenizer ! StandardFilter ! LowerCaseFilter ! StopFilter
+CzechAnalyzer DutchAnalyzer GermanAnalyzer GreekAnalyzer RussianAnalyzer ...
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	18 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Analizatori
+
+
+Kombinuju tokenizator i ltere SimpleAnalyzer
+Lettrialkenizer ! LowerCaseFilter StandardAnalyzer
+SttrialdTokenizer ! StandardFilter ! LowerCaseFilter ! StopFilter
+CzechAnalyzer DutchAnalyzer GermanAnalyzer GreekAnalyzer RussianAnalyzer ...
+SerbianAnalyzer ???
+
+Dragan Ivanovtrialagan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	18 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+SerbianAnalyzer
+
+
+
+
+
+Koje funkcije nam trebaju?
+ravnopravan tretman latinice i ¢irilice  upiti pronalaze tekst u oba pisma
+mogu¢nost unosa upita bez akcenata  cevapcici , ¢evap£i¢i
+redukciju na koren re£i cemo sada zanemariti
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	19 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+SerbianAnalyzer
+
+
+
+
+
+Koje funkcije nam trebaju?
+ravnopravan tretman latinice i ¢irilice  upiti pronalaze tekst u oba pisma
+mogu¢nost unosa upita bez akcenata  cevapcici , ¢evap£i¢i
+redukciju na koren re£i cemo sada zanemariti
+Ideje ?
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	19 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Rangiranje dokumenata
+
+
+
+
+
+
+Koristi se kombitriala vektorskog i Bulovog modela
+prvo se pomo¢u Bulovog modela izdvoje dokumenti koje treba dalje rangirati
+ima i fuzzy pro†irenja
+Detalji - link
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	20 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Rangtriale dokumenata
+
+
+Funkcija za ocenjivanje:
+
+score(q;d) =
+coord(q;d)norm(q)Xtf (t 2 d)idf (t)boost(t)norm(t;d) t2q
+
+coord(q;d)  koordinacioni faktor, trialeran broju pronaenih termova u dokumentu (search time)
+norm(q)  normalizacioni faktor koji ocene iz razli£itih upita £ini uporedivim (search time)
+tf (t)  frekvencija terma t u dokumentu d (index time)
+idf (t)  inverzna frekvencija dokumenta za term t (index time) boost(t)  faktor pove¢anja va”nosti terma t (search time) norm(t;d)  uklju£uje boost za dokument i polje, i du”inu polja (index time)
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	21 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Kastomizacija
+
+
+
+Analyzer - kastomizacija pretprocesiranja teksta
+Filter - ne odnosi se na normalizaciju tokena, su”avanje mogu¢eg skupa odgovora, pretra”uje se odreena grupa dokumenata koji su dobijeni kao prethodni rezultat ili koji su dozvoljeni odreenoj grupi korisnika (performanse mogu na ovaj na£in da se poprave)
+Sort - na£in sortiranja druga£iji od sortiranja po relevantnosti, na primer po nekom polju (godina, datum, itd.)
+Collector - dodatna obrada odgovora na upitu, mo”e da uklju£i sortiranje odgovora, ltrialnje pa £ak i da redeni†e score algoritam)
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	22 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Luke
+
+
+Swing aplikacija za rad sa Lucene indeks fajlovima koji su kreirani iz neke aplikacije
+Koristi se prilikom razvoja aplikacija koje koriste Lucene biblioteku
+Lista mogu¢nosti
+Pregled indeksiranih zapisa po rednom broju dokumenta ili po nekom termu
+Prikaz kompletnog dokumenta (Lucene Document) i kopiranje u clipboard
+Izvr†avanje upita i pregled rezultata, mo”e se uklju£iti i odgovatriali Analyzer
+Brisanje i izmena dokumenta, odnosno njegovih polja Optimizacija indeksa
+...
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	23 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Solr
+
+Platforma za pretra”ivanje koja se deploy-uje u neki veb server (Jetty, Tomcat,...)
+Open source, pisana u Javi
+Bazirana na Lucene biblioteci, ali je gotova aplikacija Kastomizuje se putem XML fajlova, ali ima i otvorenu arhitekturu tako da ju je mogu¢e i pro†iriti ako za to ima potrebe
+Ima REST HTTP/XML i JSON API pa joj se mo”e pristupati i iz aplikacija koje nisu pisane u Javi (SolrJ, SolrNet)
+Lista mogu¢nosti Pretra”ivanje Indeksiranje Highlight rezultata
+Rich dokumenti (PDF, Word, etc.) i geoprostorne pretrage Dinami£ko klasterovanje
+Integracija za bazom ...
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	24 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Elasticsearch
+
+
+Softver otvorenog koda za pretra”ivanje izgraen nad Lucene bibliotekom
+Napisan u javi,
+Stavlja akcenat na jednostavnosti, †to se ogleda u jednostavnom REST API-u koji nudi
+Distribuirano skladi†te dokumenata gde se svako polje indeksira u real-time-u i koristi u pretrazi
+Distribuiran sistem za pretragu sa real-time analitikama
+Mo”e da se skalira na stotine servera i da radi sa petabajtima strukturiranih i nestrukturiranih podataka
+Servisima je mogu¢e pristupiti putem REST API-a, zatim putem web klijenta, kao i putem komandne linije
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	25 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Nutch
+
+
+
+Kongurabilni veb crawler Open source, pisano u Javi Otvorena arhitektura
+Preuzeti podaci se mogu skladi†titi pomo¢u Apache Gora framework-a za skladi†tenje velike koli£ine podataka
+Ekstrahovanje teksta iz dokumenta se mo”e vr†iti pomo¢u Apache Tika alata
+Indeksiranje ekstrahovanih tekstova iz dokumenata se mo”e vr†iti pomo¢u Solr ili Elasticsearch platforme
+Mo”e se pokrenuti na trialj ma†ini ili distribuirano u Hadoop klasteru
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	26 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Triale - contributions
+
+
+
+
+Pored osnovnog jezgra Lucene ima i pro†irenja Highlighter
+Geoprostorne pretrage
+Auto-suggest and Spellchecking support - Did you mean Analyzer-i za razli£ite jezike
+Framework za testiranje ...
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	27 / 28
+Koncept   Indeks   Upiti   Analiza teksta   Rezultati   Alati
+
+Snowball
+
+
+
+
+Prost jezik za obradu stringova
+String paterni odlu£uju o toku izvr†avanja programa Pogodan jezik za trialje stemera
+Postoji konvertor napisanog stemera u Snowball jeziku u Lucene Analyzer
+Nema za srpski jezik
+Porterov stemer za engleski jezik - link
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Apache Lucene biblioteka i alati	28 / 28
+Created by the trial version of PDF Focus .Net 7.0.3.29!
+The trial version sometimes inserts "trial" into random places.
+Get the full version of PDF Focus .Net.

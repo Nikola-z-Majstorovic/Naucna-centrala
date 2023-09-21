@@ -1,0 +1,2873 @@
+﻿RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+
+
+
+
+
+Relevance feedback i pro†irivanje upita
+
+
+Dragan Ivanovi¢ dragan.ivanovic@uns.ac.rs
+
+Katedra za informatiku, Fakultet tehni£kih nauka, Novi Sad
+
+2015.
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	1 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: osnovna ideja
+
+
+Korisnik postavlja (kratak, jednostavan) upit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	2 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: osnovna ideja
+
+
+Korisnik postavlja (kratak, jednostavan) upit Pretra”iva£ vra¢a skup dokumenata
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	2 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: osnovna ideja
+
+
+Korisnik postavlja (kratak, jednostavan) upit Pretra”iva£ vra¢a skup dokumenata
+Korisnik ozna£ava neke dokumente kao relevantne, a neke kao nerelevantne
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dtrial.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	2 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: osnovna ideja
+
+
+Korisnik postavlja (kratak, jednostavan) upit Pretra”iva£ vra¢a skup dokumenata
+Korisnik ozna£ava neke dokumente kao relevantne, a neke kao nerelevantne
+Pretra”iva£ izra£unava novu reprezentaciju informacione potrebe, bolju od inicijalnog upita
+
+
+
+
+
+
+
+
+
+
+Dtrial Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	2 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: osnovna ideja
+
+
+Korisnik postavlja (kratak, jednostavan) upit Pretra”iva£ vra¢a skup dokumenata
+Korisnik ozna£ava neke dokumente kao relevantne, a neke kao nerelevantne
+Pretra”iva£ izra£unava novu reprezentaciju informacione potrebe, bolju od inicijalnog upita
+Pretra”iva£ sam postavlja novi upit i vra¢a rezultate korisniku
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	2 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: osnovna ideja
+
+
+Korisnik postavlja (kratak, jednostavan) upit Pretra”iva£ vra¢a skup dokumenata
+Korisnik ozna£ava neke dokumente kao relevantne, a neke kao nerelevantne
+Pretra”iva£ izra£unava novu reprezentaciju informacione potrebe, bolju od inicijalnog upita
+Pretra”iva£ sam postavlja novi upit i vra¢a rezultate korisniku Novi rezultati imaju (nadamo se) bolji povrat
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	2 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: osnovna ideja
+
+
+Korisnik postavlja (kratak, jednostavan) upit Pretra”iva£ vra¢a skup dokumenata
+Korisnik ozna£ava neke dokumente kao relevantne, a neke kao nerelevantne
+Pretra”iva£ izra£unava novu reprezentaciju informacione potrebe, bolju od inicijalnog upita
+Pretra”iva£ sam postavlja novi upit i vra¢a rezultate korisniku Novi rezultati imaju (nadamo se) bolji povrat
+Ovo mo”e da se radi iterativno
+
+
+
+
+
+
+Dragan Ivanotrialragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	2 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: osnovna ideja
+
+
+Korisnik postavlja (kratak, jednostavan) upit Pretra”iva£ vra¢a skup dokumenata
+Korisnik ozna£ava neke dokumente kao relevantne, a neke kao nerelevantne
+Pretra”iva£ izra£unava novu reprezentaciju informacione potrebe, bolju od inicijalnog upita
+Pretra”iva£ sam postavlja novi upit i vra¢a rezultate korisniku Novi rezultati imaju (nadamo se) bolji povrat
+Ovo mo”e da se radi iterativno
+Obi£no pretra”ivanje bez RF zva¢emo ad hoc pretra”ivanje
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	2 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance trialack: osnovna ideja
+
+
+Korisnik postavlja (kratak, jednostavan) upit Pretra”iva£ vra¢a skup dokumenata
+Korisnik ozna£ava neke dokumente kao relevantne, a neke kao nerelevantne
+Pretra”iva£ izra£unava novu reprezentaciju informacione potrebe, bolju od inicijalnog upita
+Pretra”iva£ sam postavlja novi upit i vra¢a rezultate korisniku Novi rezultati imaju (nadamo se) bolji povrat
+Ovo mo”e da se radi iterativno
+Obi£no pretra”ivanje bez RF zva¢emo ad hoc pretra”ivanje
+Pogleda¢emo tri RF primera koji ilustruju razli£ite aspekte procesa
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	2 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance Feedback: primer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	3 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rezultati za po£etni upit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	4 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Korisnik ozna£ava †ta je relevantno
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	5 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rezultati posle RF ciklusa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	6 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Ad hoc pretra”ivanje za upit canine (1)
+
+
+izvor: Fernando Díaz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragtrialanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	7 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Ad hoc pretra”ivanje za upit canine (2)
+
+
+izvor: Fernando Díaz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	8 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+RF ciklus: ozna£i relevantne
+
+
+
+izvor: Trialndo Díaz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	9 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rezultati posle RF ciklusa
+
+
+izvor: Fernando Díaz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	10 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rezultati za po£etni upit
+
+Po£etni upit: New space satellite applications
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.itrialic@uns.ac.rs	Relevance feedback i pro†irivanje upita	11 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rezultati za po£etni upit
+
+Po£etni upit: New space satellite applications
+Rezultati za po£etni upit:
+1. 0.539, 08/13/91, NASA Hasn’t Scrapped Imaging Spectrome-ter
+2.   0.533,  07/09/91,  NASA  Scratches  Environment  Gear  From Satellite Plan
+3.   0.528, 04/04/90, Science Panel Backs NASA Satellite Plan, But Urges Launches of Smaller Probes
+4.  0.526, 09/09/91, A NASA Satellite Project Accomplishes In-credible Feat: Staying Within Budget
+5. 0.525, 07/24/90, Scientist Who Exposed Global Warming Pro-poses Satellites for Climate Research
+6.  0.524, 08/22/90, Report Provides Support for the Critics Of Using Big Satellites to Study Climate
+7.  0.516, 04/13/87, Arianespace Receives Satellite Launch Pact From Telesat Canada
+8. 0.509, 12/02/87, Telecommunications Tale of Two Companies
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	11 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rezultati za po£etni upit
+
+Po£etni upit: New space satellite applications
+Rezultati za po£etni upit:
++    1. 0.539, 08/13/91, NASA Hasn’t Scrapped Imaging Spectrome-ter
++    2.   0.533,  07/09/91,  NASA  Scratches  Environment  Gear  From Satellite Plan
+3.   0.528, 04/04/90, Science Panel Backs NASA Satellite Plan, But Urges Launches of Smaller Probes
+4.  0.526, 09/09/91, A NASA Satellite Project Accomplishes In-credible Feat: Staying Within Budget
+5. 0.525, 07/24/90, Scientist Who Exposed Global Warming Pro-poses Satellites for Climate Research
+6.  0.524, 08/22/90, Report Provides Support for the Critics Of Using Big Satellites to Study Climate
+7.  0.516, 04/13/87, Arianespace Receives Satellite Launch Pact From Telesat Canada
++    8. 0.509, 12/02/87, Telecommunications Tale of Two Companies
+
+Korisnik ozna£ava relevantne dokumente sa +
+
+
+Dragan Ivanovi¢,dragan.trialvic@uns.ac.rs	Relevance feedback i pro†irivanje upita	11 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pro†ireni upit posle RF
+
+
+
+
+
+2.074	new 30.816	satellite 5.991	nasa 4.196	launch
+trial	instrument 3.004	bundespost 2.790	rocket 2.003	broadcast 0.836	oil
+
+15.106	space 5.660	application 5.196	eos
+3.972	aster
+3.446	arianespace 2.806	ss
+2.053	scientist 1.172	earth 0.646	measure
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	12 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rezultati za pro†ireni upit
+
+*    1.   0.513,  07/09/91,  NASA  Scratches  Environment  Gear  From Satellite Plan
+*    2.  0.500, 08/13/91, NASA Hasn’t Scrapped Imaging Spectrome-ter
+3. 0.493, 08/07/89, When the Pentagon Launches a Secret Satel-lite, Space Sleuths Do Some Spy Work of Their Own
+4.    0.493,  07/31/89,  NASA  Uses  ‘Warm’  Superconductors  For Fast Circuit
+*    5. 0.492, 12/02/87, Telecommunications Tale of Two Companies 6.   0.491,  07/09/91,  Soviets May Adapt Parts of SS-20 Missile For Commercial Use
+7.    0.490,  07/12/88,  Gaping  Gap:   Pentagon  Lags  in  Race  To Match the Soviets In Rocket Launchers
+8. 0.490, 06/14/90, Rescue of Satellite By Space Agency To Cost $90 Million
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	13 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Osnovni koncept za RF: centroid
+
+
+
+Centroid je centar mase za skup ta£aka
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	14 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Osnovni koncept za RF: centroid
+
+
+
+Centroid je centar mase za skup ta£aka
+Dokumenti su predstavljeni kao ta£ke u visoko-dimenzionalnom prostoru
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	14 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Osnovni koncept za RF: centroid
+
+
+
+Centroid je centar mase za skup ta£aka
+Dokumenti su predstavljeni kao ta£ke u visoko-dimenzionalnom prostoru
+Mo”emo izra£unati centroid za skup dokumenata
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	14 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Osnovni koncept za RF: centroid
+
+
+
+Centroid je centar mase za skup ta£aka
+Dokumenti su predstavljeni kao ta£ke u visoko-dimenzionalnom prostoru
+Trialo izra£unati centroid za skup dokumenata Denicija:
+~(D) =   1   X v(d) d2D
+~
+jDj
+
+gde je D skup dokumenata i v(d) = d je vektor kojim rtrialentujemo dokument d
+~
+~
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	14 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Centroid: primeri
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	15 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio-ov algoritam
+
+
+Rocchio-ov algoritam implemtriala RF u vektorskom modelu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	16 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio-ov algoritam
+
+
+Rocchio-ov algoritam implementira RF u vektorskom modelu Rocchio bira upit qopt  koji maksimizuje
+~
+
+qopt  = max[sim(q;Dr) 	sim(q;Dnr)]
+~	~
+~
+~
+q
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	16 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio-ov algoritam
+
+
+Rocchio-ov algoritam implementira RF u vektorskom modelu Rocchio bira upit qopt  koji maksimizuje
+~
+
+qopt  = max[sim(q;Dr) 	sim(q;Dnr)]
+~	~
+~
+~
+q
+
+Ideja je da se napravi maksimalno razdvajanje relevantnih i nerelevantnih dokumenata
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	16 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio-ov algoritam
+
+
+Rocchio-ov algoritam implementira RF u vektorskom modelu Rocchio bira upit qopt  koji maksimizuje
+~
+
+qopt  = max[sim(q;Dr) 	sim(q;Dnr)]
+~	~
+~
+~
+q
+
+Ideja je da se napravi maksimalno razdvajanje relevantnih i nerelevantnih dokumenata
+Opttriali vektor upita je
+qopt  = jD j  X  dj  + [jD j  X  dj      jD   j   X  dj]
+1	1	1
+r	r	nr
+~	~	~
+~	~	~
+~
+dj2Dr	dj2Dr	dj2Dnr
+
+Dr: skup relevantnih dokumenata; Dnr: skup nerelevantnih dokumenata
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	16 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio-ov trialitam
+
+
+
+
+Optimalni vektor upita je
+qopt  = jD j  X  dj  + [jD j  X  dj      jD   j   X  dj]
+1	1
+r	r	nr
+~	~	~
+~	~	~
+1
+~
+dj2Dr	dj2Dr	dj2Dnr
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	17 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio-ov algoritam
+
+
+
+
+Optimalni vektor upita je
+qopt  = jD j  X  dj  + [jD j  X  dj      jD   j   X  dj]
+1	1
+r	r	nr
+~	~	~
+~	~	~
+1
+~
+dj2Dr	dj2Dr	dj2Dnr
+
+q-opt = centroid-rel + (centroid-rel - centroid-nonrel)
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	17 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio-ov algoritam
+
+
+
+
+Optimalni vektor upita je
+qopt  = jD j  X  dj  + [jD j  X  dj      jD   j   X  dj]
+1	1
+r	r	nr
+~	~	~
+~	~	~
+1
+~
+dj2Dr	dj2Dr	dj2Dnr
+
+q-opt = centroid-rel + (centroid-rel - centroid-nonrel)
+Pomeramo centroid relevantnih dokumenata za trialku dva centroida
+
+
+
+
+
+
+Dragan Ivanovi¢,dragantrialovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	17 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocctrialv algoritam
+
+
+
+
+Optimalni vektor upita je
+qopt  = jD j  X  dj  + [jD j  X  dj      jD   j   X  dj]
+1	1
+r	r	nr
+~	~	~
+~	~	~
+1
+~
+dj2Dr	dj2Dr	dj2Dnr
+
+q-opt = centroid-rel + (centroid-rel - centroid-ntrial)
+Pomeramo centroid relevantnih dokumenata za razliku dva centroida
+Pretpostavili smo da j~rj = j~nrj = 1 za ovaj slu£aj.
+
+
+
+
+
+Dragan Ivanovi¢,dtrial.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	17 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio ilustracija
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+~R  ne razdvaja relevantne i nerelevantne
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	18 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio ilustracija
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+qopt  odli£no razdvaja relevantne i nerelevantne
+~
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	18 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio 1971 algoritam (SMART sistem)
+
+Problem je †to mi obi£no ne znamo sve relevantne i nerelevantne dokumente, i ne znamo da naemo njihov centroid
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	19 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio 1971 algoritam (SMART sistem)
+
+Problem je †to mi obi£no ne znamo sve relevantne i nerelevantne dokumente, i ne znamo da naemo njihov centroid
+Ono †to se koristi u praksi
+qm  = q0 + jD j  X  dj  	jD   j   X  dj
+1	1
+r	nr
+~	~
+~	~
+~	~
+dj2Dr	dj2Dnr
+
+qm: modikovani vektor upita q0: originalni vektor upita; Dr  i Dnr: skup poznatih relevantnih odnosno nerelevantnih ,  i : te”ine
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	19 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio 1971 algoritam (SMART sistem)
+
+Problem je †to mi obi£no ne znamo sve relevantne i nerelevantne dokumente, i ne znamo da naemo njihov centroid
+Ono †to se koristi u praksi
+qm  = q0 + jD j  X  dj  	jD   j   X  dj
+1	1
+r	nr
+~	~
+~	~
+~	~
+dj2Dr	dj2Dnr
+
+qm: modikovani vektor upita q0: originalni vektor upita; Dr  i Dnr: skup poznatih relevantnih odnosno nerelevantnih ,  i : te”ine
+Novi upit se pomera prema relevantnim dokumentima i udaljava od nerelevantnih
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	19 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio 1971 algoritam (Trial sistem)
+
+Problem je †to mi obi£no ne znamo sve relevantne i nerelevantne dokumente, i ne znamo da naemo njihov centroid
+Ono †to se koristi u praksi
+qm  = q0 + jD j  X  dj  	jD   j   X  dj
+1	1
+r	nr
+~	~
+~	~
+~	~
+dj2Dr	dj2Dnr
+
+qm: modikovani vektor upita q0: originalni vektor upita; Dr  i Dnr: skup poznatih relevantnih odnosno nerelevantnih ,  i : te”ine
+Novi upit se pomera prema relevantnim dokumentima i udaljava od nerelevantnih
+Kompromis  vs. =: Ako imamo mnogo ocenjenih dokumenata, treba nam ve¢i =
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	19 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rocchio RF ilustracija
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	20 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pozitivni i negativni RF
+
+
+
+
+
+
+Pozitivni odgovori su vredniji nego negativni
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	21 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pozitivni i negativni RF
+
+
+
+
+
+
+Pozitivni odgovori su vredniji nego negativni Za†to?
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	21 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pozitivni i negativni RF
+
+
+
+
+
+
+Pozitivni odgovori su vredniji nego negativni Za†to?
+Na primer, neka je  = 0:75,  = 0:25 da se dobije ve¢a te”ina za pozitivni odgovor
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	21 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pozitivni i negativni RF
+
+
+
+
+
+
+Pozitivni odgovori su vredniji nego negativni Za†to?
+Na primer, neka je  = 0:75,  = 0:25 da se dobije ve¢a te”ina za pozitivni odgovor
+Mnogi sistemi dotrialavaju samo pozitivne odgovore
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	21 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: pretpostavke
+
+
+
+
+
+Kada RF mo”e da unapredi povrat?
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	22 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: pretpostavke
+
+
+
+
+
+Kada RF mo”e da unapredi povrat?
+Pretpostavka 1: korisnik zna termove u kolekciji dovoljno dobro za po£etni upit
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	22 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: pretptrialke
+
+
+
+
+
+Kada RF mo”e da unapredi povrat?
+Pretpostavka 1: korisnik zna termove u kolekciji dovoljno dobro za po£etni upit
+Pretpotriala 2: relevantni dokumenti sadr”e sli£ne termove (tako da mo”emo skakati od jednog relevantnog dokumenta na drugi kad unosimo RF)
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	22 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Kr†enje pretpostavke 1
+
+
+
+
+
+
+Kr†enje pretpostavke 1: korisnik zna termove u kolekciji dovoljno dobro za po£etni upit
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dratrialvanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	23 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Trialje pretpostavke 1
+
+
+
+
+
+
+Kr†enje prtrialtavke 1: korisnik zna termove u kolekciji dovoljno dobro za po£etni upit
+Neslaganje korisnikovog re£nika i re£nika kolekcije
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	23 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Kr†enje pretpostavke 1
+
+
+
+
+
+
+Kr†enje pretpostavke 1: korisnik zna termove u kolekciji dovoljno dobro za po£etni upit
+Neslaganje korisnikovog re£nika i re£nika kolekcije Primer: kosmonaut / astronaut
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	23 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Kr†enje pretpostavke 2
+
+
+
+
+Kr†enje pretpostavke 2: relevantni dokumenti nisu sli£ni
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	24 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Kr†enje ptrialstavke 2
+
+
+
+
+Kr†enje pretpostavke 2: relevantni dokumenti nisu sli£ni Primer upita: contradictory government policies
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	24 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Kr†enje pretpostavke 2
+
+
+
+
+Kr†enje pretpostavke 2: relevantni dokumenti nisu sli£ni Primer upita: contradictory government policies
+Za†to RF ne¢e zna£ajno pove¢ati povrat za ovaj upit?
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	24 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Kr†enje pretpostavke 2
+
+
+
+
+Kr†enje pretpostavke 2: relevantni dokumenti nisu sli£ni Primer upita: contradictory government policies
+Za†to RF ne¢e zna£ajno pove¢ati povrat za ovaj upit? Nekoliko nevezanih prototipova
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	24 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Kr†enje pretpostrial 2
+
+
+
+
+Kr†enje pretpostavke 2: relevantni dokumenti nisu sli£ni Primer upita: contradictory government policies
+Za†to RF ne¢e zna£ajno pove¢ati povrat za ovaj upit? Nekoliko nevezanih prototipova
+Subsidies for tobacco farmers vs. anti-smoking campaigns
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	24 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Kr†enje pretpostavke 2
+
+
+
+
+Kr†enje pretpostavke 2: relevantni dokumenti nisu sli£ni Primer upita: contradictory government policies
+Za†to RF ne¢e zna£ajno pove¢ati povrat za ovaj upit? Nekoliko nevezanih prototipova
+Subsidies for tobacco farmers vs. anti-smoking campaigns Aid for developing countries vs. high taris on imports from developing countries
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	24 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Kr†enje pretpostavke 2
+
+
+
+
+Kr†enje pretpostavke 2: relevantni dokumenti nisu sli£ni Primer upita: contradictory govtrialnt policies
+Za†to RF ne¢e zna£ajno pove¢ati povrat za ovaj upit? Nekoliko nevezanih prototipova
+Subsidies for tobacco farmers vs. anti-smoking campaigns Aid for developing countries vs. high taris on imports from developing countries
+RF na tobacco dokumente ne¢e pomo¢i u pronala”enju dokumenata o developing countries
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	24 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: vrednovanje
+
+
+
+
+
+Uzmimo jednu od mera za performanse IR sistema, recimo preciznost za najboljih 10 dokumenata: P@10
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	25 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: vrednovanje
+
+
+
+
+
+Uzmimo jednu od mera za performanse IR sistema, recimo preciznost za najboljih 10 dokumenata: P@10
+Izra£unamo P@10 za originalni upit q0
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	25 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: vrednovanje
+
+
+
+
+
+Uzmimo jednu od mera za performanse IR sistema, recimo preciznost za najboljih 10 dokumenata: P@10
+Izra£unamo P@10 za originalni upit q0 Izra£unamo P@10 za RF-modikovani upit q1
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	25 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: vrednovanje
+
+
+
+
+
+Uzmimo jednu od mera za performanse IR sistema, recimo preciznost za najboljih 10 dokumenata: P@10
+Izra£unamo P@10 za originalni upit q0 Izra£unamo P@10 za RF-modikovani upit q1 U ve¢ini slu£ajeva: q1  je drasti£no bolje od q0!
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	25 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: vrednovanje
+
+
+
+
+
+Uzmimo jednu od mera za performanse IR sistema, recimo preciznost za najboljih 10 dokumenata: P@10
+Izra£unamo P@10 za originalni upit q0 Izra£unamo P@10 za RF-modikovani upit q1 U ve¢ini slu£ajeva: q1  je drasti£no bolje od q0! Da li je ovo fer poreenje?
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@unstrials	Relevance feedback i pro†irivanje upita	25 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: vrednovanje
+
+
+
+
+
+Fer poreenje mora biti na ostatku kolekcije: dokumentima koje korisnik jo† nije ocenio
+
+
+
+
+
+
+
+
+
+
+
+
+Trialn Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	26 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: vrednovanje
+
+
+
+
+
+Fer poreenje mora biti na ostatku kolekcije: dokumentima koje korisnik jo† nije ocenio
+Studije pokazuju da je RF uspe†an ako se vrednuje na ovakav na£in
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	26 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: vrtrialanje
+
+
+
+
+
+Fer poreenje mora biti na ostatku kolekcije: dokumentima koje korisnik jo† nije ocenio
+Studije pokazuju da je RF uspe†an ako se vrednuje na ovakav na£in
+Empirijski, jedan RF ciklus je £esto vrlo uspe†an; drugi je marginalno koristan
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	26 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: vrednovanje
+
+
+
+
+
+Pravo vrednovanje koristi mora uklju£iti druge metode koje tro†e istu koli£inu vremena.
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	27 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rtrialnce feedback: vrednovanje
+
+
+
+
+
+Pravo vrednovanje koristi mora uklju£iti druge metode koje tro†e istu koli£inu vremena.
+Alternativa za RF: korisnik revidira i ponovo po†alje upit
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	27 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: vrednovanje
+
+
+
+
+
+Pravo vrednovanje koristi mora uklju£iti druge metode koje tro†e istu koli£inu vremena.
+Alternativa za RF: korisnik revidira i ponovo po†alje upit
+Korisnicima mo”e da se vi†e svia revizija upita nego ocenjivanje dokumenata
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	27 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: vrednovanje
+
+
+
+
+
+Pravo vrednovanje koristi mora uklju£iti druge metode koje tro†e istu koli£inu vremena.
+Alternativa za RF: korisnik revidira i ponovo po†alje upit
+Korisnicima mo”e da se vi†e svia revizija upita nego ocenjivanje dokumenata
+Nema jasnog dokaza da je RF najbolje kori†¢enje korisnikovog vremena
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	27 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+
+
+
+
+
+
+
+Da li web pretra”iva£i koriste RF?
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	28 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+
+
+
+
+
+
+
+Google: similar pages
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	29 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Reltriale feedback: problemi
+
+
+
+
+
+Relevance feedback je skup
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	30 / 43
+RF: otrial   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: problemi
+
+
+
+
+
+Relevance feedback je skup
+RF kreira duga£ke modikovane upite
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	30 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: problemi
+
+
+
+
+
+Relevance feedback je skup
+RF kreira duga£ke modikovane upite duga£ki upiti su skupi za obradu
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@utrial.rs	Relevance feedback i pro†irivanje upita	30 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: problemi
+
+
+
+
+
+Relevance feedback je skup
+RF kreira duga£ke modikovane upite duga£ki upiti su skupi za obradu
+Korisnici oklevaju da daju eksplicitne odgovore
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	30 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Relevance feedback: problemi
+
+
+
+
+
+Relevance feedback je skup
+RF kreira duga£ke modikovane upite duga£ki upiti su skupi za obradu
+Korisnici oklevaju da daju eksplicitne odgovore
+esto je te†ko razumeti za†to je neki dokument pronaen nakon †to je primenjen RF
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	30 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Druge upotrebe za RF
+
+
+
+
+Odr”avanje trajnih upita
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	31 / 43
+RF: otrial   RF: detalji   Globalno pro†irenje upita
+
+Druge upotrebe za RF
+
+
+
+
+Odr”avanje trajnih upita
+Primer: multicore computer chips
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	31 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Druge upotrebe za RF
+
+
+
+
+Odr”avanje trajnih upita
+Primer: multicore computer chips
+elim da primim svakog dana listu novinskih £lanaka objavljenih u prethodnih 24 sata na temu multicore computer chips
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	31 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Druge upotrebe za RF
+
+
+
+
+Odr”avanje trajnih upita
+Primer: multicore computer chips
+elim da primim svakog dana listu novinskih £lanaka objavljenih u prethodnih 24 sata na temu multicore computer chips
+RF se mo”e koristiti za ranaciju ovog trajnog upita tokom vremena
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivtrialc@uns.ac.rs	Relevance feedback i pro†irivanje upita	31 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Druge upotrebe za RF
+
+
+
+
+Odr”avanje trajnih upita
+Primer: multicore computer chips
+elim da primim svakog dana listu novinskih £lanaka objavljenih u prethodnih 24 sata na temu multicore computer chips
+RF se mo”e koristiti za ranaciju ovog trajnog upita tokom vremena
+Spam lteri rade sli£nu stvar
+
+
+
+
+
+
+Dragan Ivatrial,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	31 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Druge upotrebe za RF
+
+
+
+
+Odr”avanje trajnih upita
+Primer: multicore computer chips
+elim da primim svakog dana listu novinskih £lanaka objavljenih u prethodnih 24 sata na temu multicore computer chips
+RF se mo”e koristiti za ranaciju ovog trajnog upita tokom vremena
+Spam lteri rade sli£nu stvar
+RF je mnogo prakti£niji za trajne upite nego za web pretragu
+
+
+
+
+Dragan Ivanovi¢,dragan.itrialic@uns.ac.rs	Relevance feedback i pro†irivanje upita	31 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+PsetrialF
+
+
+
+Trial relevance feedback
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	32 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pseudo-RF
+
+
+
+Blind relevance feedback
+Pseudo-RF automatizuje ru£ni deo pravog RF ciklusa
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	32 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Trialo-RF
+
+
+
+Blind relevance ftrialck
+Pseudo-RF automatizuje ru£ni deo pravog RF ciklusa Pseudo-RF algoritam:
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	32 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pseudo-RF
+
+
+
+Blind relevance feedback
+Pseudo-RF automatizuje ru£ni deo pravog RF ciklusa Pseudo-RF algoritam:
+Izra£unaj rangiranu listu pogodaka za korisnikov upit
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanotrialragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	32 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Trialo-RF
+
+
+
+Blind relevance feedback
+Pseudo-RF automatizuje ru£ni deo pravog RF ciklusa Pseudo-RF algoritam:
+Izra£unaj rangiranu listu pogodaka za korisnikov upit Pretpostavi da je najboljih k dokumenata relevantno
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	32 / 43
+RF: triale   RF: detalji   Globalno pro†irenje upita
+
+Pseudo-RF
+
+
+
+Blind relevance feedback
+Pseudo-RF automatizuje ru£ni deo pravog RF ciklusa Pseudo-RF algoritam:
+Izra£unaj rangiranu listu pogodaka za korisnikov upit Pretpostavi da je najboljih k dokumenata relevantno Uradi RF ciklus (npr. Rocchio algoritmom)
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	32 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Ptrial-RF
+
+
+
+Blind relevance feedback
+Pseudo-RF automatizuje ru£ni deo pravog RF ciklusa Pseudo-RF algoritam:
+Izra£unaj rangiranu listu pogodaka za korisnikov upit Pretpostavi da je najboljih k dokumenata relevantno Uradi RF ciklus (npr. Rocchio algoritmom)
+Radi dobro u proseku, ali mo”e da napravi katastrofu za neke upite
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	32 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+PstrialRF
+
+
+
+Blind relevance feedback
+Pseudo-RF automatizuje ru£ni deo pravog RF ciklusa Pseudo-RF algoritam:
+Izra£unaj rangiranu listu pogodaka za kortrialov upit Pretpostavi da je najboljih k dokumenata relevantno Uradi RF ciklus (npr. Rocchio algoritmom)
+Radi dobro u proseku, ali mo”e da napravi katastrofu za neke upite
+Vi†e iteracija mo”e da izazove kltriale upita.
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	32 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pseudo-RF
+
+
+
+Blind relevance feedback
+Pseudo-RF automatizuje ru£ni deo pravog RF ciklusa Pseudo-RF algoritam:
+Izra£unaj rangiranu listu pogodaka za korisnikov upit Pretpostavi da je najboljih k dokumenata relevantno Uradi RF ciklus (npr. Rocchio algoritmom)
+Radi dobro u proseku, ali mo”e da napravi katastrofu za neke upite
+Vi†e iteracija mo”e da izazove klizanje utrial Za†to?
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	32 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pseudo-RF i TREC4
+
+Cornell SMART sistem
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	33 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pseudo-RF i TREC4
+
+Cornell SMART sistem
+Rezultat prikazuje broj relevantnih dokumenata meu najboljih 100 za 50 upita (ukupno 5000 dokumenata):
+
+metod lnc.ltc lnc.ltc-PsRF Lnu.ltu
+Lnu.ltu-PsRF
+
+broj relevantnih 3210
+3634 3709 4350
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	33 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pseudo-RF i TREC4
+
+Cornell SMART sistem
+Rezultat prikazuje broj relevantnih dokumenata meu najboljih 100 za 50 upita (ukupno 5000 dokumenata):
+
+metod lnc.ltc lnc.ltc-PsRF Lnu.ltu
+Lnu.ltu-PsRF
+
+broj relevantnih 3210
+3634 3709 4350
+
+Porede se dva na£ina za normalizaciju (L i l) i pseudo-RF (PsRF)
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	33 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pseudo-RF i TREC4
+
+Cornell SMART sistem
+Rezultat prikazuje broj relevantnih dokumenata meu najboljih 100 za 50 upita (ukupno 5000 dokumenata):
+
+metod lnc.ltc lnc.ltc-PsRF Lnu.ltu
+Lnu.ltu-PsRF
+
+broj relevantnih 3210
+3634 3709 4350
+
+Porede se dva na£ina za triallizaciju (L i l) i pseudo-RF (PsRF) Pseudo-RF je dodao samo 20 termova upitu (Trialio bi dodao mnogo vi†e)
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	33 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pseudo-RF i TREC4
+
+Ctriall SMART sistem
+Rezultat prikazuje broj relevantnih dokumenata meu najboljih 100 za 50 upita (ukupno 5000 dokumenata):
+
+metod lnc.ltc lnc.ltc-PsRF Lnu.ltu
+Lnu.ltu-PsRF
+
+broj relevantnih 3210
+3634 3709 4350
+
+Porede se dva na£ina za normalizaciju (L i l) i pseudo-RF (PsRF) Pseudo-RF je dodao samo 20 termova upitu (Rocchio bi dodao mnogo vi†e)
+Ovo pokazuje da je pseudo-RF ekasan u proseku
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	33 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Trialektan ili implicitni RF
+
+
+
+
+Od korisnika se ne o£ekuje eksplicitno izja†njavanje da li je ne†to relevantno ili nije, ali se koristi implicitno izja†njavanje korisnika
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovitrial.ac.rs	Relevance feedback i pro†irivanje upita	34 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Indirektan ili implicitni RF
+
+
+
+
+Od korisnika se ne o£ekuje eksplicitno izja†njavanje da li je ne†to retrialtno ili nije, ali se koristi impltrialo izja†njavanje korisnika
+Na primer, ako se za jedan upit na veb pretra”iva£u na osnovu dinami£kog sa”etka korisnici £esto odlu£uju da otvore odreeni rezultat, veb pretra”iva£i mogu koristiti re£i iz tog dinami£kog sa”etka da njime pro†ire inicijalni upit i vrate listu odgovora za pro†ireni upit
+
+
+
+
+
+Dragan Ivtrial¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	34 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Globalno pro†irenje upita
+
+
+
+
+Pro†irenje upita je drugi metod za pove¢anje povrata
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	35 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Globalno pro†irenje upita
+
+
+
+
+Pro†irenje upita je drugi metod za pove¢anje povrata
+Koristimo termin globalno pro†irenje upita kada mislimo na globalne metode za reformulaciju upita
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivantrialuns.ac.rs	Relevance feedback i pro†irivanje upita	35 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Globalno pro†irenje upita
+
+
+
+
+Pro†irenje upita je drugi metod za pove¢anje povrata
+Koristimo termin glotrial pro†irenje upita kada mislimo na globalne metode za reformulaciju upita
+U GPU, upit se menja zavisno od nekog globalnog resursa, koji ne zavisi od upita
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	35 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Globalno pro†irenje upita
+
+
+
+
+Pro†irenje upita je drugi metod za pove¢anje povrata
+Koristimo termin globalno pro†irenje upita kada mislimo na globalne metode za rtrialulaciju upita
+U GPU, upit se menja zavisno od nekog gtrialnog resursa, koji ne zavisi od upita
+Glavne informacije koje se koriste: (skoro-)sinonimi
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	35 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Globalno pro†irenje upita
+
+
+
+
+Pro†irenje upita je drugi metod za pove¢anje povrata
+Koristimo termin globalno pro†irenje upita kada mislimo na globalne metode za reformulaciju upita
+U GPU, upit se menja zavisno od nekog globalnog resursa, koji ne zavisi od upita
+Glavne informacije koje se koriste: (skoro-)sinonimi Baza podataka koja £uva (skoro-)sinonime je tezaurus
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	35 / 43
+RF: otrial   RF: detalji   Globalno pro†irenje upita
+
+Gtrialno pro†irenje upita
+
+
+
+
+Prtrialnje upita je drugi metod za pove¢anje povrata
+Koristimo termin globalno pro†irenje upita kada mislimo na globalne metode za reformulaciju upita
+U GPU, upit se menja zavisno od nekog globalnog resursa, koji ne zavisi od upita
+Glavne informacije koje se koriste: (skoro-)sinonimi Baza podataka koja £uva (skoro-)sinonime je tezaurus Dve vrste tezaurusa: ru£no i automatski formirani
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivatrial@uns.ac.rs	Relevance feedback i pro†irivanje upita	35 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Globalno pro†irenje upita: primer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	36 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Vrste odgovora korisnika
+
+
+
+Korisnik daje odgovor (informacije) o dokumentima.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	37 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Vrste odgovora korisnika
+
+
+
+Korisnik daje odgovor (informacije) o dokumentima. e†¢e u RF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanotrialragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	37 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Vrste odgovora korisnika
+
+
+
+Korisnik daje odgovor (informacije) o dokumentima. e†¢e u RF
+Korisnik daje odgovor o re£ima ili frazama.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	37 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Vrste odgovora korisnika
+
+
+
+Korisnik daje odgovor (informacije) o dokumentima. e†¢e u RF
+Korisnik daje odgovor o re£ima ili frazama. £e†¢e za pro†irenje upita
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	37 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Vrste odgovora korisnika
+
+
+
+Korisnik daje odgovor (informacije) o dokumentima. e†¢e u RF
+Korisnik daje odgovor o re£ima ili frazama. £e†¢e za pro†irenje upita
+RF mo”emo posmatrati kao varijantu pro†irenja upita
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	37 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Vrste odgovora korisnika
+
+
+
+Korisnik daje odgovor (informacije) o dokumentima. e†¢e u RF
+Korisnik daje odgovor o re£ima ili frazama. £e†¢e za pro†irenje upita
+RF mo”emo posmatrati kao varijantu pro†irenja upita Dodajemo termove u upit
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	37 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Vrste odgovora korisnika
+
+
+
+Korisnik daje odgovor (informacije) o dokumentima. e†¢e u RF
+Korisnik daje odgovor o re£ima ili frazama. £e†¢e za pro†irenje upita
+RF mo”emo posmatrati kao varijantu pro†irenja upita Dodajemo termove u upit
+Termovi dodati u RF ciklusu su zasnovani na lokalnim informacijama u teku¢em rezultatu
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	37 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Vrste odgovora korisnika
+
+
+
+Korisnik daje odgovor (informacije) o dokumentima. e†¢e u RF
+Kortrial daje odgovor o re£ima ili frazama. £e†¢e za pro†irenje upita
+RF mo”emo posmatrati kao varijantu pro†irenja upita Dodajemo termove u upit
+Termovi dodati u RF ciklusu su zasnovani na lokalnim informacijama u teku¢em rezultatu
+Termovi dodati u GPU se zasnivaju na globalnim informacijama koje ne zavise od upita
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	37 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Vrste pro†irenja upita
+
+
+
+
+
+
+Ru£ni tezaurus (neko ga odr”ava, npr. PubMed)
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	38 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Vrste pro†irenja upita
+
+
+
+
+
+
+Ru£ni tezaurus (neko ga odr”ava, npr. PubMed)
+Automatski generisan tezaurus (npr. zasnovan na statistici zajedni£kog pojavljivanja)
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	38 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Vrste pro†irenja upita
+
+
+
+
+
+
+Ru£ni tezaurus (neko ga odr”ava, npr. PubMed)
+Automatski generisan tezaurus (npr. zasnovan na statistici zajedni£kog pojavljivanja)
+Ekvivalentnost upita zasnovano na analizi istorije upita (log mining, korisno za web)
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	38 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pro†irenje upita zasnovano na tezaurusu
+
+
+Za svaki term t u upitu, pro†iri upit re£ima koje tezaurus navodi kao semanti£ki povezane sa t
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	39 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pro†irenje upita zasnovano na tezaurusu
+
+
+Za svaki term t u upitu, pro†iri upit re£ima koje tezaurus navodi kao semanti£ki povezane sa t
+Primer: hospital ! medical
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	39 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pro†irenje upita zasnovano na tezaurusu
+
+
+Za svaki term t u upitu, pro†iri upit re£ima koje tezaurus navodi kao semanti£ki povezane sa t
+Primer: hospital ! medical U principu pove¢ava povrat
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivatrial@uns.ac.rs	Relevance feedback i pro†irivanje upita	39 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pro†irenje upita zasnovano na tezaurusu
+
+
+Za svaki term t u upitu, pro†iri upit re£ima koje tezaurus navodi kao semanti£ki povezane sa t
+Primer: hospital ! medical U principu pove¢ava povrat
+Mo”e zna£ajno da smanji preciznost, naro£ito sa dvosmislenim termovima
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	39 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pro†irenje upita zasnovano na tezaurusu
+
+
+Za svaki term t u upitu, pro†iri upit re£ima koje tezaurus navodi kao semanti£ki povezane sa t
+Primer: hospital ! medical U pritrial pove¢ava povrat
+Mo”e zna£ajno da smanji preciznost, naro£ito sa dvosmislenim termovima
+interest rate (kamatna stopa) ! interest rate fascinate evaluate
+
+
+
+
+
+
+
+
+Trialn Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	39 / 43
+RF: otrial   RF: detalji   Globalno pro†irenje upita
+
+Pro†irenje upita zasnovano na tezaurusu
+
+
+Za svaki term t u upitu, pro†iri upit re£ima koje tezaurus navodi kao semanti£ki povezane sa t
+Primer: hospital ! medical U principu pove¢ava povrat
+Mo”e zna£ajno da smanji preciznost, naro£ito sa dvosmislenim termovima
+interest rate (kamatna stopa) ! interest rate fascinate evaluate
+esto kori†¢en u speciijalizovanim pretra”iva£ima za nau£ne i in”enjerske primene
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	39 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pro†irenje upita zasnovano na trialrusu
+
+
+Za svaki term t u upitu, ptriali upit re£ima koje tezaurus navodi kao semanti£ki povezane sa t
+Primer: hospital ! medical U principu pove¢ava povrat
+Mo”e zna£ajno da smanji preciznost, naro£ito sa dvosmislenim termovima
+interest rate (kamatna stopa) ! interest rate fascinate evaluate
+esto kori†¢en u speciijalizovanim pretra”iva£ima za nau£ne i in”enjerske primene
+Vrlo skupo ru£no odr”avanje tezaurusa
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	39 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Pro†irenje upita zasnovano na tezaurusu
+
+
+Za svaki term t u upitu, pro†iri upit re£ima koje tezaurus navodi kao semanti£ki povezane sa t
+Primer: hospital ! medical U principu pove¢ava povrat
+Mo”e zna£ajno da smanji preciznost, naro£ito sa dvosmislenim termovima
+interest rate (kamatna stopa) ! interest rate fascinate evaluate
+esto kori†¢en u speciijalizovanim pretra”iva£ima za nau£ne i in”enjerske primene
+Vrlo skupo ru£no odr”avanje tezaurusa
+Ru£ni tezaurus je skoro ekvivalentan anotiranju sa kontrolisanim re£nikom.
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	39 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Primer ru£nog tezaurusa: PubMed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	40 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Automatsko generisanje tezaurusa
+
+
+
+Poku†aj da se generi†e tezaurus na osnovu analize distribucije re£i u dokumentu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	41 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Automatsko generisanje tezaurusa
+
+
+
+Poku†aj da se generi†e tezaurus na osnovu analize distribucije re£i u dokumentu
+Osnovni pojam: sli£nost dve re£i
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	41 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Automatsko generisanje tezaurusa
+
+
+
+Poku†aj da se generi†e tezaurus na osnovu analize distribucije re£i u dokumentu
+Osnovni pojam: sli£nost dve re£i
+Denicija 1: dve re£i su sli£ne ako se pojavljuju zajedno sa sli£nim re£ima
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	41 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Automatsko generisanje tezaurusa
+
+
+
+Poku†aj da se generi†e tezaurus na osnovu analize distribucije re£i u dokumentu
+Osnovni pojam: sli£nost dve re£i
+Denicija 1: dve re£i su sli£ne ako se pojavljuju zajedno sa sli£nim re£ima
+Denicija 2: dve re£i su sli£ne ako se pojavljuju u istom gramati£kom odnosu sa sli£nim re£ima
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	41 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Automatsko generisanje tezaurusa
+
+
+
+Poku†aj da se generi†e tezaurus na osnovu analize distribucije re£i u dokumentu
+Osnovni pojam: sli£nost dve re£i
+Denicija 1: dve re£i su sli£ne ako se pojavljuju zajedno sa sli£nim re£ima
+Denicija 2: dve re£i su sli£ne ako se pojavljuju u istom gramati£kom odnosu sa sli£nim re£ima
+Jabuke i kru†ke se beru, lju†te, jedu, pripremaju; dakle jabuke i kru†ke su sli£ne
+
+
+
+
+
+
+Dragan Trialvi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	41 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Automatsko generisanje tezaurusa
+
+
+
+Poku†aj da se generi†e tezaurus na osnovu analize distribucije re£i u dokumentu
+Osnovni pojam: sli£nost dve re£i
+Denicija 1: dve re£i su sli£ne ako se pojavljuju zajedno sa sli£nim re£ima
+Denicija 2: dve re£i su sli£ne ako se pojavljuju u istom gramati£kom odnosu sa sli£nim re£ima
+Jabuke i kru†ke se beru, lju†te, jedu, pripremaju; dakle jabuke i kru†ke su sli£ne
+Zajedni£ko pojavljivanje je robusnije, gramati£ki odnosi su ta£niji
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	41 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Tezarus baziran na zajedni£kom pojavljivanju: primeri
+
+
+
+
+re£ absolutely bottomed captivating doghouse makeup mediating keeping lithographs pathogens senses
+
+najbli”i susedi
+absurd, whatsoever, totally, exactly, nothing dip, copper, drops, topped, slide, trimmed shimmer, stunningly, superbly, plucky, witty dog, porch, crawling, beside, downstairs repellent, lotion, glossy, sunscreen, skin, gel reconciliation, negotiate, case, conciliation hoping, bring, wiping, could, some, would drawings, Picasso, Dali, sculptures, Gauguin toxins, bacteria, organisms, bacterial, parasite grasp, psyche, truly, clumsy, naive, innate
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	42 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rezime
+
+
+
+
+
+
+RF i pro†irenje upita pove¢avaju povrat
+
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	43 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rezime
+
+
+
+
+
+
+RF i pro†irenje upita pove¢avaju povrat
+U puno slu£ajeva preciznost zna£ajno opada
+
+
+
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	43 / 43
+RF: osnove   RF: detalji   Globalno pro†irenje upita
+
+Rezime
+
+
+
+
+
+
+RF i pro†irenje upita pove¢avaju povrat
+U puno slu£ajeva preciznost zna£ajno opada
+Izmena upita zasnovana na istoriji upita (query log) (koja je slo”enija od jednostavnog pro†irenja) je £e†¢a na webu od RF-a
+
+
+
+
+
+
+
+
+Dragan Ivanovi¢,dragan.ivanovic@uns.ac.rs	Relevance feedback i pro†irivanje upita	43 / 43
+Created by the trial version of PDF Focus .Net 7.0.3.29!
+The trial version sometimes inserts "trial" into random places.
+Get the full version of PDF Focus .Net.

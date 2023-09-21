@@ -1,0 +1,1632 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ScientificCentreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AuthorComments">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="AuthorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReviewId" Type="int" Nullable="false" />
+          <Property Name="CommentedOnDate" Type="date" Nullable="false" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
+          <Property Name="CommentContent" Type="nvarchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CamundaUserProcess">
+          <Key>
+            <PropertyRef Name="ProcessInstanceId" />
+          </Key>
+          <Property Name="ProcessInstanceId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="TaskId" Type="uniqueidentifier" />
+          <Property Name="TaskName" Type="nvarchar" MaxLength="30" />
+          <Property Name="ProcesName" Type="nvarchar" MaxLength="30" />
+          <Property Name="WorkerName" Type="nvarchar" MaxLength="30" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CountryTowns">
+          <Key>
+            <PropertyRef Name="CountryId" />
+            <PropertyRef Name="TownId" />
+          </Key>
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="TownId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MagazineAreas">
+          <Key>
+            <PropertyRef Name="MagazineId" />
+            <PropertyRef Name="ScientificAreaId" />
+          </Key>
+          <Property Name="MagazineId" Type="int" Nullable="false" />
+          <Property Name="ScientificAreaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MagazineProjects">
+          <Key>
+            <PropertyRef Name="MagazineId" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="MagazineId" Type="int" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Magazines">
+          <Key>
+            <PropertyRef Name="MagazineId" />
+          </Key>
+          <Property Name="MagazineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ISSN" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MagazineContent" Type="nvarchar(max)" />
+          <Property Name="Access" Type="tinyint" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MagazineWorkers">
+          <Key>
+            <PropertyRef Name="MagazineId" />
+            <PropertyRef Name="ReviewerEditorId" />
+          </Key>
+          <Property Name="MagazineId" Type="int" Nullable="false" />
+          <Property Name="ReviewerEditorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="AreaId" Type="int" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PaymentType" Type="tinyint" Nullable="false" />
+          <Property Name="PaymentSum" Type="int" Nullable="false" />
+          <Property Name="SubibscriptionPackageOrProduct" Type="tinyint" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="100" />
+          <Property Name="Successfull" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectAuthors">
+          <Key>
+            <PropertyRef Name="AuthorId" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="AuthorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectReviews">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="ReviewerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReviewedOnDate" Type="date" Nullable="false" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
+          <Property Name="OnlyForEditor" Type="bit" />
+          <Property Name="AreaId" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="ReviewContent" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="EditorContent" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="ProjectsEditor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EditorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScientificAreas">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScientificCentreUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="100" />
+          <Property Name="TownId" Type="int" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="100" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReaderAuthorOther" Type="tinyint" />
+          <Property Name="CamundaTaskId" Type="uniqueidentifier" />
+          <Property Name="TaskType" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ScientificProjects">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="KeyWords" Type="nvarchar" MaxLength="200" />
+          <Property Name="Abstract" Type="nvarchar" MaxLength="300" />
+          <Property Name="ScientificAreaId" Type="int" Nullable="false" />
+          <Property Name="NotRegisteredAutorsInfo" Type="nvarchar" MaxLength="500" />
+          <Property Name="ProjectContent" Type="nvarchar(max)" />
+          <Property Name="SentOnDate" Type="datetime" Nullable="false" />
+          <Property Name="LastDateTimeEdited" Type="datetime" />
+          <Property Name="Accepted" Type="bit" Nullable="false" />
+          <Property Name="Removed" Type="bit" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="400" />
+          <Property Name="DOI" Type="nvarchar" MaxLength="20" />
+          <Property Name="PdfHtmlFileName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Subscriptions">
+          <Key>
+            <PropertyRef Name="SubscriptionId" />
+          </Key>
+          <Property Name="SubscriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SubibscriptionType" Type="tinyint" Nullable="false" />
+          <Property Name="SubscriptionStartDate" Type="datetime" Nullable="false" />
+          <Property Name="SubscriptionExpiryDate" Type="datetime" Nullable="false" />
+          <Property Name="SubscriptionMagazineId" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="TaskDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="StartedOnDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" />
+          <Property Name="Processed" Type="bit" Nullable="false" />
+          <Property Name="Expired" Type="bit" Nullable="false" />
+          <Property Name="TaskType" Type="tinyint" Nullable="false" />
+          <Property Name="OutcomeResult" Type="bit" />
+        </EntityType>
+        <EntityType Name="Towns">
+          <Key>
+            <PropertyRef Name="TownId" />
+          </Key>
+          <Property Name="TownId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Lat" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="Lng" Type="decimal" Precision="6" Scale="3" />
+        </EntityType>
+        <EntityType Name="UserInventories">
+          <Key>
+            <PropertyRef Name="InventoryId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="InventoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProjectId" Type="tinyint" />
+          <Property Name="MagazineId" Type="int" />
+          <Property Name="DateAcquired" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTasks">
+          <Key>
+            <PropertyRef Name="TaskId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AuthorCom__Autho__056ECC6A">
+          <End Role="ScientificCentreUsers" Type="Self.ScientificCentreUsers" Multiplicity="1" />
+          <End Role="AuthorComments" Type="Self.AuthorComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AuthorComments">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AuthorCom__Proje__047AA831">
+          <End Role="ScientificProjects" Type="Self.ScientificProjects" Multiplicity="1" />
+          <End Role="AuthorComments" Type="Self.AuthorComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificProjects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="AuthorComments">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AuthorCom__Revie__0662F0A3">
+          <End Role="ProjectReviews" Type="Self.ProjectReviews" Multiplicity="1" />
+          <End Role="AuthorComments" Type="Self.AuthorComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectReviews">
+              <PropertyRef Name="ReviewId" />
+            </Principal>
+            <Dependent Role="AuthorComments">
+              <PropertyRef Name="ReviewId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CamundaUs__UserI__2116E6DF">
+          <End Role="ScientificCentreUsers" Type="Self.ScientificCentreUsers" Multiplicity="0..1" />
+          <End Role="CamundaUserProcess" Type="Self.CamundaUserProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CamundaUserProcess">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CountryTo__Count__2EA5EC27">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="CountryTowns" Type="Self.CountryTowns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="CountryTowns">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CountryTo__TownI__2F9A1060">
+          <End Role="Towns" Type="Self.Towns" Multiplicity="1" />
+          <End Role="CountryTowns" Type="Self.CountryTowns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Towns">
+              <PropertyRef Name="TownId" />
+            </Principal>
+            <Dependent Role="CountryTowns">
+              <PropertyRef Name="TownId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MagazineA__Magaz__3DE82FB7">
+          <End Role="Magazines" Type="Self.Magazines" Multiplicity="1" />
+          <End Role="MagazineAreas" Type="Self.MagazineAreas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazines">
+              <PropertyRef Name="MagazineId" />
+            </Principal>
+            <Dependent Role="MagazineAreas">
+              <PropertyRef Name="MagazineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MagazineA__Scien__3EDC53F0">
+          <End Role="ScientificAreas" Type="Self.ScientificAreas" Multiplicity="1" />
+          <End Role="MagazineAreas" Type="Self.MagazineAreas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificAreas">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="MagazineAreas">
+              <PropertyRef Name="ScientificAreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MagazineP__Magaz__3A179ED3">
+          <End Role="Magazines" Type="Self.Magazines" Multiplicity="1" />
+          <End Role="MagazineProjects" Type="Self.MagazineProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazines">
+              <PropertyRef Name="MagazineId" />
+            </Principal>
+            <Dependent Role="MagazineProjects">
+              <PropertyRef Name="MagazineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MagazineP__Proje__3B0BC30C">
+          <End Role="ScientificProjects" Type="Self.ScientificProjects" Multiplicity="1" />
+          <End Role="MagazineProjects" Type="Self.MagazineProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificProjects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="MagazineProjects">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MagazineW__Magaz__4959E263">
+          <End Role="Magazines" Type="Self.Magazines" Multiplicity="1" />
+          <End Role="MagazineWorkers" Type="Self.MagazineWorkers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazines">
+              <PropertyRef Name="MagazineId" />
+            </Principal>
+            <Dependent Role="MagazineWorkers">
+              <PropertyRef Name="MagazineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MagazineW__Revie__4A4E069C">
+          <End Role="ScientificCentreUsers" Type="Self.ScientificCentreUsers" Multiplicity="1" />
+          <End Role="MagazineWorkers" Type="Self.MagazineWorkers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="MagazineWorkers">
+              <PropertyRef Name="ReviewerEditorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__UserId__66603565">
+          <End Role="ScientificCentreUsers" Type="Self.ScientificCentreUsers" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectAu__Autho__373B3228">
+          <End Role="ScientificCentreUsers" Type="Self.ScientificCentreUsers" Multiplicity="1" />
+          <End Role="ProjectAuthors" Type="Self.ProjectAuthors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectAuthors">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectAu__Proje__36470DEF">
+          <End Role="ScientificProjects" Type="Self.ScientificProjects" Multiplicity="1" />
+          <End Role="ProjectAuthors" Type="Self.ProjectAuthors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificProjects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectAuthors">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectRe__AreaI__019E3B86">
+          <End Role="ScientificAreas" Type="Self.ScientificAreas" Multiplicity="1" />
+          <End Role="ProjectReviews" Type="Self.ProjectReviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificAreas">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="ProjectReviews">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectRe__Proje__7FB5F314">
+          <End Role="ScientificProjects" Type="Self.ScientificProjects" Multiplicity="1" />
+          <End Role="ProjectReviews" Type="Self.ProjectReviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificProjects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectReviews">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectRe__Revie__00AA174D">
+          <End Role="ScientificCentreUsers" Type="Self.ScientificCentreUsers" Multiplicity="1" />
+          <End Role="ProjectReviews" Type="Self.ProjectReviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectReviews">
+              <PropertyRef Name="ReviewerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectsE__Edito__0EF836A4">
+          <End Role="ScientificCentreUsers" Type="Self.ScientificCentreUsers" Multiplicity="1" />
+          <End Role="ProjectsEditor" Type="Self.ProjectsEditor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectsEditor">
+              <PropertyRef Name="EditorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectsE__Proje__0E04126B">
+          <End Role="ScientificProjects" Type="Self.ScientificProjects" Multiplicity="1" />
+          <End Role="ProjectsEditor" Type="Self.ProjectsEditor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificProjects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectsEditor">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Scientifi__Scien__45F365D3">
+          <End Role="ScientificAreas" Type="Self.ScientificAreas" Multiplicity="1" />
+          <End Role="ScientificProjects" Type="Self.ScientificProjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificAreas">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="ScientificProjects">
+              <PropertyRef Name="ScientificAreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subscript__Subsc__13BCEBC1">
+          <End Role="Magazines" Type="Self.Magazines" Multiplicity="1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazines">
+              <PropertyRef Name="MagazineId" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="SubscriptionMagazineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subscript__UserI__12C8C788">
+          <End Role="ScientificCentreUsers" Type="Self.ScientificCentreUsers" Multiplicity="1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__ProjectId__5AEE82B9">
+          <End Role="ScientificProjects" Type="Self.ScientificProjects" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificProjects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserInven__Magaz__01D345B0">
+          <End Role="Magazines" Type="Self.Magazines" Multiplicity="0..1" />
+          <End Role="UserInventories" Type="Self.UserInventories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazines">
+              <PropertyRef Name="MagazineId" />
+            </Principal>
+            <Dependent Role="UserInventories">
+              <PropertyRef Name="MagazineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserInven__UserI__00DF2177">
+          <End Role="ScientificCentreUsers" Type="Self.ScientificCentreUsers" Multiplicity="1" />
+          <End Role="UserInventories" Type="Self.UserInventories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserInventories">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserTasks__TaskI__32767D0B">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="UserTasks" Type="Self.UserTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="UserTasks">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserTasks__UserI__336AA144">
+          <End Role="ScientificCentreUsers" Type="Self.ScientificCentreUsers" Multiplicity="1" />
+          <End Role="UserTasks" Type="Self.UserTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserTasks">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScientificAreasMagazineWorkers">
+          <End Role="ScientificAreas" Type="Self.ScientificAreas" Multiplicity="0..1" />
+          <End Role="MagazineWorkers" Type="Self.MagazineWorkers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificAreas">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="MagazineWorkers">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Towns_ScientificCentreUsers">
+          <End Role="Towns" Type="Self.Towns" Multiplicity="0..1" />
+          <End Role="ScientificCentreUsers" Type="Self.ScientificCentreUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Towns">
+              <PropertyRef Name="TownId" />
+            </Principal>
+            <Dependent Role="ScientificCentreUsers">
+              <PropertyRef Name="TownId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ScientificCentreModelStoreContainer">
+          <EntitySet Name="AuthorComments" EntityType="Self.AuthorComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CamundaUserProcess" EntityType="Self.CamundaUserProcess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CountryTowns" EntityType="Self.CountryTowns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MagazineAreas" EntityType="Self.MagazineAreas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MagazineProjects" EntityType="Self.MagazineProjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Magazines" EntityType="Self.Magazines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MagazineWorkers" EntityType="Self.MagazineWorkers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectAuthors" EntityType="Self.ProjectAuthors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectReviews" EntityType="Self.ProjectReviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectsEditor" EntityType="Self.ProjectsEditor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScientificAreas" EntityType="Self.ScientificAreas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScientificCentreUsers" EntityType="Self.ScientificCentreUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScientificProjects" EntityType="Self.ScientificProjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Towns" EntityType="Self.Towns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInventories" EntityType="Self.UserInventories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTasks" EntityType="Self.UserTasks" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AuthorCom__Autho__056ECC6A" Association="Self.FK__AuthorCom__Autho__056ECC6A">
+            <End Role="ScientificCentreUsers" EntitySet="ScientificCentreUsers" />
+            <End Role="AuthorComments" EntitySet="AuthorComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AuthorCom__Proje__047AA831" Association="Self.FK__AuthorCom__Proje__047AA831">
+            <End Role="ScientificProjects" EntitySet="ScientificProjects" />
+            <End Role="AuthorComments" EntitySet="AuthorComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AuthorCom__Revie__0662F0A3" Association="Self.FK__AuthorCom__Revie__0662F0A3">
+            <End Role="ProjectReviews" EntitySet="ProjectReviews" />
+            <End Role="AuthorComments" EntitySet="AuthorComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CamundaUs__UserI__2116E6DF" Association="Self.FK__CamundaUs__UserI__2116E6DF">
+            <End Role="ScientificCentreUsers" EntitySet="ScientificCentreUsers" />
+            <End Role="CamundaUserProcess" EntitySet="CamundaUserProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CountryTo__Count__2EA5EC27" Association="Self.FK__CountryTo__Count__2EA5EC27">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="CountryTowns" EntitySet="CountryTowns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CountryTo__TownI__2F9A1060" Association="Self.FK__CountryTo__TownI__2F9A1060">
+            <End Role="Towns" EntitySet="Towns" />
+            <End Role="CountryTowns" EntitySet="CountryTowns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MagazineA__Magaz__3DE82FB7" Association="Self.FK__MagazineA__Magaz__3DE82FB7">
+            <End Role="Magazines" EntitySet="Magazines" />
+            <End Role="MagazineAreas" EntitySet="MagazineAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MagazineA__Scien__3EDC53F0" Association="Self.FK__MagazineA__Scien__3EDC53F0">
+            <End Role="ScientificAreas" EntitySet="ScientificAreas" />
+            <End Role="MagazineAreas" EntitySet="MagazineAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MagazineP__Magaz__3A179ED3" Association="Self.FK__MagazineP__Magaz__3A179ED3">
+            <End Role="Magazines" EntitySet="Magazines" />
+            <End Role="MagazineProjects" EntitySet="MagazineProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MagazineP__Proje__3B0BC30C" Association="Self.FK__MagazineP__Proje__3B0BC30C">
+            <End Role="ScientificProjects" EntitySet="ScientificProjects" />
+            <End Role="MagazineProjects" EntitySet="MagazineProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MagazineW__Magaz__4959E263" Association="Self.FK__MagazineW__Magaz__4959E263">
+            <End Role="Magazines" EntitySet="Magazines" />
+            <End Role="MagazineWorkers" EntitySet="MagazineWorkers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MagazineW__Revie__4A4E069C" Association="Self.FK__MagazineW__Revie__4A4E069C">
+            <End Role="ScientificCentreUsers" EntitySet="ScientificCentreUsers" />
+            <End Role="MagazineWorkers" EntitySet="MagazineWorkers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__UserId__66603565" Association="Self.FK__Payments__UserId__66603565">
+            <End Role="ScientificCentreUsers" EntitySet="ScientificCentreUsers" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectAu__Autho__373B3228" Association="Self.FK__ProjectAu__Autho__373B3228">
+            <End Role="ScientificCentreUsers" EntitySet="ScientificCentreUsers" />
+            <End Role="ProjectAuthors" EntitySet="ProjectAuthors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectAu__Proje__36470DEF" Association="Self.FK__ProjectAu__Proje__36470DEF">
+            <End Role="ScientificProjects" EntitySet="ScientificProjects" />
+            <End Role="ProjectAuthors" EntitySet="ProjectAuthors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectRe__AreaI__019E3B86" Association="Self.FK__ProjectRe__AreaI__019E3B86">
+            <End Role="ScientificAreas" EntitySet="ScientificAreas" />
+            <End Role="ProjectReviews" EntitySet="ProjectReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectRe__Proje__7FB5F314" Association="Self.FK__ProjectRe__Proje__7FB5F314">
+            <End Role="ScientificProjects" EntitySet="ScientificProjects" />
+            <End Role="ProjectReviews" EntitySet="ProjectReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectRe__Revie__00AA174D" Association="Self.FK__ProjectRe__Revie__00AA174D">
+            <End Role="ScientificCentreUsers" EntitySet="ScientificCentreUsers" />
+            <End Role="ProjectReviews" EntitySet="ProjectReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectsE__Edito__0EF836A4" Association="Self.FK__ProjectsE__Edito__0EF836A4">
+            <End Role="ScientificCentreUsers" EntitySet="ScientificCentreUsers" />
+            <End Role="ProjectsEditor" EntitySet="ProjectsEditor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectsE__Proje__0E04126B" Association="Self.FK__ProjectsE__Proje__0E04126B">
+            <End Role="ScientificProjects" EntitySet="ScientificProjects" />
+            <End Role="ProjectsEditor" EntitySet="ProjectsEditor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Scientifi__Scien__45F365D3" Association="Self.FK__Scientifi__Scien__45F365D3">
+            <End Role="ScientificAreas" EntitySet="ScientificAreas" />
+            <End Role="ScientificProjects" EntitySet="ScientificProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subscript__Subsc__13BCEBC1" Association="Self.FK__Subscript__Subsc__13BCEBC1">
+            <End Role="Magazines" EntitySet="Magazines" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subscript__UserI__12C8C788" Association="Self.FK__Subscript__UserI__12C8C788">
+            <End Role="ScientificCentreUsers" EntitySet="ScientificCentreUsers" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__ProjectId__5AEE82B9" Association="Self.FK__Tasks__ProjectId__5AEE82B9">
+            <End Role="ScientificProjects" EntitySet="ScientificProjects" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserInven__Magaz__01D345B0" Association="Self.FK__UserInven__Magaz__01D345B0">
+            <End Role="Magazines" EntitySet="Magazines" />
+            <End Role="UserInventories" EntitySet="UserInventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserInven__UserI__00DF2177" Association="Self.FK__UserInven__UserI__00DF2177">
+            <End Role="ScientificCentreUsers" EntitySet="ScientificCentreUsers" />
+            <End Role="UserInventories" EntitySet="UserInventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserTasks__TaskI__32767D0B" Association="Self.FK__UserTasks__TaskI__32767D0B">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="UserTasks" EntitySet="UserTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserTasks__UserI__336AA144" Association="Self.FK__UserTasks__UserI__336AA144">
+            <End Role="ScientificCentreUsers" EntitySet="ScientificCentreUsers" />
+            <End Role="UserTasks" EntitySet="UserTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScientificAreasMagazineWorkers" Association="Self.FK_ScientificAreasMagazineWorkers">
+            <End Role="ScientificAreas" EntitySet="ScientificAreas" />
+            <End Role="MagazineWorkers" EntitySet="MagazineWorkers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Towns_ScientificCentreUsers" Association="Self.FK_Towns_ScientificCentreUsers">
+            <End Role="Towns" EntitySet="Towns" />
+            <End Role="ScientificCentreUsers" EntitySet="ScientificCentreUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ScientificCentreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ScientificCentreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Countries" EntityType="ScientificCentreModel.Country" />
+          <EntitySet Name="Magazines" EntityType="ScientificCentreModel.Magazine" />
+          <EntitySet Name="Payments" EntityType="ScientificCentreModel.Payment" />
+          <EntitySet Name="ProjectAuthors" EntityType="ScientificCentreModel.ProjectAuthor" />
+          <EntitySet Name="ScientificAreas" EntityType="ScientificCentreModel.ScientificArea" />
+          <EntitySet Name="ScientificCentreUsers" EntityType="ScientificCentreModel.ScientificCentreUser" />
+          <EntitySet Name="Subscriptions" EntityType="ScientificCentreModel.Subscription" />
+          <EntitySet Name="Tasks" EntityType="ScientificCentreModel.Task" />
+          <EntitySet Name="Towns" EntityType="ScientificCentreModel.Town" />
+          <EntitySet Name="UserInventories" EntityType="ScientificCentreModel.UserInventory" />
+          <AssociationSet Name="FK__UserInven__Magaz__01D345B0" Association="ScientificCentreModel.FK__UserInven__Magaz__01D345B0">
+            <End Role="Magazine" EntitySet="Magazines" />
+            <End Role="UserInventory" EntitySet="UserInventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__UserId__66603565" Association="ScientificCentreModel.FK__Payments__UserId__66603565">
+            <End Role="ScientificCentreUser" EntitySet="ScientificCentreUsers" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectAu__Autho__373B3228" Association="ScientificCentreModel.FK__ProjectAu__Autho__373B3228">
+            <End Role="ScientificCentreUser" EntitySet="ScientificCentreUsers" />
+            <End Role="ProjectAuthor" EntitySet="ProjectAuthors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subscript__UserI__628FA481" Association="ScientificCentreModel.FK__Subscript__UserI__628FA481">
+            <End Role="ScientificCentreUser" EntitySet="ScientificCentreUsers" />
+            <End Role="Subscription" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserInven__UserI__00DF2177" Association="ScientificCentreModel.FK__UserInven__UserI__00DF2177">
+            <End Role="ScientificCentreUser" EntitySet="ScientificCentreUsers" />
+            <End Role="UserInventory" EntitySet="UserInventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Towns_ScientificCentreUsers" Association="ScientificCentreModel.FK_Towns_ScientificCentreUsers">
+            <End Role="Town" EntitySet="Towns" />
+            <End Role="ScientificCentreUser" EntitySet="ScientificCentreUsers" />
+          </AssociationSet>
+          <AssociationSet Name="CountryTowns" Association="ScientificCentreModel.CountryTowns">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Town" EntitySet="Towns" />
+          </AssociationSet>
+          <AssociationSet Name="MagazineAreas" Association="ScientificCentreModel.MagazineAreas">
+            <End Role="Magazine" EntitySet="Magazines" />
+            <End Role="ScientificArea" EntitySet="ScientificAreas" />
+          </AssociationSet>
+          <AssociationSet Name="UserTasks" Association="ScientificCentreModel.UserTasks">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="ScientificCentreUser" EntitySet="ScientificCentreUsers" />
+          </AssociationSet>
+          <EntitySet Name="ScientificProjects" EntityType="ScientificCentreModel.ScientificProject" />
+          <AssociationSet Name="FK__ProjectAu__Proje__36470DEF" Association="ScientificCentreModel.FK__ProjectAu__Proje__36470DEF">
+            <End Role="ScientificProject" EntitySet="ScientificProjects" />
+            <End Role="ProjectAuthor" EntitySet="ProjectAuthors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Scientifi__Scien__45F365D3" Association="ScientificCentreModel.FK__Scientifi__Scien__45F365D3">
+            <End Role="ScientificArea" EntitySet="ScientificAreas" />
+            <End Role="ScientificProject" EntitySet="ScientificProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__ProjectId__5AEE82B9" Association="ScientificCentreModel.FK__Tasks__ProjectId__5AEE82B9">
+            <End Role="ScientificProject" EntitySet="ScientificProjects" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="MagazineProjects" Association="ScientificCentreModel.MagazineProjects">
+            <End Role="Magazine" EntitySet="Magazines" />
+            <End Role="ScientificProject" EntitySet="ScientificProjects" />
+          </AssociationSet>
+          <EntitySet Name="MagazineWorkers" EntityType="ScientificCentreModel.MagazineWorker" />
+          <AssociationSet Name="FK__MagazineW__Magaz__4959E263" Association="ScientificCentreModel.FK__MagazineW__Magaz__4959E263">
+            <End Role="Magazine" EntitySet="Magazines" />
+            <End Role="MagazineWorker" EntitySet="MagazineWorkers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MagazineW__Revie__4A4E069C" Association="ScientificCentreModel.FK__MagazineW__Revie__4A4E069C">
+            <End Role="ScientificCentreUser" EntitySet="ScientificCentreUsers" />
+            <End Role="MagazineWorker" EntitySet="MagazineWorkers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScientificAreasMagazineWorkers" Association="ScientificCentreModel.FK_ScientificAreasMagazineWorkers">
+            <End Role="ScientificArea" EntitySet="ScientificAreas" />
+            <End Role="MagazineWorker" EntitySet="MagazineWorkers" />
+          </AssociationSet>
+          <EntitySet Name="AuthorComments" EntityType="ScientificCentreModel.AuthorComment" />
+          <EntitySet Name="ProjectReviews" EntityType="ScientificCentreModel.ProjectReview" />
+          <AssociationSet Name="FK__AuthorCom__Autho__056ECC6A" Association="ScientificCentreModel.FK__AuthorCom__Autho__056ECC6A">
+            <End Role="ScientificCentreUser" EntitySet="ScientificCentreUsers" />
+            <End Role="AuthorComment" EntitySet="AuthorComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AuthorCom__Proje__047AA831" Association="ScientificCentreModel.FK__AuthorCom__Proje__047AA831">
+            <End Role="ScientificProject" EntitySet="ScientificProjects" />
+            <End Role="AuthorComment" EntitySet="AuthorComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AuthorCom__Revie__0662F0A3" Association="ScientificCentreModel.FK__AuthorCom__Revie__0662F0A3">
+            <End Role="ProjectReview" EntitySet="ProjectReviews" />
+            <End Role="AuthorComment" EntitySet="AuthorComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectRe__AreaI__019E3B86" Association="ScientificCentreModel.FK__ProjectRe__AreaI__019E3B86">
+            <End Role="ScientificArea" EntitySet="ScientificAreas" />
+            <End Role="ProjectReview" EntitySet="ProjectReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectRe__Proje__7FB5F314" Association="ScientificCentreModel.FK__ProjectRe__Proje__7FB5F314">
+            <End Role="ScientificProject" EntitySet="ScientificProjects" />
+            <End Role="ProjectReview" EntitySet="ProjectReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectRe__Revie__00AA174D" Association="ScientificCentreModel.FK__ProjectRe__Revie__00AA174D">
+            <End Role="ScientificCentreUser" EntitySet="ScientificCentreUsers" />
+            <End Role="ProjectReview" EntitySet="ProjectReviews" />
+          </AssociationSet>
+          <EntitySet Name="ProjectsEditors" EntityType="ScientificCentreModel.ProjectsEditor" />
+          <AssociationSet Name="FK__ProjectsE__Edito__0EF836A4" Association="ScientificCentreModel.FK__ProjectsE__Edito__0EF836A4">
+            <End Role="ScientificCentreUser" EntitySet="ScientificCentreUsers" />
+            <End Role="ProjectsEditor" EntitySet="ProjectsEditors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProjectsE__Proje__0E04126B" Association="ScientificCentreModel.FK__ProjectsE__Proje__0E04126B">
+            <End Role="ScientificProject" EntitySet="ScientificProjects" />
+            <End Role="ProjectsEditor" EntitySet="ProjectsEditors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subscript__Subsc__13BCEBC1" Association="ScientificCentreModel.FK__Subscript__Subsc__13BCEBC1">
+            <End Role="Magazine" EntitySet="Magazines" />
+            <End Role="Subscription" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <EntitySet Name="CamundaUserProcesses" EntityType="ScientificCentreModel.CamundaUserProcess" />
+          <AssociationSet Name="FK__CamundaUs__UserI__2116E6DF" Association="ScientificCentreModel.FK__CamundaUs__UserI__2116E6DF">
+            <End Role="ScientificCentreUser" EntitySet="ScientificCentreUsers" />
+            <End Role="CamundaUserProcess" EntitySet="CamundaUserProcesses" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Towns" Relationship="ScientificCentreModel.CountryTowns" FromRole="Country" ToRole="Town" />
+        </EntityType>
+        <EntityType Name="Magazine">
+          <Key>
+            <PropertyRef Name="MagazineId" />
+          </Key>
+          <Property Name="MagazineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ISSN" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MagazineContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Access" Type="Byte" Nullable="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserInventories" Relationship="ScientificCentreModel.FK__UserInven__Magaz__01D345B0" FromRole="Magazine" ToRole="UserInventory" />
+          <NavigationProperty Name="ScientificAreas" Relationship="ScientificCentreModel.MagazineAreas" FromRole="Magazine" ToRole="ScientificArea" />
+          <NavigationProperty Name="ScientificProjects" Relationship="ScientificCentreModel.MagazineProjects" FromRole="Magazine" ToRole="ScientificProject" />
+          <NavigationProperty Name="MagazineWorkers" Relationship="ScientificCentreModel.FK__MagazineW__Magaz__4959E263" FromRole="Magazine" ToRole="MagazineWorker" />
+          <NavigationProperty Name="Subscriptions" Relationship="ScientificCentreModel.FK__Subscript__Subsc__13BCEBC1" FromRole="Magazine" ToRole="Subscription" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="PaymentType" Type="Byte" Nullable="false" />
+          <Property Name="PaymentSum" Type="Int32" Nullable="false" />
+          <Property Name="SubibscriptionPackageOrProduct" Type="Byte" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Successfull" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ScientificCentreUser" Relationship="ScientificCentreModel.FK__Payments__UserId__66603565" FromRole="Payment" ToRole="ScientificCentreUser" />
+        </EntityType>
+        <EntityType Name="ProjectAuthor">
+          <Key>
+            <PropertyRef Name="AuthorId" />
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="AuthorId" Type="Guid" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ScientificCentreUser" Relationship="ScientificCentreModel.FK__ProjectAu__Autho__373B3228" FromRole="ProjectAuthor" ToRole="ScientificCentreUser" />
+          <NavigationProperty Name="ScientificProject" Relationship="ScientificCentreModel.FK__ProjectAu__Proje__36470DEF" FromRole="ProjectAuthor" ToRole="ScientificProject" />
+        </EntityType>
+        <EntityType Name="ScientificArea">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Magazines" Relationship="ScientificCentreModel.MagazineAreas" FromRole="ScientificArea" ToRole="Magazine" />
+          <NavigationProperty Name="ScientificProjects" Relationship="ScientificCentreModel.FK__Scientifi__Scien__45F365D3" FromRole="ScientificArea" ToRole="ScientificProject" />
+          <NavigationProperty Name="MagazineWorkers" Relationship="ScientificCentreModel.FK_ScientificAreasMagazineWorkers" FromRole="ScientificArea" ToRole="MagazineWorker" />
+          <NavigationProperty Name="ProjectReviews" Relationship="ScientificCentreModel.FK__ProjectRe__AreaI__019E3B86" FromRole="ScientificArea" ToRole="ProjectReview" />
+        </EntityType>
+        <EntityType Name="ScientificCentreUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TownId" Type="Int32" />
+          <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payments" Relationship="ScientificCentreModel.FK__Payments__UserId__66603565" FromRole="ScientificCentreUser" ToRole="Payment" />
+          <NavigationProperty Name="ProjectAuthors" Relationship="ScientificCentreModel.FK__ProjectAu__Autho__373B3228" FromRole="ScientificCentreUser" ToRole="ProjectAuthor" />
+          <NavigationProperty Name="Subscriptions" Relationship="ScientificCentreModel.FK__Subscript__UserI__628FA481" FromRole="ScientificCentreUser" ToRole="Subscription" />
+          <NavigationProperty Name="UserInventories" Relationship="ScientificCentreModel.FK__UserInven__UserI__00DF2177" FromRole="ScientificCentreUser" ToRole="UserInventory" />
+          <NavigationProperty Name="Town" Relationship="ScientificCentreModel.FK_Towns_ScientificCentreUsers" FromRole="ScientificCentreUser" ToRole="Town" />
+          <NavigationProperty Name="Tasks" Relationship="ScientificCentreModel.UserTasks" FromRole="ScientificCentreUser" ToRole="Task" />
+          <NavigationProperty Name="MagazineWorkers" Relationship="ScientificCentreModel.FK__MagazineW__Revie__4A4E069C" FromRole="ScientificCentreUser" ToRole="MagazineWorker" />
+          <NavigationProperty Name="AuthorComments" Relationship="ScientificCentreModel.FK__AuthorCom__Autho__056ECC6A" FromRole="ScientificCentreUser" ToRole="AuthorComment" />
+          <NavigationProperty Name="ProjectReviews" Relationship="ScientificCentreModel.FK__ProjectRe__Revie__00AA174D" FromRole="ScientificCentreUser" ToRole="ProjectReview" />
+          <NavigationProperty Name="ProjectsEditors" Relationship="ScientificCentreModel.FK__ProjectsE__Edito__0EF836A4" FromRole="ScientificCentreUser" ToRole="ProjectsEditor" />
+          <Property Name="ReaderAuthorOther" Type="Byte" />
+          <Property Name="CamundaTaskId" Type="Guid" />
+          <Property Name="TaskType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CamundaUserProcesses" Relationship="ScientificCentreModel.FK__CamundaUs__UserI__2116E6DF" FromRole="ScientificCentreUser" ToRole="CamundaUserProcess" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="SubscriptionId" />
+          </Key>
+          <Property Name="SubscriptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="SubibscriptionType" Type="Byte" Nullable="false" />
+          <Property Name="SubscriptionStartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SubscriptionExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ScientificCentreUser" Relationship="ScientificCentreModel.FK__Subscript__UserI__628FA481" FromRole="Subscription" ToRole="ScientificCentreUser" />
+          <Property Name="SubscriptionMagazineId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Magazine" Relationship="ScientificCentreModel.FK__Subscript__Subsc__13BCEBC1" FromRole="Subscription" ToRole="Magazine" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="TaskDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StartedOnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="3" />
+          <Property Name="Processed" Type="Boolean" Nullable="false" />
+          <Property Name="Expired" Type="Boolean" Nullable="false" />
+          <Property Name="TaskType" Type="Byte" Nullable="false" />
+          <Property Name="OutcomeResult" Type="Boolean" />
+          <NavigationProperty Name="ScientificCentreUsers" Relationship="ScientificCentreModel.UserTasks" FromRole="Task" ToRole="ScientificCentreUser" />
+          <NavigationProperty Name="ScientificProject" Relationship="ScientificCentreModel.FK__Tasks__ProjectId__5AEE82B9" FromRole="Task" ToRole="ScientificProject" />
+        </EntityType>
+        <EntityType Name="Town">
+          <Key>
+            <PropertyRef Name="TownId" />
+          </Key>
+          <Property Name="TownId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Lat" Type="Decimal" Precision="6" Scale="3" />
+          <Property Name="Lng" Type="Decimal" Precision="6" Scale="3" />
+          <NavigationProperty Name="ScientificCentreUsers" Relationship="ScientificCentreModel.FK_Towns_ScientificCentreUsers" FromRole="Town" ToRole="ScientificCentreUser" />
+          <NavigationProperty Name="Countries" Relationship="ScientificCentreModel.CountryTowns" FromRole="Town" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="UserInventory">
+          <Key>
+            <PropertyRef Name="InventoryId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="InventoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="ProjectId" Type="Byte" />
+          <Property Name="MagazineId" Type="Int32" />
+          <Property Name="DateAcquired" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Magazine" Relationship="ScientificCentreModel.FK__UserInven__Magaz__01D345B0" FromRole="UserInventory" ToRole="Magazine" />
+          <NavigationProperty Name="ScientificCentreUser" Relationship="ScientificCentreModel.FK__UserInven__UserI__00DF2177" FromRole="UserInventory" ToRole="ScientificCentreUser" />
+        </EntityType>
+        <Association Name="FK__UserInven__Magaz__01D345B0">
+          <End Type="ScientificCentreModel.Magazine" Role="Magazine" Multiplicity="0..1" />
+          <End Type="ScientificCentreModel.UserInventory" Role="UserInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazine">
+              <PropertyRef Name="MagazineId" />
+            </Principal>
+            <Dependent Role="UserInventory">
+              <PropertyRef Name="MagazineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__UserId__66603565">
+          <End Type="ScientificCentreModel.ScientificCentreUser" Role="ScientificCentreUser" Multiplicity="1" />
+          <End Type="ScientificCentreModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectAu__Autho__373B3228">
+          <End Type="ScientificCentreModel.ScientificCentreUser" Role="ScientificCentreUser" Multiplicity="1" />
+          <End Type="ScientificCentreModel.ProjectAuthor" Role="ProjectAuthor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectAuthor">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subscript__UserI__628FA481">
+          <End Type="ScientificCentreModel.ScientificCentreUser" Role="ScientificCentreUser" Multiplicity="1" />
+          <End Type="ScientificCentreModel.Subscription" Role="Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Subscription">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserInven__UserI__00DF2177">
+          <End Type="ScientificCentreModel.ScientificCentreUser" Role="ScientificCentreUser" Multiplicity="1" />
+          <End Type="ScientificCentreModel.UserInventory" Role="UserInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserInventory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Towns_ScientificCentreUsers">
+          <End Type="ScientificCentreModel.Town" Role="Town" Multiplicity="0..1" />
+          <End Type="ScientificCentreModel.ScientificCentreUser" Role="ScientificCentreUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Town">
+              <PropertyRef Name="TownId" />
+            </Principal>
+            <Dependent Role="ScientificCentreUser">
+              <PropertyRef Name="TownId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CountryTowns">
+          <End Type="ScientificCentreModel.Country" Role="Country" Multiplicity="*" />
+          <End Type="ScientificCentreModel.Town" Role="Town" Multiplicity="*" />
+        </Association>
+        <Association Name="MagazineAreas">
+          <End Type="ScientificCentreModel.Magazine" Role="Magazine" Multiplicity="*" />
+          <End Type="ScientificCentreModel.ScientificArea" Role="ScientificArea" Multiplicity="*" />
+        </Association>
+        <Association Name="UserTasks">
+          <End Type="ScientificCentreModel.Task" Role="Task" Multiplicity="*" />
+          <End Type="ScientificCentreModel.ScientificCentreUser" Role="ScientificCentreUser" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ScientificProject">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KeyWords" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Abstract" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ScientificAreaId" Type="Int32" Nullable="false" />
+          <Property Name="NotRegisteredAutorsInfo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SentOnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastDateTimeEdited" Type="DateTime" Precision="3" />
+          <Property Name="Accepted" Type="Boolean" Nullable="false" />
+          <Property Name="Removed" Type="Boolean" Nullable="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProjectAuthors" Relationship="ScientificCentreModel.FK__ProjectAu__Proje__36470DEF" FromRole="ScientificProject" ToRole="ProjectAuthor" />
+          <NavigationProperty Name="ScientificArea" Relationship="ScientificCentreModel.FK__Scientifi__Scien__45F365D3" FromRole="ScientificProject" ToRole="ScientificArea" />
+          <NavigationProperty Name="Tasks" Relationship="ScientificCentreModel.FK__Tasks__ProjectId__5AEE82B9" FromRole="ScientificProject" ToRole="Task" />
+          <NavigationProperty Name="Magazines" Relationship="ScientificCentreModel.MagazineProjects" FromRole="ScientificProject" ToRole="Magazine" />
+          <Property Name="DOI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AuthorComments" Relationship="ScientificCentreModel.FK__AuthorCom__Proje__047AA831" FromRole="ScientificProject" ToRole="AuthorComment" />
+          <NavigationProperty Name="ProjectReviews" Relationship="ScientificCentreModel.FK__ProjectRe__Proje__7FB5F314" FromRole="ScientificProject" ToRole="ProjectReview" />
+          <NavigationProperty Name="ProjectsEditors" Relationship="ScientificCentreModel.FK__ProjectsE__Proje__0E04126B" FromRole="ScientificProject" ToRole="ProjectsEditor" />
+          <Property Name="PdfHtmlFileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__ProjectAu__Proje__36470DEF">
+          <End Type="ScientificCentreModel.ScientificProject" Role="ScientificProject" Multiplicity="1" />
+          <End Type="ScientificCentreModel.ProjectAuthor" Role="ProjectAuthor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificProject">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectAuthor">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Scientifi__Scien__45F365D3">
+          <End Type="ScientificCentreModel.ScientificArea" Role="ScientificArea" Multiplicity="1" />
+          <End Type="ScientificCentreModel.ScientificProject" Role="ScientificProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificArea">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="ScientificProject">
+              <PropertyRef Name="ScientificAreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__ProjectId__5AEE82B9">
+          <End Type="ScientificCentreModel.ScientificProject" Role="ScientificProject" Multiplicity="1" />
+          <End Type="ScientificCentreModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificProject">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MagazineProjects">
+          <End Type="ScientificCentreModel.Magazine" Role="Magazine" Multiplicity="*" />
+          <End Type="ScientificCentreModel.ScientificProject" Role="ScientificProject" Multiplicity="*" />
+        </Association>
+        <EntityType Name="MagazineWorker">
+          <Key>
+            <PropertyRef Name="MagazineId" />
+            <PropertyRef Name="ReviewerEditorId" />
+          </Key>
+          <Property Name="MagazineId" Type="Int32" Nullable="false" />
+          <Property Name="ReviewerEditorId" Type="Guid" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AreaId" Type="Int32" />
+          <NavigationProperty Name="Magazine" Relationship="ScientificCentreModel.FK__MagazineW__Magaz__4959E263" FromRole="MagazineWorker" ToRole="Magazine" />
+          <NavigationProperty Name="ScientificCentreUser" Relationship="ScientificCentreModel.FK__MagazineW__Revie__4A4E069C" FromRole="MagazineWorker" ToRole="ScientificCentreUser" />
+          <NavigationProperty Name="ScientificArea" Relationship="ScientificCentreModel.FK_ScientificAreasMagazineWorkers" FromRole="MagazineWorker" ToRole="ScientificArea" />
+        </EntityType>
+        <Association Name="FK__MagazineW__Magaz__4959E263">
+          <End Type="ScientificCentreModel.Magazine" Role="Magazine" Multiplicity="1" />
+          <End Type="ScientificCentreModel.MagazineWorker" Role="MagazineWorker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazine">
+              <PropertyRef Name="MagazineId" />
+            </Principal>
+            <Dependent Role="MagazineWorker">
+              <PropertyRef Name="MagazineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MagazineW__Revie__4A4E069C">
+          <End Type="ScientificCentreModel.ScientificCentreUser" Role="ScientificCentreUser" Multiplicity="1" />
+          <End Type="ScientificCentreModel.MagazineWorker" Role="MagazineWorker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="MagazineWorker">
+              <PropertyRef Name="ReviewerEditorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScientificAreasMagazineWorkers">
+          <End Type="ScientificCentreModel.ScientificArea" Role="ScientificArea" Multiplicity="0..1" />
+          <End Type="ScientificCentreModel.MagazineWorker" Role="MagazineWorker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificArea">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="MagazineWorker">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AuthorComment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="AuthorId" Type="Guid" Nullable="false" />
+          <Property Name="ReviewId" Type="Int32" Nullable="false" />
+          <Property Name="CommentedOnDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <Property Name="CommentContent" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ScientificCentreUser" Relationship="ScientificCentreModel.FK__AuthorCom__Autho__056ECC6A" FromRole="AuthorComment" ToRole="ScientificCentreUser" />
+          <NavigationProperty Name="ScientificProject" Relationship="ScientificCentreModel.FK__AuthorCom__Proje__047AA831" FromRole="AuthorComment" ToRole="ScientificProject" />
+          <NavigationProperty Name="ProjectReview" Relationship="ScientificCentreModel.FK__AuthorCom__Revie__0662F0A3" FromRole="AuthorComment" ToRole="ProjectReview" />
+        </EntityType>
+        <EntityType Name="ProjectReview">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="ReviewerId" Type="Guid" Nullable="false" />
+          <Property Name="ReviewedOnDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <Property Name="OnlyForEditor" Type="Boolean" />
+          <Property Name="AreaId" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="ReviewContent" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AuthorComments" Relationship="ScientificCentreModel.FK__AuthorCom__Revie__0662F0A3" FromRole="ProjectReview" ToRole="AuthorComment" />
+          <NavigationProperty Name="ScientificArea" Relationship="ScientificCentreModel.FK__ProjectRe__AreaI__019E3B86" FromRole="ProjectReview" ToRole="ScientificArea" />
+          <NavigationProperty Name="ScientificProject" Relationship="ScientificCentreModel.FK__ProjectRe__Proje__7FB5F314" FromRole="ProjectReview" ToRole="ScientificProject" />
+          <NavigationProperty Name="ScientificCentreUser" Relationship="ScientificCentreModel.FK__ProjectRe__Revie__00AA174D" FromRole="ProjectReview" ToRole="ScientificCentreUser" />
+          <Property Name="EditorContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__AuthorCom__Autho__056ECC6A">
+          <End Type="ScientificCentreModel.ScientificCentreUser" Role="ScientificCentreUser" Multiplicity="1" />
+          <End Type="ScientificCentreModel.AuthorComment" Role="AuthorComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AuthorComment">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AuthorCom__Proje__047AA831">
+          <End Type="ScientificCentreModel.ScientificProject" Role="ScientificProject" Multiplicity="1" />
+          <End Type="ScientificCentreModel.AuthorComment" Role="AuthorComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificProject">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="AuthorComment">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AuthorCom__Revie__0662F0A3">
+          <End Type="ScientificCentreModel.ProjectReview" Role="ProjectReview" Multiplicity="1" />
+          <End Type="ScientificCentreModel.AuthorComment" Role="AuthorComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProjectReview">
+              <PropertyRef Name="ReviewId" />
+            </Principal>
+            <Dependent Role="AuthorComment">
+              <PropertyRef Name="ReviewId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectRe__AreaI__019E3B86">
+          <End Type="ScientificCentreModel.ScientificArea" Role="ScientificArea" Multiplicity="1" />
+          <End Type="ScientificCentreModel.ProjectReview" Role="ProjectReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificArea">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="ProjectReview">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectRe__Proje__7FB5F314">
+          <End Type="ScientificCentreModel.ScientificProject" Role="ScientificProject" Multiplicity="1" />
+          <End Type="ScientificCentreModel.ProjectReview" Role="ProjectReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificProject">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectReview">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectRe__Revie__00AA174D">
+          <End Type="ScientificCentreModel.ScientificCentreUser" Role="ScientificCentreUser" Multiplicity="1" />
+          <End Type="ScientificCentreModel.ProjectReview" Role="ProjectReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectReview">
+              <PropertyRef Name="ReviewerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProjectsEditor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EditorId" Type="Guid" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ScientificCentreUser" Relationship="ScientificCentreModel.FK__ProjectsE__Edito__0EF836A4" FromRole="ProjectsEditor" ToRole="ScientificCentreUser" />
+          <NavigationProperty Name="ScientificProject" Relationship="ScientificCentreModel.FK__ProjectsE__Proje__0E04126B" FromRole="ProjectsEditor" ToRole="ScientificProject" />
+        </EntityType>
+        <Association Name="FK__ProjectsE__Edito__0EF836A4">
+          <End Type="ScientificCentreModel.ScientificCentreUser" Role="ScientificCentreUser" Multiplicity="1" />
+          <End Type="ScientificCentreModel.ProjectsEditor" Role="ProjectsEditor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectsEditor">
+              <PropertyRef Name="EditorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProjectsE__Proje__0E04126B">
+          <End Type="ScientificCentreModel.ScientificProject" Role="ScientificProject" Multiplicity="1" />
+          <End Type="ScientificCentreModel.ProjectsEditor" Role="ProjectsEditor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificProject">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectsEditor">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subscript__Subsc__13BCEBC1">
+          <End Type="ScientificCentreModel.Magazine" Role="Magazine" Multiplicity="1" />
+          <End Type="ScientificCentreModel.Subscription" Role="Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Magazine">
+              <PropertyRef Name="MagazineId" />
+            </Principal>
+            <Dependent Role="Subscription">
+              <PropertyRef Name="SubscriptionMagazineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CamundaUserProcess">
+          <Key>
+            <PropertyRef Name="ProcessInstanceId" />
+          </Key>
+          <Property Name="ProcessInstanceId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="TaskId" Type="Guid" />
+          <Property Name="TaskName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ProcesName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="WorkerName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ScientificCentreUser" Relationship="ScientificCentreModel.FK__CamundaUs__UserI__2116E6DF" FromRole="CamundaUserProcess" ToRole="ScientificCentreUser" />
+        </EntityType>
+        <Association Name="FK__CamundaUs__UserI__2116E6DF">
+          <End Type="ScientificCentreModel.ScientificCentreUser" Role="ScientificCentreUser" Multiplicity="0..1" />
+          <End Type="ScientificCentreModel.CamundaUserProcess" Role="CamundaUserProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScientificCentreUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CamundaUserProcess">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ScientificCentreModelStoreContainer" CdmEntityContainer="ScientificCentreEntities">
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="ScientificCentreModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Magazines">
+            <EntityTypeMapping TypeName="ScientificCentreModel.Magazine">
+              <MappingFragment StoreEntitySet="Magazines">
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Access" ColumnName="Access" />
+                <ScalarProperty Name="MagazineContent" ColumnName="MagazineContent" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ISSN" ColumnName="ISSN" />
+                <ScalarProperty Name="MagazineId" ColumnName="MagazineId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="ScientificCentreModel.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="Successfull" ColumnName="Successfull" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="SubibscriptionPackageOrProduct" ColumnName="SubibscriptionPackageOrProduct" />
+                <ScalarProperty Name="PaymentSum" ColumnName="PaymentSum" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectAuthors">
+            <EntityTypeMapping TypeName="ScientificCentreModel.ProjectAuthor">
+              <MappingFragment StoreEntitySet="ProjectAuthors">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScientificAreas">
+            <EntityTypeMapping TypeName="ScientificCentreModel.ScientificArea">
+              <MappingFragment StoreEntitySet="ScientificAreas">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScientificCentreUsers">
+            <EntityTypeMapping TypeName="ScientificCentreModel.ScientificCentreUser">
+              <MappingFragment StoreEntitySet="ScientificCentreUsers">
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="CamundaTaskId" ColumnName="CamundaTaskId" />
+                <ScalarProperty Name="ReaderAuthorOther" ColumnName="ReaderAuthorOther" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="TownId" ColumnName="TownId" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="ScientificCentreModel.Subscription">
+              <MappingFragment StoreEntitySet="Subscriptions">
+                <ScalarProperty Name="SubscriptionMagazineId" ColumnName="SubscriptionMagazineId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SubscriptionExpiryDate" ColumnName="SubscriptionExpiryDate" />
+                <ScalarProperty Name="SubscriptionStartDate" ColumnName="SubscriptionStartDate" />
+                <ScalarProperty Name="SubibscriptionType" ColumnName="SubibscriptionType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="ScientificCentreModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="OutcomeResult" ColumnName="OutcomeResult" />
+                <ScalarProperty Name="TaskType" ColumnName="TaskType" />
+                <ScalarProperty Name="Expired" ColumnName="Expired" />
+                <ScalarProperty Name="Processed" ColumnName="Processed" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="StartedOnDate" ColumnName="StartedOnDate" />
+                <ScalarProperty Name="TaskDescription" ColumnName="TaskDescription" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Towns">
+            <EntityTypeMapping TypeName="ScientificCentreModel.Town">
+              <MappingFragment StoreEntitySet="Towns">
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TownId" ColumnName="TownId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInventories">
+            <EntityTypeMapping TypeName="ScientificCentreModel.UserInventory">
+              <MappingFragment StoreEntitySet="UserInventories">
+                <ScalarProperty Name="DateAcquired" ColumnName="DateAcquired" />
+                <ScalarProperty Name="MagazineId" ColumnName="MagazineId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CountryTowns" TypeName="ScientificCentreModel.CountryTowns" StoreEntitySet="CountryTowns">
+            <EndProperty Name="Town">
+              <ScalarProperty Name="TownId" ColumnName="TownId" />
+            </EndProperty>
+            <EndProperty Name="Country">
+              <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MagazineAreas" TypeName="ScientificCentreModel.MagazineAreas" StoreEntitySet="MagazineAreas">
+            <EndProperty Name="ScientificArea">
+              <ScalarProperty Name="AreaId" ColumnName="ScientificAreaId" />
+            </EndProperty>
+            <EndProperty Name="Magazine">
+              <ScalarProperty Name="MagazineId" ColumnName="MagazineId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserTasks" TypeName="ScientificCentreModel.UserTasks" StoreEntitySet="UserTasks">
+            <EndProperty Name="ScientificCentreUser">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Task">
+              <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="ScientificProjects">
+            <EntityTypeMapping TypeName="ScientificCentreModel.ScientificProject">
+              <MappingFragment StoreEntitySet="ScientificProjects">
+                <ScalarProperty Name="PdfHtmlFileName" ColumnName="PdfHtmlFileName" />
+                <ScalarProperty Name="DOI" ColumnName="DOI" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Removed" ColumnName="Removed" />
+                <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+                <ScalarProperty Name="LastDateTimeEdited" ColumnName="LastDateTimeEdited" />
+                <ScalarProperty Name="SentOnDate" ColumnName="SentOnDate" />
+                <ScalarProperty Name="ProjectContent" ColumnName="ProjectContent" />
+                <ScalarProperty Name="NotRegisteredAutorsInfo" ColumnName="NotRegisteredAutorsInfo" />
+                <ScalarProperty Name="ScientificAreaId" ColumnName="ScientificAreaId" />
+                <ScalarProperty Name="Abstract" ColumnName="Abstract" />
+                <ScalarProperty Name="KeyWords" ColumnName="KeyWords" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="MagazineProjects" TypeName="ScientificCentreModel.MagazineProjects" StoreEntitySet="MagazineProjects">
+            <EndProperty Name="ScientificProject">
+              <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+            </EndProperty>
+            <EndProperty Name="Magazine">
+              <ScalarProperty Name="MagazineId" ColumnName="MagazineId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="MagazineWorkers">
+            <EntityTypeMapping TypeName="ScientificCentreModel.MagazineWorker">
+              <MappingFragment StoreEntitySet="MagazineWorkers">
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="ReviewerEditorId" ColumnName="ReviewerEditorId" />
+                <ScalarProperty Name="MagazineId" ColumnName="MagazineId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuthorComments">
+            <EntityTypeMapping TypeName="ScientificCentreModel.AuthorComment">
+              <MappingFragment StoreEntitySet="AuthorComments">
+                <ScalarProperty Name="CommentContent" ColumnName="CommentContent" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="CommentedOnDate" ColumnName="CommentedOnDate" />
+                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectReviews">
+            <EntityTypeMapping TypeName="ScientificCentreModel.ProjectReview">
+              <MappingFragment StoreEntitySet="ProjectReviews">
+                <ScalarProperty Name="EditorContent" ColumnName="EditorContent" />
+                <ScalarProperty Name="ReviewContent" ColumnName="ReviewContent" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="OnlyForEditor" ColumnName="OnlyForEditor" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="ReviewedOnDate" ColumnName="ReviewedOnDate" />
+                <ScalarProperty Name="ReviewerId" ColumnName="ReviewerId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectsEditors">
+            <EntityTypeMapping TypeName="ScientificCentreModel.ProjectsEditor">
+              <MappingFragment StoreEntitySet="ProjectsEditor">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="EditorId" ColumnName="EditorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CamundaUserProcesses">
+            <EntityTypeMapping TypeName="ScientificCentreModel.CamundaUserProcess">
+              <MappingFragment StoreEntitySet="CamundaUserProcess">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="WorkerName" ColumnName="WorkerName" />
+                <ScalarProperty Name="ProcesName" ColumnName="ProcesName" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProcessInstanceId" ColumnName="ProcessInstanceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

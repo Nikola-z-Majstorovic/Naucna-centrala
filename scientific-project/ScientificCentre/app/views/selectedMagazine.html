@@ -1,0 +1,29 @@
+﻿<div class="content">
+    <div class="content-body" data-ng-show="!loading">
+        <br /><br /><br />
+        <h1 style="text-align:center; width: 100%;">OUR PROJECTS FOR <span style="color: #EC2785;text-transform: uppercase;">{{getMagazineName(selectedMagazine.MagazineId).name}}</span></h1>
+        <br /><br /><br />
+        <div class="LocationRepeater" data-ng-if="project.Accepted" data-ng-repeat="project in selectedMagazine.ScientificProjects | filter:search | orderObjectBy:sortBy:sortDirection">
+            <div>
+                <label>Name: </label>&nbsp&nbsp
+                {{project.Subject}}
+            </div>
+            <div>
+                <label>Keywords: </label>&nbsp&nbsp
+                {{project.KeyWords}}
+            </div>
+            <div>
+                <label>Abstract: </label>&nbsp&nbsp
+                {{project.Abstract}}
+            </div>
+            <div>
+                <label>Area: </label>&nbsp&nbsp
+                {{project.ScientificArea.Name}}
+                <br /><br />
+                <label>View Project:  </label>&nbsp&nbsp
+                <a href="app/resources/css/Projects/{{project.PdfHtmlFileName}}" target="_blank">Project</a>
+                <button data-ng-click="buyProject(project.ProjectId);">Buy This Project</button>
+            </div><br /><br />
+        </div>
+    </div>
+</div>

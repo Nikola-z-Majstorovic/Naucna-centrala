@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScientificCentre", "ScientificCentre\ScientificCentre.csproj", "{0FE05299-B4B8-48A9-962F-6CFA7E06DBBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScientificCentreData", "ScientificCentreData\ScientificCentreData.csproj", "{943880DC-DD38-4F83-99B1-6C346C132535}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FE05299-B4B8-48A9-962F-6CFA7E06DBBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE05299-B4B8-48A9-962F-6CFA7E06DBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE05299-B4B8-48A9-962F-6CFA7E06DBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE05299-B4B8-48A9-962F-6CFA7E06DBBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{943880DC-DD38-4F83-99B1-6C346C132535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{943880DC-DD38-4F83-99B1-6C346C132535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{943880DC-DD38-4F83-99B1-6C346C132535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{943880DC-DD38-4F83-99B1-6C346C132535}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0D413EA-49E7-4F7A-8C27-6FB4F7ADC88F}
+	EndGlobalSection
+EndGlobal

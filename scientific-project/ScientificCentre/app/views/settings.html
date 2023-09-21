@@ -1,0 +1,131 @@
+﻿<div class="content">
+    <div class="content-body" data-ng-show="!loading">
+        <div data-ng-repeat="task in Tasks" ng-show="task.Processed == 0 && task.Expired == 0" ng-class="">
+            <br /><br />
+            <fieldset>
+                <legend>Task Type: {{getType(task.TaskType).name}}&nbsp; &nbsp; &nbsp; &nbsp;  Project: {{task.ScientificProject.Subject}}</legend>
+                <div>
+                    <label>Key words: </label>&nbsp&nbsp
+                    {{task.ScientificProject.KeyWords}}
+                </div>
+                <div>
+                    <label>Abstract: </label>&nbsp&nbsp
+                    {{task.ScientificProject.Abstract}}
+                </div>
+                <div data-ng-repeat="author in task.ScientificProject.ProjectAuthors">
+                    <label>Author: </label>&nbsp&nbsp
+                    {{author.ScientificCentreUser.Name}}  {{author.ScientificCentreUser.Surname}}
+                    <label>Role: </label>&nbsp&nbsp
+                    {{author.Role}}
+                </div>
+                <div>
+                    <label>Not registrated authors: </label>&nbsp&nbsp
+                    {{task.ScientificProject.NotRegisteredAutorsInfo}}
+                </div>
+                <div>
+                    <label>Task start date </label>&nbsp&nbsp
+                    {{task.StartedOnDate}}
+                </div>
+                <div>
+                    <label>Task expiry date: </label>&nbsp&nbsp
+                    {{task.ExpirationDate}}
+                </div>
+                <div>
+                    <label>Link to project:  </label>&nbsp&nbsp
+                    <a href="app/resources/css/Projects/{{task.ScientificProject.FileName}}" target="_blank">Project</a>
+                </div>
+                <br /><br />
+                <button data-ng-if="task.ScientificProject.ProjectReviews.length > 0 && (loggedUser.Roles[0] == 'Main Editor' || loggedUser.Roles[0] == 'Editor')" data-ng-click="displayReviewCommentModal(task.ScientificProject.ProjectReviews);">Show Reviews & Comments</button>
+
+                <!-- <div style="width: 100%;" data-ng-if="!task.Expired && !task.Processed">-->
+                <div style="width: 100%;">
+                    <button data-ng-show="task.TaskType == 0 && loggedUser.Roles[0] == 'Main Editor'" data-ng-click="executeCommand(1,task);">Assing editor</button> <!-- Dodati kasnije && task.ScientificProject.ProjectReviews.length == 0 -->
+                    <button data-ng-show="task.TaskType == 1 || task.TaskType == 4" data-ng-click="executeCommand(2, task);">Asign reviewers</button>
+                    <button data-ng-show="task.TaskType == 2" data-ng-click="executeCommand(3, task);">Review</button>
+                    <button data-ng-show="(task.TaskType == 0 || task.TaskType == 4) && task.ScientificProject.ProjectReviews.length > 0" data-ng-click="executeCommand(4, task);">Accept project</button>    <!-- Dodati kasnije && task.ScientificProject.ProjectReviews.length > 0 -->
+                    <button data-ng-show="task.TaskType == 0 || task.TaskType == 4" data-ng-click="executeCommand(5, task);">Return project to author</button>
+                    <button data-ng-show="task.TaskType == 0 || task.TaskType == 4" data-ng-click="executeCommand(6, task);">Reject project</button>
+                    <button data-ng-show="task.TaskType == 4" data-ng-click="executeCommand(7, task);">Send Project To Previous Reviewers</button>
+                </div>
+            </fieldset><br /><br />
+
+        </div>
+        <div class="modal" style="padding-top: 350px !important;" data-ng-show="showModalComment">
+            <div class="modal-content">
+                <form name="frm">
+                    <label>Please enter the comment:</label><br />
+                    <textarea data-ng-model="selectedProject.Comment"></textarea>
+                    <div class="buttons-container">
+                        <button data-ng-click="returnProjectToAuthor();" title="Save">Save</button>
+                        <button data-ng-click="exitModal()" title="Cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal" style="padding-top: 350px !important;" data-ng-show="showModalReviewers">
+            <div class="modal-content">
+                <form name="frm1">
+                    <h2>Please assign reviewers:</h2>
+                    <div data-ng-repeat="reviewer in Reviewers">
+                        <div class="buttons-container">
+                            <label for="User_{{$index}}">{{reviewer.ScientificCentreUser.Name}} {{reviewer.ScientificCentreUser.Surname}} - {{reviewer.ScientificCentreUser.Username}}</label>
+                            <input id="User_{{$index}}" data-ng-disabled="reviewer.AreaId != selectedProject.AreaId && loggedUser.Roles[0] == 'Editor'" type="checkbox" data-ng-click="addReviewer(reviewer.ReviewerEditorId)" />
+
+                        </div>
+                    </div>
+                    <button data-ng-click="frm1.$invalid || assignReviewers();" title="Save">Save</button>
+                    <button data-ng-click="completeWithoutReviewers()" data-ng-if="loggedUser.Roles[0] == 'Editor'" title="Send to Main Editor">Let Main Editor assign reviewers</button>
+                    <button data-ng-click="exitModal()" title="Cancel">Cancel</button>
+                </form>
+            </div>
+        </div>
+        <div class="modal" style="padding-top: 350px !important;" data-ng-show="showModalReview">
+            <div class="modal-content">
+                <form name="frm2">
+                    <label>Please enter the comment:</label><br />
+                    <textarea data-ng-model="review.EditorContent"></textarea>
+                    <br />
+                    <label>Please enter the review content:</label><br />
+                    <textarea data-ng-model="review.ReviewContent"></textarea>
+                    <div>
+                        <label for="Rating">Rating:</label><br />
+                        <select name="Rating" id="Rating" required=""
+                                data-ng-model="review.Rating"
+                                data-ng-options="rating.value as rating.name for rating in enumRatings">
+                            <option value="">- Please Select -</option>
+                        </select>
+                        <span data-ng-show="erForm.Rating.$error.required" class="required">*</span>
+                    </div>
+                    <div>
+                        <label for="ForEditor">Only for Editor</label>
+                        <input type="checkbox" data-ng-click="forEditor()" />
+                    </div>
+                    <div class="buttons-container">
+                        <button data-ng-click="frm2.$invalid || sendReviewToEditor();" title="Save">Save</button>
+                        <button data-ng-click="exitModal()" title="Cancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal" style="padding-top: 350px !important;" data-ng-show="showReviewCommentModal">
+            <div class="modal-content">
+
+                <div data-ng-repeat="prReview in selectedProjectReviews">
+                    <p>Reviewed on date: {{prReview.ReviewedOnDate}}</p>
+                    <p>From Reviewer: {{prReview.ScientificCentreUser.Name}} {{prReview.ScientificCentreUser.Surname}}</p>
+                    <h2>Project Review:</h2><br />
+                    <p>{{prReview.ReviewContent}}</p>
+
+                    <h2>Project Comment: </h2><br />
+                    <p>{{prReview.EditorContent}}</p>
+
+                    <h2>Reviewer mark: {{getRatingName(prReview.Rating).name}}</h2><br />
+                    <br />
+                    <br />
+
+                </div>
+                <button data-ng-click="exitModal()" title="Close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

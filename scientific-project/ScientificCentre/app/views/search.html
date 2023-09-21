@@ -1,0 +1,42 @@
+﻿<div class="content">
+    <div class="content-body" data-ng-show="!loading">
+        <form name="erForm">
+            <input type="checkbox" name="FillQuery" value="" data-ng-model="project.FillQuery">All fields has to be fill<br>
+            <div>
+                <label for="Magazine">Search for project by magazine:</label><br />
+                <select name="MagazineName" id="Magazine"
+                        data-ng-model="project.MagazineName" 
+                        data-ng-options="magazine.Name as magazine.Name for magazine in Magazines">
+                    <option value="">- Please Select -</option>
+                </select>
+            </div>
+            <div class="control-item" style="min-height: 2em !important;">
+                <label for="subject">Search for project by subject:</label><br />
+                <input id="subject" data-ng-model="project.ProjectName" type="text" name="ProjectName" placeholder="Subject"  />                
+            </div>
+            <div class="control-item" style="min-height: 2em !important;">
+                <label for="keyWords">Search for project by Key words:</label><br />
+                <input id="keyWords" data-ng-model="project.KeyWords" type="text" name="KeyWords" placeholder="Key words"  />
+            </div>
+            <div class="control-item" style="min-height: 2em !important;">
+                <label for="authorsName">Search for project by authors(name and surname):</label><br />
+                <input id="authorsName" data-ng-model="project.AuthorsName" type="text" name="AuthorsName" placeholder="Authors Name"  />
+            </div>
+            <div class="control-item" style="min-height: 2em !important;">
+                <label for="content">Search for project by content from PDF:</label><br />
+                <input id="content" data-ng-model="project.ProjectContent" type="text" name="ProjectContent" placeholder="content"  />
+            </div>
+            <div>
+                <label for="ScientificArea">Scientific area:</label><br />
+                <select name="ScientificArea" id="ScientificArea"
+                        data-ng-model="project.ScientificArea" 
+                        data-ng-options="area.Name as area.Name for area in allAreas">
+                    <option value="">- Please Select -</option>
+                </select>
+            </div>
+            <input type="checkbox" name="PhrazeQuery" value="Bike">Phraze Query<br>
+        </form>
+        
+        <button data-ng-click="erForm.$invalid || search()">Search</button>
+    </div>
+</div>

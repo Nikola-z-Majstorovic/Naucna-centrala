@@ -1,0 +1,17 @@
+﻿<div class="content">
+    <div class="content-body" data-ng-show="!loading">
+        <form name="form">
+            <div class="control-item" style="min-height: 2em !important;">
+                <div data-ng-repeat="filteredProject in filteredProjects">
+                    <label for="MagazineName">MagazineName:</label> {{ filteredProject.MagazineName}}<br />
+                    <label for="AreaName">Area name:</label> {{ filteredProject.AreaName}}<br />
+                    <label for="ProjectAuthors">Project autor: </label>{{ filteredProject.MagazineName}}<br />
+                    <label for="ProjectName">Project name:</label> {{ filteredProject.ProjectName}}<br />
+                    <label for="ProjectKeywords">Project key words:</label> {{ filteredProject.ProjectKeywords}}<br />
+                    <label for="ProjectContent">Project Content:</label> <div  ng-bind-html = "renderHtml(filteredProject.ProjectContent)"></div><br />
+                    <p>------------------------------------------------------</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
